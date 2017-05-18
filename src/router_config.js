@@ -13,6 +13,7 @@ import dd_country_chart_tdje from 'components/charts/base/dd/chart/tdje.vue'
 import dd_country_chart_tdsl from 'components/charts/base/dd/chart/tdsl.vue'
 import dd_country_chart_bzje from 'components/charts/base/dd/chart/bzje.vue'
 import dd_country_chart_bzsl from 'components/charts/base/dd/chart/bzsl.vue'
+import dd_country_chart_ddjj from 'components/charts/base/dd/chart/ddjj.vue'
 
 import dd_city from 'components/charts/base/dd/city.vue';
 import dd_detail from 'components/charts/base/dd/detail.vue';
@@ -48,146 +49,151 @@ import limit from 'components/page/limit/index';
 //limit
 //import limit_dd from 'components/page/limit/template/dd.vue'
 const routes = [
-  { 
-     path: '/login',
-     component: login
-  },
+{
+  path:'',
+  redirect: '/home'
+},
+{ 
+ path: '/login',
+ component: login
+},
+{
+  path: '/home',
+  component: home,
+  children:[ 
   {
-      path: '/home',
-      component: home,
-      children:[ 
-  {
-      path:'limit',
-      component:limit,
-      
+    path:'limit',
+    component:limit,
+    
   },  
   {
-      path:'/charts',
-      component:chart_base,
-      children:[
-	  {
-	      path:'dd',
-	      component:base_dd,
-	      children:[
-		       {
-		         path:'country',
-		         component:dd_country,
-			 children:[
-			     {
-				 path:'zdd',
-				 component:dd_country_chart_zdd
-			     },
-			     {
-                                 path:'ddxq',
-                                 component:dd_country_chart_ddxq
-                             },
-			      {
-                                 path:'cdje',
-                                 component:dd_country_chart_cdje
-                             },
-                             {
-                                 path:'cdsl',
-                                 component:dd_country_chart_cdsl
-                             },
-                             {
-                                 path:'tdje',
-                                 component:dd_country_chart_tdje
-                             },
-                             {
-                                 path:'tdsl',
-                                 component:dd_country_chart_tdsl
-                             },
-                             {
-                                 path:'bzje',
-                                 component:dd_country_chart_bzje
-                             },
-                             {
-                                 path:'bzsl',
-                                 component:dd_country_chart_bzsl
-                             }
+    path:'/charts',
+    component:chart_base,
+    children:[
+    {
+     path:'dd',
+     component:base_dd,
+     children:[
+     {
+       path:'country',
+       component:dd_country,
+       children:[
+       {
+         path:'zdd',
+         component:dd_country_chart_zdd
+       },
+       {
+         path:'ddxq',
+         component:dd_country_chart_ddxq
+       },
+       {
+         path:'cdje',
+         component:dd_country_chart_cdje
+       },
+       {
+         path:'cdsl',
+         component:dd_country_chart_cdsl
+       },
+       {
+         path:'tdje',
+         component:dd_country_chart_tdje
+       },
+       {
+         path:'tdsl',
+         component:dd_country_chart_tdsl
+       },
+       {
+         path:'bzje',
+         component:dd_country_chart_bzje
+       },
+       {
+         path:'bzsl',
+         component:dd_country_chart_bzsl
+       },
+       {
+         path:'ddjj',
+         component:dd_country_chart_ddjj
+       }
+       ]
+     },
+     {                   
+       path:'city',
+       component:dd_city,
+     },
+     {
+       path:'detail',
+       component:dd_detail,
+     }			           
+     ]
+   },
+   {
+    path:'fwz',
+    component:base_fwz,
+    children:[
+    {
+     path:'city',
+     component:fwz_city,
+   },
+   {
+     path:'detail',
+     component:fwz_detail,
+   },
+   {
+     path:'country',
+     component:fwz_country,
+     children:[
 
+     {
+       path:'fwzsl',
+       component:fwz_country_chart_fwzsl
+     },
+     {
+       path:'drxzsl',
+       component:fwz_country_chart_drxzsl
+     },
+     {
+       path:'sxztrs',
+       component:fwz_country_chart_sxztrs
+     },
 
-			     
-			 ]
-	               },
-		       {                   
-                         path:'city',
-                         component:dd_city,
-                       },
-		       {
-                         path:'detail',
-                         component:dd_detail,
-                       }			           
-		  ]
-	  },
-	  {
-              path:'fwz',
-              component:base_fwz,
-	      children:[
-		       {
-                         path:'city',
-                         component:fwz_city,
-                       },
-                       {
-                         path:'detail',
-                         component:fwz_detail,
-                       },
-	               {
-                         path:'country',
-                         component:fwz_country,
-                         children:[
+     {
+       path:'xxztrs',
+       component:fwz_country_chart_xxztrs
+     },
 
-                             {
-                                 path:'fwzsl',
-                                 component:fwz_country_chart_fwzsl
-                             },
-		             {
-                                 path:'drxzsl',
-                                 component:fwz_country_chart_drxzsl
-                             },
-                             {
-                                 path:'sxztrs',
-                                 component:fwz_country_chart_sxztrs
-                             },
+     {
+       path:'ygzrs',
+       component:fwz_country_chart_ygzrs
+     },
+     {
+       path:'wgzrs',
+       component:fwz_country_chart_wgzrs
+     }
+     ]
+   }
+   ]
+ },
+ {
+  path:'hh',
+  component:base_hh
+},
+{
+  path:'ds',
+  component:base_ds
+},
+{
+  path:'fc',
+  component:base_fc
+},
+{
+  path:'sp',
+  component:base_sp
+}
+]
+}
 
-                             {
-                                 path:'xxztrs',
-                                 component:fwz_country_chart_xxztrs
-                             },
-
-                             {
-                                 path:'ygzrs',
-                                 component:fwz_country_chart_ygzrs
-                             },
-                             {
-                                 path:'wgzrs',
-                                 component:fwz_country_chart_wgzrs
-                             }
-			    ]
-		       }
-		]
-          },
-	  {
-              path:'hh',
-              component:base_hh
-          },
-	  {
-              path:'ds',
-              component:base_ds
-          },
-	  {
-              path:'fc',
-              component:base_fc
-          },
-	  {
-              path:'sp',
-              component:base_sp
-          }
-      ]
-  }
-
-      ]
-  }
+]
+}
 ]
 
 

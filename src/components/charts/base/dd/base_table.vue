@@ -27,29 +27,34 @@
   <tbody>
 
     	
-    <tr v-for="item in $store.state.module_dd.default.tableList.trtotal">
-      <td >{{$store.state.module_dd.default.tableList.tmpList[item-1].count}}</td>
-      <td >{{$store.state.module_dd.default.tableList.zddList[item-1].count}}</td>
-      <td >{{$store.state.module_dd.default.tableList.ddxqList[item-1].count}} </td>
-      <td >{{$store.state.module_dd.default.tableList.cdjeList[item-1].count}} </td>
-      <!--<td >{{$store.state.module_dd.default.tableList.cdslList[item-1].count}}  </td>-->
-      <td >{{$store.state.module_dd.default.tableList.tdjeList[item-1].count}} </td>
-      <td >{{$store.state.module_dd.default.tableList.tdslList[item-1].count}} </td>
-      <td >{{$store.state.module_dd.default.tableList.bzjeList[item-1].count}} </td>
-      <td >{{$store.state.module_dd.default.tableList.bzslList[item-1].count}} </td>
-      <td v-if="threeType!='detail'"><a @click='xq' :data-val=$store.state.module_dd.default.tableList.tmpList[item-1].val :data-val2=$store.state.module_dd.default.tableList.tmpList[item-1].count :href=hrefVal :data-city=$store.state.module_dd.default.tableList.cityList[item-1].count>详情</a></td>
+    <tr v-for="item in tableList.trtotal">
+      <td >{{tableList.tmpList[item-1].count}}</td>
+      <td >{{tableList.zddList[item-1].count}}</td>
+      <td >{{tableList.ddxqList[item-1].count}} </td>
+      <td >{{tableList.cdjeList[item-1].count}} </td>
+      <td >{{tableList.tdjeList[item-1].count}} </td>
+      <td >{{tableList.tdslList[item-1].count}} </td>
+      <td >{{tableList.bzjeList[item-1].count}} </td>
+      <td >{{tableList.bzslList[item-1].count}} </td>
+      <td >{{tableList.cdjeList[item-1].count | calculate(tableList.zddList[item-1].count)}}</td>
+      <td v-if="threeType!='detail'">
+        <a @click='xq' 
+          :data-val="tableList.tmpList[item-1].val" 
+          :data-val2="tableList.tmpList[item-1].count" 
+          :href="hrefVal" 
+          :data-city="tableList.cityList[item-1].count"
+        >详情</a>
+      </td>
     </tr>
    
 
   </tbody>
   <tfoot>
     <tr><th colspan="10">
-
-
-<mypage v-if="threeType=='country'" firstType="Dd"></mypage>
-
+      <mypage v-if="threeType=='country'" firstType="Dd"></mypage>
     </th>
-  </tr></tfoot>
+  </tr>
+  </tfoot>
 </table>
 
 
@@ -59,85 +64,85 @@
 </template>
 
 
-<script  type="text/ecmascript-6">
+<script>
 
-import mypage from "../common/page"
+  import mypage from "../common/page"
 
-var tabs=require('components/data/dd_country_chart_tab.json')
+  var tabs=require('components/data/dd_country_chart_tab.json')
 
 
-export default{
-      
-       data(){
-	var store=this.$store.state.module_dd.default
-       	
-	return{
-		firstThName:'日期',
-		tabs:tabs,
-		pages:[1,2,3,4,5],
-		currentPage:1
-		
-                
-	}
-       },
-       computed:{
-	 hrefVal:function(){
-		
-		
-		var type='city'
-		if(this.threeType=='city'){
-			type='detail'
-		}
-		return '#/charts/dd/'+type
-	 }
-       },
-       mounted(){
-       
-		var that=this
-		var first=this.$store.dispatch('initFirstAll',{region:true,type:'module_dd'})
-		
-		first.then((m)=>{
-		
-			that.$store.dispatch('initTableOfDd',{threeType:this.threeType}).then((msg)=>{
+  export default{
 
-				that.$store.dispatch('updateTableOfDd')
-		 	})
-	
-		})
-	
-       },
-       created(){
+    data(){
+      var store=this.$store.state.module_dd.default
+      return{
+        firstThName:'日期',
+        tabs:tabs,
+        pages:[1,2,3,4,5],
+        currentPage:1,
+        tableList: this.$store.state.module_dd.default.tableList
+      }
+    },
+    computed:{
+      hrefVal:function(){
+        var type='city'
+        if(this.threeType=='city'){
+          type='detail'
+        }
+        return '#/charts/dd/'+type
+      }
+    },
+    filters:{
+      calculate(divisor, dividend){
+        return dividend === 0? 0 : (Math.round(divisor* 10000 / dividend)/ 10000).toFixed(2);
+      }
+    },
+    mounted(){
 
-       },
-       methods:{
-		
-	xq(event){
-		
-		var val = event.target.getAttribute('data-val')
-		var val2 = event.target.getAttribute('data-val2')
-		 var cityCode = event.target.getAttribute('data-city')
-		this.$store.dispatch('updateXq',{val:val,val2:val2,cityCode:cityCode})
-		
-	},		
-	returnme(){
-		
-		if(this.threeType=='city'){
-			this.$router.push('/charts/dd/country/zdd')					
-			this.$store.dispatch('returnme')
-		}else if(this.threeType=='detail'){
-			this.$router.push('/charts/dd/city')
-			this.$store.dispatch('returnmedetail')
-		}
+      var that=this;
+      var first=this.$store.dispatch('initFirstAll',{region:true,type:'module_dd'})
 
-		
-	}	
-       },
-       components:{
-	mypage
-       },
-       props: ['threeType']
-       
-}
+      first.then((m)=>{
+
+        that.$store.dispatch('initTableOfDd',{threeType:this.threeType}).then((msg)=>{
+          that.$store.dispatch('updateTableOfDd')
+        })
+
+      })
+
+    },
+    created(){
+      console.log(this.$store.state.module_dd.default.tableList);
+    },
+    methods:{
+
+      xq(event){
+
+        var val = event.target.getAttribute('data-val')
+        var val2 = event.target.getAttribute('data-val2')
+        var cityCode = event.target.getAttribute('data-city')
+        this.$store.dispatch('updateXq',{val:val,val2:val2,cityCode:cityCode})
+
+      },		
+      returnme(){
+
+        if(this.threeType=='city'){
+          this.$router.push('/charts/dd/country/zdd')					
+          this.$store.dispatch('returnme')
+        }else if(this.threeType=='detail'){
+          this.$router.push('/charts/dd/city')
+          this.$store.dispatch('returnmedetail')
+        }
+
+
+      }	
+    },
+    components:{
+      mypage
+    },
+    props: ['threeType']
+
+  }
 </script>
 <style rel="stylesheet/less" lang="less">
 

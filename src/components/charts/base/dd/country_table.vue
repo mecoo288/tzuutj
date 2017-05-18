@@ -1,23 +1,23 @@
 <template>
-<div>
+	<div>
 
-<mybasetable threeType="country"></mybasetable>
-</div>
+		<mybasetable threeType="country"></mybasetable>
+	</div>
 </template>
 
-<script  type="text/ecmascript-6">
-import mybasetable from "./base_table.vue"
+<script>
+	import mybasetable from "./base_table.vue"
 
-export default{
-       
-       data(){
-	return{
+	export default{
+		
+		data(){
+			return{
+				
+			}
+		},
+		components:{
+			mybasetable
+		}
 		
 	}
-       },
-       components:{
-	mybasetable
-       }
-       
-}
 </script>

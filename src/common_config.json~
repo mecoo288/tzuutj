@@ -1,8 +1,0 @@
-{
-    "baseapi":{
-	"ip":"stat.tuzuu.me",
-	"port":8899,
-	"reqUrl":"http://stat.tuzuu.me:8899",
-	"cookieDomain":".tuzuu.me"
-    }
-}

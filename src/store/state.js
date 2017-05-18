@@ -27,11 +27,11 @@ var citys_merge=[];
 
 Vue.http.get(reqUrl+"/api/common/leftMenus").then(res=>{
     if(res.status==200&&res.data.code==='00000'){
-          
-	res.body.data.forEach(function(val,key,array){
-              leftMenus.push(val);
-          }); 
-    }
+      
+       res.body.data.forEach(function(val,key,array){
+          leftMenus.push(val);
+      }); 
+   }
 },res=>{});
 
 
