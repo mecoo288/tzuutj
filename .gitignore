@@ -5,4 +5,3 @@ node_modules/
 prod/
 npm-debug.log
 dist/
-static/
