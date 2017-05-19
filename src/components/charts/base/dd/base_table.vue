@@ -36,7 +36,7 @@
       <td >{{tableList.tdslList[item-1].count}} </td>
       <td >{{tableList.bzjeList[item-1].count}} </td>
       <td >{{tableList.bzslList[item-1].count}} </td>
-      <td >{{tableList.cdjeList[item-1].count | calculate(tableList.zddList[item-1].count)}}</td>
+      <td >{{tableList.ddjjList[item-1].count}}</td>
       <td v-if="threeType!='detail'">
         <a @click='xq' 
           :data-val="tableList.tmpList[item-1].val" 
@@ -74,7 +74,6 @@
   export default{
 
     data(){
-      var store=this.$store.state.module_dd.default
       return{
         firstThName:'日期',
         tabs:tabs,
@@ -92,11 +91,6 @@
         return '#/charts/dd/'+type
       }
     },
-    filters:{
-      calculate(divisor, dividend){
-        return dividend === 0? 0 : (Math.round(divisor* 10000 / dividend)/ 10000).toFixed(2);
-      }
-    },
     mounted(){
 
       var that=this;
@@ -110,9 +104,6 @@
 
       })
 
-    },
-    created(){
-      console.log(this.$store.state.module_dd.default.tableList);
     },
     methods:{
 

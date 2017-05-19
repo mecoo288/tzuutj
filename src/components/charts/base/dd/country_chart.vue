@@ -2,7 +2,7 @@
 	<div>
 
 		<div class="ui  seven item menu">
-			<a class="item" :class="{active: tab.active}"  v-for="tab in chartTab" :href="'#/charts/dd/country/'+tab.alias"  @click='updateByType' :data-val="tab.alias">
+			<a class="item" :class="{active: activeTag == tab.alias}"  v-for="tab in chartTab" :href="'#/charts/dd/country/'+tab.alias"  @click='updateByType(tab.alias)'>
 				{{tab.name}}
 			</a>
 		</div>
@@ -12,36 +12,35 @@
 	</div>
 </template>
 <script>
-	let chartTab=require('components/data/dd_country_chart_tab.json')
+	let chartTab=require('components/data/dd_country_chart_tab.json');
+	import {mapActions} from 'vuex';
 	export default {
 		data(){
 			return{
-				chartTab:[
-					...chartTab,
-				],
+				chartTab: chartTab,
+				activeTag: '',
 				options:{}
 			}
 		},
 		methods:{
-			updateByType(event){
-				var type=event.target.getAttribute('data-val')
-
-				this.$store.dispatch('updateByTypeOfDd', { chartType:type })
-
+			...mapActions([
+				'updateByTypeOfDd',
+				'initFirstAll',
+			]),
+			updateByType(type){
+				this.activeTag = type;
+				this.updateByTypeOfDd({ chartType:type });
 			},
-
-		},
-
-		components:{
-
 		},
 		mounted(){
-			var that=this	
-			var first=this.$store.dispatch('initFirstAll',{region:true,type:'module_dd'})
+			let that = this;
+			let first = this.initFirstAll({region:true,type:'module_dd'});
+			let _path = this.$route.path.split("/");
+			let tag = _path[_path.length - 1];
 			first.then((m)=>{
-				that.$store.dispatch('updateByTypeOfDd', { chartType:'zdd' })
-			});  
-
+				that.updateByTypeOfDd({ chartType: tag })
+			});
+			this.activeTag = tag;
 		}
 	}
 </script>

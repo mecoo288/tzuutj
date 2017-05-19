@@ -187,7 +187,7 @@ request
         case 'ddjj':
         let avarage = (val.orders_num === 0 ? 0 : (Math.round(val.pay_money* 100 / val.orders_num)/10000)).toFixed(2)/1;
         chartList.unshift([date, avarage]);
-        
+        break;
         default:;
       }
     });
@@ -334,7 +334,10 @@ function updateDataOfTable(query,state,rootState,commit,arg,dispatch){
       case 'bzsl':
       chartList[val.alias].push({count:v.reimburse_num});
       break;
-
+      case 'ddjj':
+      let avarage = (v.orders_num === 0 ? 0 : (Math.round(v.pay_money* 100 / v.orders_num)/10000)).toFixed(2)/1;
+      chartList[val.alias].push({count:avarage});
+      break;
 
       default:;
     }
