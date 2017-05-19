@@ -13,7 +13,6 @@
 <script>
     import mychart from './country_chart.vue'
     import mytable from './country_table.vue'
-
     export default {
         components:{
             mychart,

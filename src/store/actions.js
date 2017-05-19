@@ -35,8 +35,6 @@ export const initFirstAll=({commit,state,rootState},arg)=>{
 function initRegionLimit(commit,state,rootState,arg,resolve){
 
 
-
-
 var citys_limit=[];
 var query={};
 
@@ -49,7 +47,7 @@ request
 //.use(nocache) // Prevents caching of *only* this request
 //.withCredentials()//跨域
 .end(function(err,res){
-
+	console.log(res);
     //if(res.ok){
     var mcode=0;
     if(res.ok){
@@ -79,7 +77,6 @@ request
 		if(!rootState[arg.type].default.firstInit){
 		    rootState[arg.type].default.now.city=val.name
 		}
-
 		switch(arg.type){
 		    case 'module_fwz':
 		    case 'module_sp':
@@ -117,12 +114,31 @@ request
 
 		    case 'module_hh':
 		    case 'module_ds':
-		    if(!rootState[arg.type].default.firstInit){
-			
-			rootState[arg.type].default.filter.cityName=val.name
-			rootState[arg.type].default.firstInit=true
-		    }
-		    break;
+			    if(!rootState[arg.type].default.firstInit){
+				
+				rootState[arg.type].default.filter.cityName=val.name
+				rootState[arg.type].default.firstInit=true
+			    }
+			    break;
+		    case 'module_home':
+			    if(!rootState[arg.type].default.firstInit){
+				
+				if(rootState[arg.type].default.filter.type!=3){
+				    rootState[arg.type].default.filter.type=2
+				}
+
+				
+
+				
+				rootState[arg.type].default.filter.cityCode=val.code
+				rootState[arg.type].default.firstInit=true
+			    }
+
+			    if(rootState[arg.type].default.filter.cityCode==0){
+				if(val.code==0){
+                    rootState[arg.type].default.filter.type=1
+				}
+		     }
 
 		    default:
 		    break;
@@ -130,8 +146,8 @@ request
 		
 		first=false
 	    }
-             citys_limit.push(val);
-         });
+         citys_limit.push(val);
+ 	});
 	rootState.default.citys_limit=citys_limit
 	
 	resolve();
