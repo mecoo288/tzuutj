@@ -3,6 +3,13 @@ export default {
     type: 'line',
     zoomType: 'x'
   },
+  lang:{
+    downloadJPEG: "导出JPEG图片",
+    downloadPDF: "导出PDF文件",
+    downloadPNG: "导出PNG图片",
+    downloadSVG: "导出SVG",
+    printChart: "打印图表"
+  },
   title: {
     text: ''
   },
