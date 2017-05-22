@@ -18,6 +18,7 @@ export default {
 
     },
     created(){
+        console.log(this.$store.state.module_dd.default.chartList.ddjj);
     }
   }
 

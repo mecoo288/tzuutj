@@ -1,28 +1,23 @@
 <template>
 	<div id="app" class="homemain">
-		<myheader :menus="menus" ></myheader>
-		<div class="mainleft  col-sm-2 col-md-2">
-			<leftmenu :leftMenu="leftMenu" ></leftmenu>
-		</div>
-		<div class="mainright col-sm-10 col-md-10">
-			<router-view></router-view>
-		</div>
+		<loading :loadingShow="loadingShow"></loading>
+		<router-view></router-view>
 	</div>
 </template>
 
 <script>
-	import leftmenu from 'components/page/common/leftmenu';
-	import myheader from 'components/page/header/header'
+	import loading from './components/page/common/loading.vue';
 	export default{
 		data(){
 			return {
-				leftMenu: {},
-				menus:{}
+				loadingShow: false
 			}
 		},
-		components: {
-			leftmenu,
-			myheader
+		components:{
+			loading,
+		},
+		created(){
+			let _this = this;
 		}
 	}  
 </script>

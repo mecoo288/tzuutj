@@ -47,7 +47,7 @@ request
 //.use(nocache) // Prevents caching of *only* this request
 //.withCredentials()//跨域
 .end(function(err,res){
-	console.log(res);
+	// console.log(res);
     //if(res.ok){
     var mcode=0;
     if(res.ok){

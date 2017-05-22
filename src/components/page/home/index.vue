@@ -8,20 +8,22 @@
         {{tab.name}}
       </a>
     </div>
-    <div id="table">
-      <mytable :threeType="activeTag" ref="updateTable"></mytable>
-    </div>
+    <highcharts  :options="options" ref="highcharts">
+    </highcharts>
+    <router-view :baseData="{a:11}" @updateType= "updateByType" @updateChart="updateChart"></router-view>
   </div>
 
 </template>
 
 <script>
-import myselect from './select'
-import mytable from './base_table'
+import myselect from './select';
+import chartConfig from "./data/chartConfig.js";
+
   export default {
+
     components: {
       myselect,
-      mytable
+      // mytable
     },
     data(){
       return {
@@ -38,15 +40,21 @@ import mytable from './base_table'
           },
         ],
         activeTag: 'total',
+        options: {},
      }
    },
    created(){
-
+    Object.assign(this.options, chartConfig);
    },
    methods: {
     updateByType(type){
       this.activeTag = type;
-      this.$refs.updateTable.update( type );
+      // this.$refs.updateTable.update( type );
+    },
+    updateChart(chartData){
+      console.log(this.options, 111111);
+      this.options = {};
+      Object.assign(this.options, chartConfig, chartData);
     }
    },
    mounted(){

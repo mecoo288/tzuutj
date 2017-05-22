@@ -101,4 +101,4 @@ const provider = [
 		}
 	]
 
-export default {total, order, provider}
+export {total, order, provider}

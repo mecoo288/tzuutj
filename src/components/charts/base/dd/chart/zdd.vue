@@ -16,7 +16,7 @@
 
    },
    mounted(){
-
+    console.log(this.$store.state.module_dd.default.chartList.zdd);
    },
    created(){
       this.$emit('say', 'zdd');
