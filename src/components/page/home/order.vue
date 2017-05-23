@@ -66,9 +66,7 @@
               }
           }],
           series:[{
-            data:[
-            [1493164800000, 33]
-            ],
+            data:[],
             name: "客单价",
             tooltip: {
                 valueSuffix: '元'
@@ -76,9 +74,7 @@
           },
           {
             color:'rgb(230,165,25)',
-            data:[
-            [1493164800000, 2]
-            ],
+            data:[],
             name: "订单均价",
             tooltip: {
                 valueSuffix: '元'

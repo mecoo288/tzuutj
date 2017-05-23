@@ -10,7 +10,9 @@ export const getDate = async function({commit,state,rootState}, parma){
   // Vue.$root.openLoding(true);
   var res = await request
     .get(rootState.default.reqUrl+ urls[parma.type])
-    .query(parma.data)
-
+    .query(parma.data);
+    // res.then(function(_res){
+    //   console.log(_res)
+    // });
   return res;
 };

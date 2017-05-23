@@ -1,8 +1,6 @@
 <template>
   <div>
-    <!-- <div id="home">
-      <myselect></myselect>
-    </div> -->
+    <myselect></myselect>
     <div class="ui  seven item menu">
       <a class="item" :class="{active: activeTag == tab.alias}"  v-for="tab in chartTab" :href="'#/home/'+tab.alias"  @click='updateByType(tab.alias)'>
         {{tab.name}}
