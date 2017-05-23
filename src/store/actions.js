@@ -177,7 +177,6 @@ export const download=({dispatch,commit,state,rootState},arg)=>{
 	var query=rootState['module_'+stype].default.filter
 	var tabList=rootState['module_'+stype].default.tabList
 
-	
 
 	if(total<1){
 		console.log('下载总数小于1')
@@ -245,7 +244,6 @@ export const download=({dispatch,commit,state,rootState},arg)=>{
     	});
 
     	
-
     	commit('download',{arg:arg,toData:toexp});
 
     },function(err){

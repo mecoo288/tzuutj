@@ -1,6 +1,6 @@
 <template>
   <div>
-    <myselect></myselect>
+    <myselect @cityUpdate="cityUpdate"></myselect>
     <div class="ui  seven item menu">
       <a class="item" :class="{active: activeTag == tab.alias}"  v-for="tab in chartTab" :href="'#/home/'+tab.alias"  @click='updateByType(tab.alias)'>
         {{tab.name}}
@@ -8,7 +8,7 @@
     </div>
     <highcharts  :options="options" ref="highcharts">
     </highcharts>
-    <router-view :baseData="{a:11}" @updateType= "updateByType" @updateChart="updateChart"></router-view>
+    <router-view :baseParma="parma" @updateType= "updateByType" @updateChart="updateChart" ref="child"></router-view>
   </div>
 
 </template>
@@ -39,6 +39,10 @@ import chartConfig from "./data/chartConfig.js";
         ],
         activeTag: 'total',
         options: {},
+        parma:{
+          cityCode: 0,
+          type: 'total'
+        }
      }
    },
    created(){
@@ -47,12 +51,17 @@ import chartConfig from "./data/chartConfig.js";
    methods: {
     updateByType(type){
       this.activeTag = type;
+      this.parma.type = type;
+      this.$refs.child.cityChange( this.parma );
       // this.$refs.updateTable.update( type );
     },
     updateChart(chartData){
-      console.log(this.options, 111111);
       this.options = {};
       Object.assign(this.options, chartConfig, chartData);
+    },
+    cityUpdate(city){
+      this.parma.cityCode = city.code;
+      this.$refs.child.cityChange( this.parma );
     }
    },
    mounted(){

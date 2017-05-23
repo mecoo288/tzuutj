@@ -48,6 +48,9 @@
         currentPage:1,
         tableList: [],
         treeType: "provider",
+        parma: {
+          cityCode:0,
+        },
         chartConf: {
           title: {
             text: '成单服务者占比率'
@@ -70,51 +73,24 @@
         }
       }
     },
-    computed:{
-      hrefVal:function(){
-        var type='city'
-        if(this.threeType=='city'){
-          type='detail'
-        }
-        return '#/charts/dd/'+type
-      }
-    },
     mounted(){
       this.$emit('updateType', this.treeType);
-      this.update();
       this.$emit('updateChart', this.chartConf);
-      // var that=this;
-      // var first=this.initFirstAll({region:true,type:'module_home'})
-
-      // first.then((m)=>{
-
-      //   this.initTableOfDd({threeType:this.threeType}).then((msg)=>{
-      //     that.updateTableOfDd()
-      //   })
-
-      // })
-
     },
     methods:{
       ...mapActions([
         'updateXq',
         'getDate'
       ]),
+      cityChange(parma){
+        Object.assign(this.parma, parma);
+        this.update();
+      },
       update(){
         let _this= this;
         this.getDate({
           type: this.treeType,
-          data: {
-            dateStart:"",
-            dateEnd:"",
-            type:"fwzsl",
-            threeType:"country",
-            page:1,
-            provinceCode:0,
-            cityCode:0,
-            pageNum:20,
-            no_page:1
-          }
+          data: this.parma
         }).then(function({status, body}){
           if(status !== 200){
             return;

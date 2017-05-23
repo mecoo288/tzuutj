@@ -47,6 +47,9 @@
         currentPage:1,
         tableList: [],
         treeType: "order",
+        parma: {
+          cityCode:0,
+        },
         chartConf: {
           title: {
             text: '客单价和订单均价比较'
@@ -85,7 +88,6 @@
     },
     mounted(){
       this.$emit('updateType', this.treeType);
-      this.update();
       this.$emit('updateChart', this.chartConf); // 更新图标
       // var that=this;
       // var first=this.initFirstAll({region:true,type:'module_home'})
@@ -104,21 +106,15 @@
         'updateXq',
         'getDate'
         ]),
+      cityChange(parma){
+        Object.assign(this.parma, parma);
+        this.update();
+      },
       update(){
         let _this= this;
         this.getDate({
           type: this.treeType,
-          data: {
-            dateStart:"",
-            dateEnd:"",
-            type:"fwzsl",
-            threeType:"country",
-            page:1,
-            provinceCode:0,
-            cityCode:0,
-            pageNum:20,
-            no_page:1
-          }
+          data: this.parma
         }).then(function({status, body}){
           if(status !== 200){
             return;

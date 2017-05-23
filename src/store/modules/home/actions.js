@@ -16,3 +16,9 @@ export const getDate = async function({commit,state,rootState}, parma){
     // });
   return res;
 };
+
+export const getCity = async function({commit,state,rootState}, parma){
+  var res = await request
+    .get(rootState.default.reqUrl+"/api/common/getUserCitys");
+  return res;
+}

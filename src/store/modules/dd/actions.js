@@ -193,7 +193,6 @@ request
     });
     }
   });
-  console.log(111111111111, chartList);
   query.no_page=-1
   query.page=tmp_page;
   query.pageNum=20;
