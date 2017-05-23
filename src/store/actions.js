@@ -243,7 +243,6 @@ export const download=({dispatch,commit,state,rootState},arg)=>{
     		
     	});
 
-    	
     	commit('download',{arg:arg,toData:toexp});
 
     },function(err){
