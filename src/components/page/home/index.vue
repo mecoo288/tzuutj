@@ -55,7 +55,7 @@ import chartConfig from "./data/chartConfig.js";
     updateByType(type){
       this.activeTag = type;
       this.parma.type = type;
-      this.$refs.child.cityChange( this.parma.data );
+      // this.$refs.child.cityChange( this.parma.data );
       // this.$refs.updateTable.update( type );
     },
     updateChart(chartData){
@@ -66,7 +66,6 @@ import chartConfig from "./data/chartConfig.js";
       this.parma.data.cityCode = city.code;
       this.parma.data.type = city.code === 0 ? 1: 2; 
       this.$refs.child.cityChange( this.parma.data );
-      console.log("cityChange");
     }
    },
    mounted(){

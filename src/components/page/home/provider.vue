@@ -77,6 +77,7 @@
     mounted(){
       this.$emit('updateType', this.treeType);
       this.$emit('updateChart', this.chartConf);
+      this.update();
     },
     methods:{
       ...mapActions([
