@@ -49,6 +49,7 @@ import chartConfig from "./data/chartConfig.js";
      }
    },
    created(){
+   console.log('indexindedx')
     Object.assign(this.options, chartConfig);
    },
    methods: {
