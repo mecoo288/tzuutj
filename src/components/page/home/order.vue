@@ -49,6 +49,7 @@
         treeType: "order",
         parma: {
           cityCode:0,
+          type: 1
         },
         chartConf: {
           title: {

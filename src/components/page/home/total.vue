@@ -49,6 +49,7 @@
         treeType: "total",
         parma: {
           cityCode:0,
+          type: 1
         },
         chartConf: {
           title: {
@@ -117,7 +118,6 @@
     mounted(){
       this.$emit('updateType', this.treeType);
       this.$emit('updateChart', this.chartConf);
-
     },
     methods:{
       ...mapActions([
