@@ -49,11 +49,16 @@ import chartConfig from "./data/chartConfig.js";
      }
    },
    created(){
-   console.log('indexindedx')
     Object.assign(this.options, chartConfig);
    },
    methods: {
+    checkLogin(){
+      if(this.$cookie.get('txy_name')==null||this.$cookie.get('txy_token')==null){
+        this.$router.push('/login')
+      }
+    },
     updateByType(type){
+      this.checkLogin();
       this.activeTag = type;
       this.parma.type = type;
       // this.$refs.child.cityChange( this.parma.data );
@@ -64,6 +69,7 @@ import chartConfig from "./data/chartConfig.js";
       Object.assign(this.options, chartConfig, chartData);
     },
     cityUpdate(city){
+      this.checkLogin();
       this.parma.data.cityCode = city.code;
       this.parma.data.type = city.code === 0 ? 1: 2; 
       this.$refs.child.cityChange( this.parma.data );

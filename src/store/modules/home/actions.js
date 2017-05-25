@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import {getCity, getTjBoth, getOrder, getProvider} from '../../../api/index.js';
 
-// var request = require("superagent");
 
 // export const getDate = async function({commit,state,rootState}, parma){
 //   var urls ={

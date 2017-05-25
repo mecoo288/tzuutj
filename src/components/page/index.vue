@@ -23,7 +23,7 @@
 		components: {
 			leftmenu,
 			myheader,
-		}
+		},
 	}  
 </script>
 
@@ -31,6 +31,13 @@
 	@import "../../common/style/index";
 	#app{
    //     margin-top:60px;
-}
+	}
+	.dropdown{
+		.ui.menu{
+			max-height: 180px;
+			overflow-y: scroll;
+			width: auto;
+		}
+	}
 
 </style>
