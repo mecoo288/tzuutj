@@ -126,9 +126,9 @@ export default{
 	.mydateselect{
 		line-height:40px;
 		border-style: solid;
-    		border-color: #dadadd;
-    		border-width: 1px;
-		width:10%;
+		border-color: #dadadd;
+		border-width: 1px;
+    width: auto;
 	}
 }
 
