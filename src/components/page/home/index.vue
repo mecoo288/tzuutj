@@ -2,7 +2,7 @@
   <div>
     <myselect @cityUpdate="cityUpdate"></myselect>
     <div class="ui  seven item menu">
-      <a class="item" :class="{active: activeTag == tab.alias}"  v-for="tab in chartTab" :href="'#/home/'+tab.alias"  @click='updateByType(tab.alias)'>
+      <a class="item" :class="{active: activeTag == tab.alias}"  v-for="tab in chartTab" :href="'#/home/'+tab.alias">
         {{tab.name}}
       </a>
     </div>
@@ -40,19 +40,23 @@ import chartConfig from "./data/chartConfig.js";
         activeTag: 'total',
         options: {},
         parma:{
-          cityCode: 0,
-          type: 'total'
+          type: 'total',
+          data: {
+            cityCode: 0,
+            type: 1,
+          }
         }
      }
    },
    created(){
+   console.log('indexindedx')
     Object.assign(this.options, chartConfig);
    },
    methods: {
     updateByType(type){
       this.activeTag = type;
       this.parma.type = type;
-      this.$refs.child.cityChange( this.parma );
+      // this.$refs.child.cityChange( this.parma.data );
       // this.$refs.updateTable.update( type );
     },
     updateChart(chartData){
@@ -60,8 +64,9 @@ import chartConfig from "./data/chartConfig.js";
       Object.assign(this.options, chartConfig, chartData);
     },
     cityUpdate(city){
-      this.parma.cityCode = city.code;
-      this.$refs.child.cityChange( this.parma );
+      this.parma.data.cityCode = city.code;
+      this.parma.data.type = city.code === 0 ? 1: 2; 
+      this.$refs.child.cityChange( this.parma.data );
     }
    },
    mounted(){

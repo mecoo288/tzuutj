@@ -49,6 +49,7 @@
         treeType: "order",
         parma: {
           cityCode:0,
+          type: 1
         },
         chartConf: {
           title: {
@@ -89,6 +90,7 @@
     mounted(){
       this.$emit('updateType', this.treeType);
       this.$emit('updateChart', this.chartConf); // 更新图标
+      this.update();
       // var that=this;
       // var first=this.initFirstAll({region:true,type:'module_home'})
 

@@ -30,7 +30,9 @@
         city_name:"请选择",
         region_name:"全国",
         citys:[],
-        selCity:{}
+        selCity:{
+          type: 1
+        }
       }
     },
     mounted(){
@@ -63,8 +65,8 @@
           return;
         }
         this.city_name = city.name;
-        this.selCity = city;
-        this.$emit('cityUpdate', city)
+        Object.assign(this.selCity, city, {type: city.code === 0 ? 1 : 2});
+        this.$emit('cityUpdate', this.selCity)
       }
     },
     components:{

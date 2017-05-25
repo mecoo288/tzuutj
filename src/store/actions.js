@@ -219,16 +219,14 @@ export const download=({dispatch,commit,state,rootState},arg)=>{
     
     
     getThings.then(function(got){
-    	
-    	
     	loopPage.forEach(function(v,k,array){
     		
 
     		var mlist=got[v];
     		
     		mlist.forEach(function(vi,ki,arri){
-    			
     			var tmppage=[];
+    			vi.average_num = (vi.orders_num === 0 ? 0 : (Math.round(vi.pay_money* 100 / vi.orders_num)/10000)).toFixed(2)/1;
     			mymap.forEach(function(mv,mk,marr){
     				if(mv.chu>1){
     					tmppage.push(vi[mv.zd]/mv.chu);

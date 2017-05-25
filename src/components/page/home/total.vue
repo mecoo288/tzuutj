@@ -49,6 +49,7 @@
         treeType: "total",
         parma: {
           cityCode:0,
+          type: 1
         },
         chartConf: {
           title: {
@@ -94,7 +95,8 @@
               opposite: true
           }],
           series:[{
-            type: 'spline',
+            type:'column',
+            color:'rgb(230,165,25)',
             data:[],
             name: "当天成单金额（单位：元）",
             tooltip: {
@@ -103,8 +105,7 @@
           },
           {
             yAxis:1,
-            type:'column',
-            color:'rgb(230,165,25)',
+            type: 'spline',
             data:[],
             name: "至今服务者总数（单位：人）",
             tooltip: {
@@ -117,7 +118,7 @@
     mounted(){
       this.$emit('updateType', this.treeType);
       this.$emit('updateChart', this.chartConf);
-
+      this.update();
     },
     methods:{
       ...mapActions([
