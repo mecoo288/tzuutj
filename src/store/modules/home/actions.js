@@ -3,7 +3,7 @@ var request = require("superagent");
 
 export const getDate = async function({commit,state,rootState}, parma){
   var urls ={
-    total: '/api/Tongji/TjBoth?',
+    total: '/api/Tongji/TjBoth',
     order: '/api/Tongji/order',
     provider: '/api/tongji/fwz'
   }
