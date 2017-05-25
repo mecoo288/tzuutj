@@ -40,7 +40,7 @@
   import {provider} from "./data/tabTag.js";
 
   export default{
-    props:['threeType'],
+    props:['threeType', 'baseParma'],
     data(){
       return{
         tabs: provider,
@@ -112,8 +112,6 @@
     components:{
       mypage
     },
-    props: ['threeType', 'baseData']
-
   }
 </script>
 <style rel="stylesheet/less" lang="less">

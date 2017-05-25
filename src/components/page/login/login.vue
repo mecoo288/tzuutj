@@ -88,43 +88,43 @@
       }
     },
     methods: {
+      checkLogin(){
+          if( this.$cookie.get('txy_name')!==null && this.$cookie.get('txy_token')!==null ){
+            this.$router.push('/home');
+          }
+        },
+      myfocus(){
+        this.result=''	
+      },
+      onSubmit(){
+        var autologin=$("#autologincheck")[0].checked
+          
+        var afterLoginUrl='/login'      
+          
+
+          
+
+        this.user.isLogin=true
 
 
-     myfocus(){
-       this.result=''	
-     },
-     onSubmit(){
-      var autologin=$("#autologincheck")[0].checked
-      
-      var afterLoginUrl='/login'      
-      
+        let url = this.$store.state.default.reqUrl+'/api/user/login'
 
-      
+        this.user.is_vue = 1;
 
-      this.user.isLogin=true
+        this.$http.post(url,this.user).then((rs) => {
+            let obj = rs.data
 
+            if (obj.code == RS_OK) {
+              this.result_type = 'rs_ok';
+              this.result = '登录成功!';
 
-      let url = this.$store.state.default.reqUrl+'/api/user/login'
+       if(autologin){
+        this.$cookie.set('cookieLogin', true, { expires: '7D' });
+      }
 
-      this.user.is_vue = 1;
-
-      this.$http.post(url,this.user).then((rs) => {
-        let obj = rs.data
-
-        if (obj.code == RS_OK) {
-          this.result_type = 'rs_ok';
-          this.result = '登录成功!';
-            //setTimeout(()=>{
-
-		//window.location.href="/!#/charts/dd/country/zdd"
-
-   if(autologin){
-    this.$cookie.set('cookieLogin', true, { expires: '7D' });
-  }
-
-  this.$router.push('/home');
-  window.location.reload();
-	    //},300)
+      this.$router.push('/home');
+      window.location.reload();
+    	    //},300)
 
 
     }else{
@@ -134,22 +134,9 @@
 
     }
   },
-  components: {},
-  props: [],
   created(){
-    this.cmap = ['decrease', 'discount', 'guarantee', 'invoice', 'special']
-
-    var cookieLogin=this.$cookie.get('cookieLogin');
-    var txy_name=this.$cookie.get('txy_name');
-    var txy_token=this.$cookie.get('txy_token');
-    var afterLoginUrl=""
-
-
-    if (cookieLogin&&txy_name&&txy_token) {
-
-      afterLoginUrl='/charts/dd/country/zdd'
-      this.$router.push(afterLoginUrl)
-    }
+    this.cmap = ['decrease', 'discount', 'guarantee', 'invoice', 'special'];
+    this.checkLogin();
 
   }
 

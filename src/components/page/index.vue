@@ -23,7 +23,7 @@
 		components: {
 			leftmenu,
 			myheader,
-		}
+		},
 	}  
 </script>
 
