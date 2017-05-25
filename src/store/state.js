@@ -3,8 +3,8 @@ import VueResource from 'vue-resource'
 var request = require("superagent");
 var dateFormat = require('dateformat');
 var commonConfig=require('../common_config.json');
-//var leftMenus = require('components/data/leftMenu.json');
-var leftMenus=[];
+var leftMenus = require('components/data/leftMenu.json');
+// var leftMenus=[];
 
 
 Vue.use(VueResource);
@@ -25,14 +25,13 @@ var citys_merge=[];
 
 
 
-Vue.http.get(reqUrl+"/api/common/leftMenus").then(res=>{
-    if(res.status==200&&res.data.code==='00000'){
-          
-	res.body.data.forEach(function(val,key,array){
-              leftMenus.push(val);
-          }); 
-    }
-},res=>{});
+// Vue.http.get(reqUrl+"/api/common/leftMenus").then(res=>{
+//     if(res.status==200&&res.data.code==='00000'){
+//        res.body.data.forEach(function(val,key,array){
+//           leftMenus.push(val);
+//       }); 
+//    }
+// },res=>{});
 
 
 

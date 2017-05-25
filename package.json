@@ -1,8 +1,8 @@
 {
-  "name": "vue_eleme",
+  "name": "tuzuu_tj",
   "version": "1.0.0",
-  "description": "A Vue.js project",
-  "author": "Administrator <896386958@qq.com>",
+  "description": "tuzuu tj",
+  "author": "tuzuu",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
@@ -20,6 +20,7 @@
   "devDependencies": {
     "autoprefixer": "^6.4.0",
     "await": "^0.2.6",
+    "axios": "^0.16.1",
     "babel-core": "^6.0.0",
     "babel-helpers": "^6.16.0",
     "babel-loader": "^6.0.0",

@@ -10,7 +10,7 @@
       </div>
   </div>
 </template>
-<script type="text/ecmascript-6">
+<script>
   export default{
     data(){
       return {
@@ -20,8 +20,8 @@
   }
 </script>
 <style rel="stylesheet/less" lang="less">
-  @import "../../common/style/mixin";
-  @dir: "common/";
+  @import "../../../common/style/mixin.less";
+  @dir: "./common/";
   @-webkit-keyframes ball-scale-multiple {
     0% {
       -webkit-transform: scale(0);
@@ -95,19 +95,29 @@
   }
   .loader-wrapper{
     width:100%;
+    position: fixed;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    background-color: rgba(255,255,255,.6);
     .loader {
-      display: flex;
-      /*max-width: 25%;*/
       height: 100px;
-      align-items: center;
-      justify-content: center;
+      position: absolute;
+      text-align: center;
+      width: 100%;
+      top: 50%;
+      left: 0;
+      margin-top: -50px;
       .loading{
-        @w: 56px;
         @h: 56px;
 
-        width: @w;
         height: @h;
-        .bg-img(@dir, 'loading.gif', @w, @h);
+        background-image: url(loading.gif);
+        background-size: 56px;
+        background-position: center;
+        background-repeat: no-repeat;
       }
     }
   }

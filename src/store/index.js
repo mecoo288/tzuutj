@@ -10,6 +10,7 @@ import hh from    './modules/hh'
 import ds from    './modules/ds'
 import fc from    './modules/fc'
 import sp from    './modules/sp'
+import home from './modules/home/'
 import limits from './limits'
 
 Vue.use(Vuex);
@@ -27,6 +28,7 @@ export default new Vuex.Store({
 	'module_ds':ds,
 	'module_fc':fc,
 	'module_sp':sp,
-	'limits':limits
+	'module_home': home,
+	'limits':limits,
     }
 });

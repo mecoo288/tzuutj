@@ -80,7 +80,7 @@ const mutations={
 
 const actions ={
     updateByRegion({commit,state},arg){
-console.log(state)   
+// console.log(state)   
    let chartList=[];
    request
   .get('http://192.168.1.38:8018/api/mock/dd')

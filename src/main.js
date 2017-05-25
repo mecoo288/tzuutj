@@ -33,8 +33,9 @@ require('bootstrap-datetime-picker/js/locales/bootstrap-datetimepicker.zh-CN.js'
 
 
 
-require('../static/dist/css/datetimepicker.css');
-require('../static/dist/js/semantic.js');
+// require('../static/dist/css/datetimepicker.css');
+// require('../static/dist/js/semantic.js');
+require('semantic-ui/dist/semantic.js');
 
 
 //require('../static/dist/js/FileSaver.js');

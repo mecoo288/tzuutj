@@ -9,7 +9,6 @@ let opt={};
 export default {
      
        data(){
-console.log(this.$route.params)       
          return{
                  options:opt
          }
