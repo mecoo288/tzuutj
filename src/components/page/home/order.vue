@@ -39,7 +39,7 @@
   import {order} from "./data/tabTag.js";
 
   export default{
-    props:['threeType', 'baseData'],
+    props:['threeType', 'baseParma'],
     data(){
       return{
         tabs: order,
@@ -88,6 +88,7 @@
       }
     },
     mounted(){
+      Object.assign(this.parma, this.baseParma.data);
       this.$emit('updateType', this.treeType);
       this.$emit('updateChart', this.chartConf); // 更新图标
       this.update();

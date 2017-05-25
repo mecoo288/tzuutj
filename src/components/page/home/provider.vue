@@ -75,6 +75,7 @@
       }
     },
     mounted(){
+      Object.assign(this.parma, this.baseParma.data);
       this.$emit('updateType', this.treeType);
       this.$emit('updateChart', this.chartConf);
       this.update();
