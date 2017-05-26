@@ -40,14 +40,9 @@
       $('.ui.dropdown').dropdown({
           on: 'hover'
       });
-      this.getCity().then(function({status, statusText, body}){
-        if(status !== 200){
-          alert(statusText);
-          return;
-        }
-        let {code, msg, data} = body;
-        if(code !== "00000"){
-          alert(msg);
+      this.GET_city().then(function({status, errmsg, data, code}){
+        if(status != 1){
+          alert(errmsg);
           return;
         }
         _this.citys = data;
@@ -55,7 +50,7 @@
     },
     methods:{
       ...mapActions([
-        'getCity'
+        'GET_city'
       ]),
       exportdata(){
         this.$store.dispatch('download',{type:'dd',name:'订单'})

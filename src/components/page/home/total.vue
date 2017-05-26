@@ -123,8 +123,7 @@
     },
     methods:{
       ...mapActions([
-        'updateXq',
-        'getDate'
+        'GET_tjBoth'
       ]),
       cityChange(parma){
         Object.assign(this.parma, parma);
@@ -132,16 +131,14 @@
       },
       update(){
         let _this= this;
-        this.getDate({
-          type: this.treeType,
-          data: this.parma
-        }).then(function({status, body}){
-          if(status !== 200){
+        this.GET_tjBoth( this.parma ).then(function({status, errmsg, data, code}){
+          if(status != 1){
+            alert(errmsg);
             return;
           }
-          _this.tableList = body.data;
+          _this.tableList = data;
           let payMoney=[], totalProvider=[];
-          body.data.forEach(function({date, pay_money, total}){
+          data.forEach(function({date, pay_money, total}){
             date = Date.parse(date);
             payMoney.unshift([date, pay_money]);
             totalProvider.unshift([date, total]);

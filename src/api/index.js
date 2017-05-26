@@ -4,6 +4,7 @@ import {
 	getOrder, 
 	getProvider
 } from './home'
+
 export {
 	getCity, 
 	getTjBoth, 

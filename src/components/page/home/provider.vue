@@ -82,8 +82,7 @@
     },
     methods:{
       ...mapActions([
-        'updateXq',
-        'getDate'
+        'GET_provider'
       ]),
       cityChange(parma){
         Object.assign(this.parma, parma);
@@ -91,17 +90,15 @@
       },
       update(){
         let _this= this;
-        this.getDate({
-          type: this.treeType,
-          data: this.parma
-        }).then(function({status, body}){
-          if(status !== 200){
+        this.GET_provider(this.parma).then(function({status, errmsg, data, code}){
+          if(status != 1){
+            alert(errmsg);
             return;
           }
-          _this.tableList = body.data;
+          _this.tableList = data;
 
           let hasorder_percent=[];
-          body.data.forEach(function({date, hasorderPercent}){
+          data.forEach(function({date, hasorderPercent}){
             date = Date.parse(date);
             hasorder_percent.unshift([date, hasorderPercent]);
           });

@@ -106,8 +106,7 @@
     },
     methods:{
       ...mapActions([
-        'updateXq',
-        'getDate'
+        'GET_order'
         ]),
       cityChange(parma){
         Object.assign(this.parma, parma);
@@ -115,16 +114,14 @@
       },
       update(){
         let _this= this;
-        this.getDate({
-          type: this.treeType,
-          data: this.parma
-        }).then(function({status, body}){
-          if(status !== 200){
+        this.GET_order(this.parma).then(function({status, errmsg, data, code}){
+          if(status != 1){
+            alert(errmsg);
             return;
           }
-          _this.tableList = body.data;
+          _this.tableList = data;
           let guestsPrice=[], orderAverage=[];
-          body.data.forEach(function({date, guests_price, order_average}){
+          data.forEach(function({date, guests_price, order_average}){
             date = Date.parse(date);
             guestsPrice.unshift([date, guests_price||0]);
             orderAverage.unshift([date, order_average||0]);
