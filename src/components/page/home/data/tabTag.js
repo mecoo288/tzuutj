@@ -88,7 +88,7 @@ const provider = [
 			legend:""
 		},
 		{
-			name:"新增服务者数",
+			name:"新增后服务者数",
 			legend:""
 		},
 		{

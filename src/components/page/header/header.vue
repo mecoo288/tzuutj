@@ -14,7 +14,7 @@
      	<div class="menu">
 
              <a href="/!#/charts/dd/country/zdd" class="item">主菜单</a>
-	     <a href="/!#/home/limit" class="item">账号管理</a>
+	     <a href="/!#/limit" class="item">账号管理</a>
 	     <a  href="javascript:;" @click="logout" class="item">退出</a>
     	</div>
     </div>
@@ -32,7 +32,7 @@
   </div>
 </nav>
 </template>
-<script type="text/ecmascript-6">
+<script>
   import logo from 'components/static/imgs/home/logo.png'
   import touxiang from 'components/static/imgs/home/touxiang.png'
   import jiaotou  from 'components/static/imgs/home/jiaotou.png'
