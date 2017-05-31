@@ -53,135 +53,138 @@ import order from 'components/page/home/order';
 import provider from 'components/page/home/provider';
 
 
-//limit
-//import limit_dd from 'components/page/limit/template/dd.vue'
 const routes = [
+{
+  path: '',
+  redirect: '/home'
+}, {
+  path: '/login',
+  component: login
+},
+{
+  path: '/limit',
+  component: limit
+},{
+  path:"/index",
+  component: index,
+  children:[
+  /*首页*/
   {
-    path: '',
-    redirect: '/home'
-  }, {
-    path: '/login',
-    component: login
-  },{
-    path:"/index",
-    component: index,
+    path: '/home',
+    component: home,
+    redirect:'/home/total',
     children:[
-      /*首页*/
-      {
-        path: '/home',
-        component: home,
-        redirect:'/home/total',
-        children:[
-          {
-            path:'total',
-            component: total
-          },{
-            path:'order',
-            component: order
-          },{
-            path:'provider',
-            component: provider
-          }
-        ]
-      },{
-        path: '/charts',
-        component: chart_base,
-        children: [{
-          path: 'dd',
-          component: base_dd,
-          children: [{
-            path: 'country',
-            component: dd_country,
-            children: [{
-              path: 'zdd',
-              component: dd_country_chart_zdd
-            }, {
-              path: 'ddxq',
-              component: dd_country_chart_ddxq
-            }, {
-              path: 'cdje',
-              component: dd_country_chart_cdje
-            }, {
-              path: 'cdsl',
-              component: dd_country_chart_cdsl
-            }, {
-              path: 'tdje',
-              component: dd_country_chart_tdje
-            }, {
-              path: 'tdsl',
-              component: dd_country_chart_tdsl
-            }, {
-              path: 'bzje',
-              component: dd_country_chart_bzje
-            }, {
-              path: 'bzsl',
-              component: dd_country_chart_bzsl
-            }, {
-              path: 'ddjj',
-              component: dd_country_chart_ddjj
-            }]
-          }, {
-            path: 'city',
-            component: dd_city,
-          }, {
-            path: 'detail',
-            component: dd_detail,
-          }]
-        }, {
-          path: 'fwz',
-          component: base_fwz,
-          children: [{
-            path: 'city',
-            component: fwz_city,
-          }, {
-            path: 'detail',
-            component: fwz_detail,
-          }, {
-            path: 'country',
-            component: fwz_country,
-            children: [
 
-            {
-              path: 'fwzsl',
-              component: fwz_country_chart_fwzsl
-            }, {
-              path: 'drxzsl',
-              component: fwz_country_chart_drxzsl
-            }, {
-              path: 'sxztrs',
-              component: fwz_country_chart_sxztrs
-            },
-
-            {
-              path: 'xxztrs',
-              component: fwz_country_chart_xxztrs
-            },
-
-            {
-              path: 'ygzrs',
-              component: fwz_country_chart_ygzrs
-            }, {
-              path: 'wgzrs',
-              component: fwz_country_chart_wgzrs
-            }]
-          }]
-        }, {
-          path: 'hh',
-          component: base_hh
-        }, {
-          path: 'ds',
-          component: base_ds
-        }, {
-          path: 'fc',
-          component: base_fc
-        }, {
-          path: 'sp',
-          component: base_sp
-        }]
-      }
-
+    {
+      path:'total',
+      component: total
+    },{
+      path:'order',
+      component: order
+    },{
+      path:'provider',
+      component: provider
+    }
     ]
+  },{
+    path: '/charts',
+    component: chart_base,
+    children: [{
+      path: 'dd',
+      component: base_dd,
+      children: [{
+        path: 'country',
+        component: dd_country,
+        children: [{
+          path: 'zdd',
+          component: dd_country_chart_zdd
+        }, {
+          path: 'ddxq',
+          component: dd_country_chart_ddxq
+        }, {
+          path: 'cdje',
+          component: dd_country_chart_cdje
+        }, {
+          path: 'cdsl',
+          component: dd_country_chart_cdsl
+        }, {
+          path: 'tdje',
+          component: dd_country_chart_tdje
+        }, {
+          path: 'tdsl',
+          component: dd_country_chart_tdsl
+        }, {
+          path: 'bzje',
+          component: dd_country_chart_bzje
+        }, {
+          path: 'bzsl',
+          component: dd_country_chart_bzsl
+        }, {
+          path: 'ddjj',
+          component: dd_country_chart_ddjj
+        }]
+      }, {
+        path: 'city',
+        component: dd_city,
+      }, {
+        path: 'detail',
+        component: dd_detail,
+      }]
+    }, {
+      path: 'fwz',
+      component: base_fwz,
+      children: [{
+        path: 'city',
+        component: fwz_city,
+      }, {
+        path: 'detail',
+        component: fwz_detail,
+      }, {
+        path: 'country',
+        component: fwz_country,
+        children: [
+
+        {
+          path: 'fwzsl',
+          component: fwz_country_chart_fwzsl
+        }, {
+          path: 'drxzsl',
+          component: fwz_country_chart_drxzsl
+        }, {
+          path: 'sxztrs',
+          component: fwz_country_chart_sxztrs
+        },
+
+        {
+          path: 'xxztrs',
+          component: fwz_country_chart_xxztrs
+        },
+
+        {
+          path: 'ygzrs',
+          component: fwz_country_chart_ygzrs
+        }, {
+          path: 'wgzrs',
+          component: fwz_country_chart_wgzrs
+        }]
+      }]
+    }, {
+      path: 'hh',
+      component: base_hh
+    }, {
+      path: 'ds',
+      component: base_ds
+    }, {
+      path: 'fc',
+      component: base_fc
+    }, {
+      path: 'sp',
+      component: base_sp
+    }]
   }
+
+  ]
+}
 ]
 
 
