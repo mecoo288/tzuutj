@@ -1,5 +1,5 @@
 var request = require("superagent");
-var commonConfig=require('../../common_config.json');
+var commonConfig=require('../../../common_config.json');
 
 
 var citys_merge=[];

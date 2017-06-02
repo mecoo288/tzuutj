@@ -11,7 +11,7 @@
 </template>
 
 <script>
-	import leftmenu from './common/leftmenu';
+	import leftmenu from '../components/leftmenue/';
 	import myheader from './header/header'
 	export default{
 		data(){
@@ -28,7 +28,7 @@
 </script>
 
 <style rel="stylesheet/less" lang="less">
-	@import "../../common/style/index";
+	@import "../common/style/index";
 	#app{
    //     margin-top:60px;
 	}

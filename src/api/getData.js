@@ -1,7 +1,8 @@
 import axios from "axios";
 import qs from "qs";
+import Vue from "vue";
 require('es6-promise').polyfill();
-const formatRes = ({status, statusText, data, ...res}, {resolve, reject}) =>{
+const formatRes = ({status, statusText, data, ...res}, {resolve, reject}, {commit,state,rootState,...ot}) =>{
 	let resData = {
 		status: 1,
 		errmsg: "",
@@ -17,13 +18,14 @@ const formatRes = ({status, statusText, data, ...res}, {resolve, reject}) =>{
 		reject(resData);
 		return;
 	}
-	if(data.status === "50555"){
+	if(data.code === "50555"){
 		Object.assign(resData, {
 			status: 0,
 			errmsg: data.msg,
 			code: data.code
-		})
+		});
 		reject(resData);
+		commit("logOut", data)
 		return;
 	}
 	Object.assign(resData, {
@@ -34,21 +36,21 @@ const formatRes = ({status, statusText, data, ...res}, {resolve, reject}) =>{
 	return res
 }
 
-const POST = (url, parma) => {
+const POST = (url, parma, scope) => {
 	let res = new Promise(function(resolve, reject){
 		axios.post(url, qs.stringify(parma), {
 			responseType: 'json'
 		}).then(function(res){
-			formatRes(res, {resolve, reject})
+			formatRes(res, {resolve, reject}, scope)
 		});
 	});
 
 	return res;
 }
-const GET = (url, parma = {}) => {
+const GET = (url, parma = {}, scope) => {
 	let res = new Promise(function(resolve, reject){
 		axios.get(url, {params: parma}).then(function(res){
-			formatRes(res, {resolve, reject})
+			formatRes(res, {resolve, reject}, scope)
 		});
 	});
 

@@ -20,7 +20,7 @@
   }
 </script>
 <style rel="stylesheet/less" lang="less">
-  @import "../../../common/style/mixin.less";
+  @import "../common/style/mixin";
   @dir: "./common/";
   @-webkit-keyframes ball-scale-multiple {
     0% {

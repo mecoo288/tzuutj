@@ -48,7 +48,7 @@ require('semantic-ui/dist/semantic.js');
 //require('xlsx')
 
 import App from './App';
-import routes from './router_config.js';
+import routes from './router/';
 
 
 
@@ -87,11 +87,7 @@ const router = new VueRouter({
 
 const app = new Vue({
   router,
-  el: '#app',
   store,
   template: '<App/>',
   components: {App}
-});
-
-// router.push('/seller');
-
+}).$mount('#app');

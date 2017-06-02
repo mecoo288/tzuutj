@@ -108,7 +108,7 @@
 </template>
 
 <script>
-  import myheader from '../header/header'
+  import myheader from '../../components/header/'
   export default {
     components: {
       myheader
@@ -208,7 +208,7 @@
 </script>
 
 <style rel="stylesheet/less" lang="less">
-  @import "../../static/style/index";
+  @import "../../components/static/style/index";
   
   #limit {
     margin:10px;

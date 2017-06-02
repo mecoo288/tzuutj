@@ -11,10 +11,9 @@ import ds from    './modules/ds'
 import fc from    './modules/fc'
 import sp from    './modules/sp'
 import home from './modules/home/'
-import limits from './limits'
+import limits from './modules/limits'
 
 Vue.use(Vuex);
-
 
 export default new Vuex.Store({
     state,

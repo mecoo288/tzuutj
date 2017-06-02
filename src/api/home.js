@@ -1,16 +1,16 @@
 import {POST, GET} from "./getData.js"
 
-const getCity = ({commit,state,rootState}, parma) => {
-	return GET('/api/common/getUserCitys', parma)
+const getCity = (scope, parma) => {
+	return GET('/api/common/getUserCitys', parma, scope)
 } 
-const getTjBoth = ({commit,state,rootState}, parma) => {
-	return POST('/api/Tongji/TjBoth', parma)
+const getTjBoth = (scope, parma) => {
+	return POST('/api/Tongji/TjBoth', parma, scope)
 } 
-const getOrder = ({commit,state,rootState}, parma) => {
-	return GET('/api/Tongji/order', parma)
+const getOrder = (scope, parma) => {
+	return GET('/api/Tongji/order', parma, scope)
 }
-const getProvider = ({commit,state,rootState}, parma) => {
-	return GET('/api/tongji/fwz', parma)
+const getProvider = (scope, parma) => {
+	return GET('/api/tongji/fwz', parma, scope)
 }
 
 export {

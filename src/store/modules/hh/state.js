@@ -1,4 +1,4 @@
-var tabList=require('components/data/hh_tab.json')
+var tabList=require('../../../data/hh_tab.json')
 var dateFormat = require('dateformat');
 
 

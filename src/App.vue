@@ -6,7 +6,7 @@
 </template>
 
 <script>
-	import loading from './components/page/common/loading.vue';
+	import loading from './components/loading.vue';
 	export default{
 		data(){
 			return {

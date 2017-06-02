@@ -1,5 +1,5 @@
 var request = require("superagent");
-var tabList=require('components/data/fwz_chart_tab.json')
+var tabList=require('../../../data/fwz_chart_tab.json')
 var dateFormat = require('dateformat');
 
 var date = new Date();

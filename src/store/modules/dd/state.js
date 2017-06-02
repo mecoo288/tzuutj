@@ -1,5 +1,5 @@
 var request = require("superagent");
-var tabList=require('components/data/dd_country_chart_tab.json')
+var tabList=require('../../../data/dd_country_chart_tab.json');
 
 var dateFormat = require('dateformat');
 

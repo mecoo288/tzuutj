@@ -12,7 +12,7 @@
 	</div>
 </template>
 <script>
-	let chartTab=require('components/data/dd_country_chart_tab.json');
+	import chartTab from '../../../../data/dd_country_chart_tab.json';
 	import {mapActions} from 'vuex';
 	export default {
 		data(){

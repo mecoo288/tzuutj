@@ -6,5 +6,6 @@ import * as mutations from './mutations'
 export default {
     state,
     actions,
+    getters,
     mutations
 }

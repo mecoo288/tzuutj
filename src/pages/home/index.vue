@@ -16,7 +16,7 @@
 <script>
 import myselect from './select';
 import chartConfig from "./data/chartConfig.js";
-
+import {mapMutations} from 'vuex'
   export default {
 
     components: {
@@ -52,6 +52,9 @@ import chartConfig from "./data/chartConfig.js";
     Object.assign(this.options, chartConfig);
    },
    methods: {
+    ...mapMutations([
+      'activMenu'
+    ]),
     checkLogin(){
       if(this.$cookie.get('txy_name')==null||this.$cookie.get('txy_token')==null){
         this.$router.push('/login')
@@ -75,21 +78,15 @@ import chartConfig from "./data/chartConfig.js";
       this.$refs.child.cityChange( this.parma.data );
     }
    },
-   mounted(){
+    created(){
+      this.activMenu('home');
       this.updateByType(this.$route.path.split("/").pop());
-        //登录校验 最终在server端做
-        if(this.$cookie.get('txy_name')==null||this.$cookie.get('txy_token')==null){
-
-          this.$router.push('/login')
-        }
-      }
-
     }
+  }
   </script>
 
   <style rel="stylesheet/less" lang="less">
-  //@import "../../static/style/index";
-  @import "../../../common/style/mixin";
+  @import "../../common/style/mixin.less";
   @dir: "static/imgs/login/";  
 
   .homemain{

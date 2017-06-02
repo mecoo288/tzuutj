@@ -68,7 +68,7 @@
 
   import mypage from "../common/page"
 
-  var tabs=require('components/data/dd_country_chart_tab.json')
+  var tabs=require('../../../../data/dd_country_chart_tab.json')
 
 
   export default{

@@ -26,7 +26,7 @@
       <input type="password" class="form-control" v-model="user.passWd" name="password" id="password" placeholder="请输入密码" @focus="myfocus">
     </div>
     <div class="form-group result" :class="result_type" >
-      <img :src="loginerr" v-if=result>{{result}}
+      <img :src="loginerr" v-if="result">{{result}}
     </div>
 
 
@@ -64,7 +64,6 @@
 </template>
 <script>
   //  import detail from 'components/header/detail'
-  import tool from 'src/util/Store';
   import loginurl from 'components/static/imgs/login/login.png'  
   import userurl from 'components/static/imgs/login/user.png'
   import passwdurl from 'components/static/imgs/login/passwd.png'
@@ -143,7 +142,7 @@
 }
 </script>
 <style rel="stylesheet/less" lang="less">
-  @import "../../../common/style/mixin";
+  @import "../../common/style/mixin.less";
   @dir: "static/imgs/login/";
 
   ::-webkit-input-placeholder {

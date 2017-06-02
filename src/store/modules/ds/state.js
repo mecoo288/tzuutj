@@ -1,5 +1,5 @@
 var request = require("superagent");
-var tabList=require('components/data/ds_tab.json')
+var tabList=require('../../../data/ds_tab.json')
 var dateFormat = require('dateformat');
 
 
