@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import * as actions from './actions'
 import * as getters from './getters'
-import * as state from './state'
+import state from './state'
 import * as mutations from './mutations'
 import dd from    './modules/dd'
 import fwz from   './modules/fwz'
@@ -14,7 +14,6 @@ import home from './modules/home/'
 import limits from './modules/limits'
 
 Vue.use(Vuex);
-
 export default new Vuex.Store({
     state,
     actions,

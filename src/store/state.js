@@ -28,9 +28,6 @@ date = {
     end:weekEnd
 }
 
-let cookieDomain = commonConfig.baseapi.cookieDomain;
-let cityLimit = 1;
-let menuActived = "";
 
 export default {
     citys,
@@ -41,8 +38,11 @@ export default {
     provinces,
     reqUrl,
     fws,
-    date,
-    cookieDomain,
-    cityLimit,
-    menuActived,
+    date:{
+        start:weekStart,
+        end:weekEnd
+    },
+    cookieDomain : commonConfig.baseapi.cookieDomain,
+    cityLimit: 1,
+    menuActived:"",
 };

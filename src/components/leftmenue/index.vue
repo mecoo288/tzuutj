@@ -1,7 +1,7 @@
 <template>
 	<div v-if="menus" >
 		<div class="ui   vertical menu inverted leftmenu"> 
-			<a  :href="menu.url" class="item"   :class=" {active : menu.alias === menuActived }"  v-for="menu in menus">
+			<a  :href="menu.url" class="item"   :class=" {active : menu.alias === alias }"  v-for="menu in menus">
 				{{menu.name}}
 			</a>
 		</div>
@@ -15,24 +15,13 @@ import {mapState, mapMutations} from 'vuex';
 			return {
 				detailShow: false,
 				menus,
-				world: ""
 			}
 		},
-		computed: mapState([
-				'menuActived'
-		]),
-		methods:{
-			...mapMutations([
-					'activMenu'
-				])
+		computed: {
+			alias(){
+				return this.$store.state.menuActived;
+			}
 		},
-		created(){
-			let _this = this;
-			setInterval(function(){
-				let v = Math.random();
-				_this.activMenu(v);
-			},2000);
-		}
 	}
 </script>
 <style rel="stylesheet/less" lang="less">

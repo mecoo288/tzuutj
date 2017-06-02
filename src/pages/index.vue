@@ -12,7 +12,7 @@
 
 <script>
 	import leftmenu from '../components/leftmenue/';
-	import myheader from './header/header'
+	import myheader from '../components/header/'
 	export default{
 		data(){
 			return {

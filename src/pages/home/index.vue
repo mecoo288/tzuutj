@@ -52,9 +52,6 @@ import {mapMutations} from 'vuex'
     Object.assign(this.options, chartConfig);
    },
    methods: {
-    ...mapMutations([
-      'activMenu'
-    ]),
     checkLogin(){
       if(this.$cookie.get('txy_name')==null||this.$cookie.get('txy_token')==null){
         this.$router.push('/login')
@@ -64,8 +61,6 @@ import {mapMutations} from 'vuex'
       this.checkLogin();
       this.activeTag = type;
       this.parma.type = type;
-      // this.$refs.child.cityChange( this.parma.data );
-      // this.$refs.updateTable.update( type );
     },
     updateChart(chartData){
       this.options = {};
@@ -79,7 +74,7 @@ import {mapMutations} from 'vuex'
     }
    },
     created(){
-      this.activMenu('home');
+      this.$store.commit('activMenu', 'home');
       this.updateByType(this.$route.path.split("/").pop());
     }
   }
