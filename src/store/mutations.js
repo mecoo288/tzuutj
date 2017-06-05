@@ -85,7 +85,10 @@ const activMenu = (state, payload) => {
   state.menuActived = payload;
 }
 
-const checkLogin = (state, payload) => {
+/* 
+  是否需要登录
+*/
+const needLogged = (state, isNeed) => {
   
 }
 
@@ -95,5 +98,6 @@ export {
   filterLogin,
   resetSearchPage,
   logOut,
+  needLogged,
   activMenu,
 }

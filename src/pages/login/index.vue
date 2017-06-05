@@ -1,6 +1,5 @@
 <template>
   <div class="login-all22 ui  centered grid">
-
     <div class="login-wrapper12 eight  wide column" >
       <div class="login-small-img">
        <div class="login-small-img-in">
@@ -8,55 +7,37 @@
       </div>
     </div>
     <form action="" role="form" @submit.prevent="onSubmit">
-
       <div class="form-group loginme" ><img src="../../components/static/imgs/login/login.png" height="24" width="24">登录</div>
-
       <div class="form-group one">
-        <!--<label for="username">用户名</label>-->
-
         <input  type="text" v-model="user.name" class="form-control" name="username" id="username" placeholder="请输入账号"  @focus="myfocus">
 
       </input>
-
     </div>
 
     <div class="form-group two">
-      <!--<label for="password">密码</label>-->
-
       <input type="password" class="form-control" v-model="user.passWd" name="password" id="password" placeholder="请输入密码" @focus="myfocus">
     </div>
     <div class="form-group result" :class="result_type" >
       <img src="../../components/static/imgs/login/error.png" v-if="result">{{result}}
     </div>
 
-
-
-
     <div class="form-group" id="autologin" >
 
       <div class="ui checkbox" >
-        <input type="checkbox" id="autologincheck">
-        <label>下次自动登录</label>
+        <input type="checkbox" id="autologincheck" v-model="isChecked">
+        <label for="autologincheck">下次自动登录</label>
       </div>
 
     </div>
-
-
     <div class="form-group loginbutton" >
      <button type="submit" class="btn btn-primary">登 录</button>
    </div>
 
  </form>
-
-
-
-
-
  <div id="footer" >
    <img src="../../components/static/imgs/login/logo.png">
    上海糖玩国际旅行社有限公司
  </div>
-
 </div>
 
 
@@ -68,10 +49,15 @@
   export default{
     data(){
       return {
-        cmap: [],
         user: {},
         result: '',
         result_type: 'rs_error',
+        isChecked: true
+      }
+    },
+    watch:{
+      isChecked(val){
+        console.log(val)
       }
     },
     methods: {
@@ -85,11 +71,11 @@
       },
       onSubmit(){
         var autologin=$("#autologincheck")[0].checked
-        
-        var afterLoginUrl='/login'      
-        
 
-        
+        var afterLoginUrl='/login'      
+
+
+
 
         this.user.isLogin=true
 
@@ -122,9 +108,11 @@
       }
     },
     created(){
-      this.cmap = ['decrease', 'discount', 'guarantee', 'invoice', 'special'];
-      this.checkLogin();
+      let _this= this;
+      this.checkLogin(function(){
 
+      });
+      this.$store.commit('needLogged', true);
     }
 
   }
