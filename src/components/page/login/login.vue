@@ -1,5 +1,5 @@
 <template>
-  <div class="login-all22 ui  centered grid">
+  <div class="login-all22 ui  centered grid" style="margin:0">
 
     <div class="login-wrapper12 eight  wide column" >
       <div class="login-small-img">
@@ -26,7 +26,7 @@
       <input type="password" class="form-control" v-model="user.passWd" name="password" id="password" placeholder="请输入密码" @focus="myfocus">
     </div>
     <div class="form-group result" :class="result_type" >
-      <img :src="loginerr" v-if=result>{{result}}
+      <img :src="loginerr" v-if="result">{{result}}
     </div>
 
 

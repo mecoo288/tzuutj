@@ -1,5 +1,5 @@
 <template>
-  <div class="login-all22 ui  centered grid">
+  <div class="login-all22 ui centered grid" style="margin:0">
 
     <div class="login-wrapper12 eight  wide column" >
       <div class="login-small-img">
@@ -21,21 +21,17 @@
         <input type="password" class="form-control iconlock" maxlength="16" v-model="newPwd" placeholder="请输入新密码">
         <i class="check circle outline icon right valok" v-if="isOk.newPwd"></i>
       </div>
-
       <div class="ui left icon input fluid">
         <i class="lock icon"></i>
         <input type="password" class="form-control iconlock" maxlength="16" v-model="reNewPwd" placeholder="请重复输入新密码">
         <i class="check circle outline icon right valok" v-if="isOk.reNewPwd"></i>
-      </div>
-      <div class="form-group errmsg">
-        <img src="../../../components/static/imgs/login/error.png" v-if="errmsg"> {{errmsg}}
       </div>
 
       <!-- <div class="loginbutton" > -->
        <button type="submit" class="btn btn-primary" :disabled="!isAllOk || saving">确 认</button>
        <!-- <button type="submit" class="btn btn-primary" :disabled="saving">确 认</button> -->
        <!-- <button type="submit" class="ui button blue fluid">确 认</button> -->
-        <a href="javascript:history.go(-1);" class="cancle-modify">取消修改</a>
+        <a href="javascript:history.go(-1);" class="cancle-modify">取消修改</a><br>
       <!-- </div> -->
 
    </form>
@@ -132,7 +128,6 @@
 <style rel="stylesheet/less" lang="less">
   @import "../../../common/style/mixin";
   @dir: "static/imgs/login/";
-
   ::-webkit-input-placeholder {
     color:#aaaaaa !important;
     font-size:14px;
@@ -148,6 +143,7 @@
   }
 
   .btn-primary{
+    margin-top: 20px;
    width:100%;
    height:56px;
  }
@@ -166,7 +162,6 @@
   color: green;
 }
 .login-all22{
-
  position: fixed;
  top:0px;
  width: 100%;
