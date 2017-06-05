@@ -31,11 +31,12 @@
         <img src="../../../components/static/imgs/login/error.png" v-if="errmsg"> {{errmsg}}
       </div>
 
-      <div class="form-group loginbutton" >
+      <!-- <div class="loginbutton" > -->
        <button type="submit" class="btn btn-primary" :disabled="!isAllOk || saving">确 认</button>
        <!-- <button type="submit" class="btn btn-primary" :disabled="saving">确 认</button> -->
        <!-- <button type="submit" class="ui button blue fluid">确 认</button> -->
-     </div>
+        <a href="javascript:history.go(-1);" class="cancle-modify">取消修改</a>
+      <!-- </div> -->
 
    </form>
 
@@ -176,7 +177,12 @@
 
 }
 
-
+.cancle-modify{
+  padding: 10px 0;
+  text-align: center;
+  margin-top: 10px;
+  display: block;
+}
 .login-wrapper12.eight.wide.column {
 
     //position: fixed;
