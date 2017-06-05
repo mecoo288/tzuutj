@@ -367,3 +367,7 @@ function getMap(type,rootState){
 
 
 }
+
+export const doChangePWD = ({rootState}, parmas) => {
+	return request.post('/api/User/modifyPwd', parmas)
+}

@@ -46,6 +46,7 @@ import base_sp from 'components/charts/base/sp/index.vue';
 // import ratings from 'components/ratings/ratings'
 // import seller from 'components/seller/seller';
 import login from 'components/page/login/login';
+import changepwd from 'components/page/changePWD/';
 import home from 'components/page/home/index';
 import limit from 'components/page/limit/index';
 import total from 'components/page/home/total';
@@ -60,6 +61,10 @@ const routes = [
 }, {
   path: '/login',
   component: login
+},
+{
+  path:'/changePWD',
+  component: changepwd
 },
 {
   path: '/limit',
