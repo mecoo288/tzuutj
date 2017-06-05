@@ -9,7 +9,7 @@
     </div>
     <form action="" role="form" @submit.prevent="onSubmit">
 
-      <div class="form-group loginme" ><img :src="loginurl">登录</div>
+      <div class="form-group loginme" ><img src="../../components/static/imgs/login/login.png" height="24" width="24">登录</div>
 
       <div class="form-group one">
         <!--<label for="username">用户名</label>-->
@@ -26,7 +26,7 @@
       <input type="password" class="form-control" v-model="user.passWd" name="password" id="password" placeholder="请输入密码" @focus="myfocus">
     </div>
     <div class="form-group result" :class="result_type" >
-      <img :src="loginerr" v-if="result">{{result}}
+      <img src="../../components/static/imgs/login/error.png" v-if="result">{{result}}
     </div>
 
 
@@ -53,7 +53,7 @@
 
 
  <div id="footer" >
-   <img :src="logourl">
+   <img src="../../components/static/imgs/login/logo.png">
    上海糖玩国际旅行社有限公司
  </div>
 
@@ -63,12 +63,6 @@
 </div>
 </template>
 <script>
-  //  import detail from 'components/header/detail'
-  import loginurl from 'components/static/imgs/login/login.png'  
-  import userurl from 'components/static/imgs/login/user.png'
-  import passwdurl from 'components/static/imgs/login/passwd.png'
-  import loginerr from 'components/static/imgs/login/error.png' 
-  import logourl from 'components/static/imgs/login/logo.png'
 
   const RS_OK='00000'
   export default{
@@ -78,30 +72,24 @@
         user: {},
         result: '',
         result_type: 'rs_error',
-        loginurl:loginurl,
-        userurl:userurl,
-        passwdurl:passwdurl,
-        loginerr:loginerr,
-        logourl:logourl
-
       }
     },
     methods: {
       checkLogin(){
-          if( this.$cookie.get('txy_name')!==null && this.$cookie.get('txy_token')!==null ){
-            this.$router.push('/home');
-          }
-        },
+        if( this.$cookie.get('txy_name')!==null && this.$cookie.get('txy_token')!==null ){
+          this.$router.push('/home');
+        }
+      },
       myfocus(){
         this.result=''	
       },
       onSubmit(){
         var autologin=$("#autologincheck")[0].checked
-          
+        
         var afterLoginUrl='/login'      
-          
+        
 
-          
+        
 
         this.user.isLogin=true
 
@@ -111,35 +99,35 @@
         this.user.is_vue = 1;
 
         this.$http.post(url,this.user).then((rs) => {
-            let obj = rs.data
+          let obj = rs.data
 
-            if (obj.code == RS_OK) {
-              this.result_type = 'rs_ok';
-              this.result = '登录成功!';
+          if (obj.code == RS_OK) {
+            this.result_type = 'rs_ok';
+            this.result = '登录成功!';
 
-       if(autologin){
-        this.$cookie.set('cookieLogin', true, { expires: '7D' });
-      }
+            if(autologin){
+              this.$cookie.set('cookieLogin', true, { expires: '7D' });
+            }
 
-      this.$router.push('/home');
-      window.location.reload();
+            this.$router.push('/home');
+            window.location.reload();
     	    //},300)
 
 
-    }else{
-      this.result = obj.msg?obj.msg:"登录失败，用户名或密码错误";
-    }
-  })
+        }else{
+          this.result = obj.msg?obj.msg:"登录失败，用户名或密码错误";
+        }
+      })
+
+      }
+    },
+    created(){
+      this.cmap = ['decrease', 'discount', 'guarantee', 'invoice', 'special'];
+      this.checkLogin();
 
     }
-  },
-  created(){
-    this.cmap = ['decrease', 'discount', 'guarantee', 'invoice', 'special'];
-    this.checkLogin();
 
   }
-
-}
 </script>
 <style rel="stylesheet/less" lang="less">
   @import "../../common/style/mixin.less";

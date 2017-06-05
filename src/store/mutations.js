@@ -85,6 +85,10 @@ const activMenu = (state, payload) => {
   state.menuActived = payload;
 }
 
+const checkLogin = (state, payload) => {
+  
+}
+
 export {
   download,
   updatePage,

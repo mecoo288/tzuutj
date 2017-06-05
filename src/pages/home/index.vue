@@ -16,7 +16,6 @@
 <script>
 import myselect from './select';
 import chartConfig from "./data/chartConfig.js";
-import {mapMutations} from 'vuex'
   export default {
 
     components: {

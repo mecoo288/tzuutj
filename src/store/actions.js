@@ -364,6 +364,11 @@ function getMap(type,rootState){
 
 
 	return ts[type];
-
-
 }
+
+
+/* 
+17-06-05 k.liu
+rebuild
+*/
+
