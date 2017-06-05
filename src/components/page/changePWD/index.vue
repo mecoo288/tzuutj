@@ -18,12 +18,12 @@
 
       <div class="ui left icon input fluid">
         <i class="lock icon"></i>
-        <input type="password" class="form-control iconlock" maxlength="16" v-model="newPwd" placeholder="请输入新密码(6-16位字母和数字)">
+        <input type="password" class="form-control iconlock" maxlength="16" v-model="newPwd" placeholder="请输入新密码(6-16位字母和数字,字母区分大小写)">
         <i class="check circle outline icon right valok" v-if="isOk.newPwd"></i>
       </div>
       <div class="ui left icon input fluid">
         <i class="lock icon"></i>
-        <input type="password" class="form-control iconlock" maxlength="16" v-model="reNewPwd" placeholder="请重复输入新密码(6-16位字母和数字)">
+        <input type="password" class="form-control iconlock" maxlength="16" v-model="reNewPwd" placeholder="请重复输入新密码(6-16位字母和数字,字母区分大小写)">
         <i class="check circle outline icon right valok" v-if="isOk.reNewPwd"></i>
       </div>
 
