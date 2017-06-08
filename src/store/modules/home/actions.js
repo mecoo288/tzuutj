@@ -10,7 +10,7 @@ import {getCity, getTjBoth, getOrder, getProvider} from '../../../api/index.js';
 //   }
 //   // Vue.$root.openLoding(true);
 //   var res = await request
-//     .get(rootState.default.reqUrl+ urls[parma.type])
+//     .get(urls[parma.type])
 //     .query(parma.data);
 //     // res.then(function(_res){
 //     //   console.log(_res)

@@ -11,7 +11,8 @@ import ds from    './modules/ds'
 import fc from    './modules/fc'
 import sp from    './modules/sp'
 import home from './modules/home/'
-import limits from './modules/limits'
+import limits from './modules/limits/'
+import account from './modules/account/'
 
 Vue.use(Vuex);
 export default new Vuex.Store({
@@ -20,13 +21,14 @@ export default new Vuex.Store({
     getters,
     mutations,
     modules:{
-	'module_dd':dd,
-	'module_fwz':fwz,
-	'module_hh':hh,
-	'module_ds':ds,
-	'module_fc':fc,
-	'module_sp':sp,
-	'module_home': home,
-	'limits':limits,
+		'module_dd':dd,
+		'module_fwz':fwz,
+		'module_hh':hh,
+		'module_ds':ds,
+		'module_fc':fc,
+		'module_sp':sp,
+		'module_home': home,
+		'limits':limits,
+		'account': account
     }
 });

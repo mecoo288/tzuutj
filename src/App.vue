@@ -1,5 +1,5 @@
 <template>
-	<div id="app" class="homemain">
+	<div id="app">
 		<loading :loadingShow="loadingShow"></loading>
 		<router-view></router-view>
 	</div>
@@ -23,7 +23,7 @@
 </script>
 
 <style rel="stylesheet/less" lang="less">
-	@import "common/style/index";
+	@import "./static/style/index";
 	#app{
    //     margin-top:60px;
 }

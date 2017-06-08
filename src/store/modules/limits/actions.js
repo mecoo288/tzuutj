@@ -17,7 +17,7 @@ export const removeUserCity=({resolve,commit,state,rootState},arg)=>{
 var query={'id':arg.id};
 
 request
-.get(rootState.default.reqUrl+'/api/limit/removeUserCity')
+.get('/api/limit/removeUserCity')
 .query(query) // query string
 //.use(prefix) // Prefixes *only* this request
 //.use(nocache) // Prevents caching of *only* this request
@@ -52,7 +52,7 @@ var query={'userId':arg.userId,'cityCode':arg.cityCode,'cityName':arg.cityName};
 return new Promise(resolve=>{
 
 request
-.get(rootState.default.reqUrl+'/api/limit/updateUserCity')
+.get('/api/limit/updateUserCity')
 .query(query) // query string
 //.use(prefix) // Prefixes *only* this request
 //.use(nocache) // Prevents caching of *only* this request
@@ -124,7 +124,7 @@ if(result){
 
 
 request
-.get(rootState.default.reqUrl+queryUrl)
+.get(queryUrl)
   //.query(query) // query string
   //.use(prefix) // Prefixes *only* this request
   //.use(nocache) // Prevents caching of *only* this request
@@ -161,7 +161,7 @@ userLists.forEach(function(v,k,arr){
 var query={'userId':v.id};
 
 request
-.get(rootState.default.reqUrl+'/api/limit/getUserCityLists')
+.get('/api/limit/getUserCityLists')
 .query(query) // query string
 //.use(prefix) // Prefixes *only* this request
 //.use(nocache) // Prevents caching of *only* this request
@@ -198,7 +198,7 @@ function updateUserCitysListData(userId,state,rootState,commit,arg,resolve){
 var query={'userId':userId};
 
 request
-.get(rootState.default.reqUrl+'/api/limit/getUserCityLists')
+.get('/api/limit/getUserCityLists')
 .query(query) // query string
 //.use(prefix) // Prefixes *only* this request
 //.use(nocache) // Prevents caching of *only* this request
@@ -257,7 +257,7 @@ function updateUserCityAllDataB(state,rootState,commit,myarg){
 
 
     request
-    .get(rootState.default.reqUrl+'/api/limit/updateUserCity')
+    .get('/api/limit/updateUserCity')
     .query(query) // query string
     //.use(prefix) // Prefixes *only* this request
     //.use(nocache) // Prevents caching of *only* this request

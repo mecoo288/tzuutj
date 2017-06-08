@@ -39,7 +39,8 @@ import base_ds from '../pages/charts/base/ds/index.vue';
 import base_fc from '../pages/charts/base/fc/index.vue';
 import base_sp from '../pages/charts/base/sp/index.vue';
 
-import login from '../pages/login/';
+import login from '../pages/account/login/';
+import changepwd from '../pages/account/changePWD/';
 import home from '../pages/home/index';
 import limit from '../pages/limit/index';
 import total from '../pages/home/total';
@@ -54,8 +55,10 @@ const routes = [
 }, {
   path: '/login',
   component: login
-},
-{
+},{
+  path:'/changePWD',
+  component: changepwd
+},{
   path: '/limit',
   component: limit
 },{

@@ -73,7 +73,7 @@ function getData(query,rootState,state){
 
  var chartList=[];
  request
-  .get(rootState.default.reqUrl+'/api/fwz/dataList')
+  .get('/api/fwz/dataList')
   .query(query) // query string
   //.use(prefix) // Prefixes *only* this request
   //.use(nocache) // Prevents caching of *only* this request
@@ -184,7 +184,7 @@ state.default.tabList.forEach(function(val,key,array){
 
 
 request
-.get(rootState.default.reqUrl+url)
+.get(url)
 .query(query) // query string
 //.use(prefix) // Prefixes *only* this request
 //.use(nocache) // Prevents caching of *only* this request
@@ -268,7 +268,7 @@ function initDataOfTable(query,state,rootState,commit,arg,resolve){
  
 
   request
-  .get(rootState.default.reqUrl+url)
+  .get(url)
   .query(query) // query string
   //.use(prefix) // Prefixes *only* this request
   //.use(nocache) // Prevents caching of *only* this request

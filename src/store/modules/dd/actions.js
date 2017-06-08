@@ -138,7 +138,7 @@ if(state.default.date.start!='开始日期'||state.default.date.end!='结束日�
 
 var chartList=[];
 request
-.get(rootState.default.reqUrl+'/api/dd/dataList')
+.get('/api/dd/dataList')
   .query(query) // query string
   //.use(prefix) // Prefixes *only* this request
   //.use(nocache) // Prevents caching of *only* this request
@@ -276,7 +276,7 @@ function updateDataOfTable(query,state,rootState,commit,arg,dispatch){
 
 
      request
-     .get(rootState.default.reqUrl+url)
+     .get(url)
 .query(query) // query string
 //.use(prefix) // Prefixes *only* this request
 //.use(nocache) // Prevents caching of *only* this request
@@ -388,7 +388,7 @@ function initDataOfTable(query,state,rootState,commit,arg,resolve){
   
 
   request
-  .get(rootState.default.reqUrl+url)
+  .get(url)
   .query(query) // query string
   //.use(prefix) // Prefixes *only* this request
   //.use(nocache) // Prevents caching of *only* this request

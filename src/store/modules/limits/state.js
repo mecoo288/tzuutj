@@ -9,7 +9,7 @@ var reqUrl=commonConfig.baseapi.reqUrl;
 var query={}
 
 request
-.get(reqUrl+'/api/common/citys_common')
+.get('/api/common/citys_common')
 .query(query) // query string
 .end(function(err, res){
       if(res.ok&&res.body.code==="00000"){
@@ -27,7 +27,7 @@ request
 
 
 request
-.get(reqUrl+'/api/common/citys_sp')
+.get('/api/common/citys_sp')
 .query(query) // query string
 .end(function(err, res){
       if(res.ok&&res.body.code==="00000"){

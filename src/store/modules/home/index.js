@@ -1,7 +1,7 @@
-import * as actions from './actions'
-import * as getters from './getters'
-import * as state from './state'
-import * as mutations from './mutations'
+import actions from './actions'
+import getters from './getters'
+import state from './state'
+import mutations from './mutations'
 
 export default {
     state,

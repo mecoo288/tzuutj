@@ -60,13 +60,12 @@
       city_name:"请选择",
       region_name:"全国",
       fws_name:'服务商姓名',
-      citys:this.$store.state.default.citys,
-      fws:this.$store.state.default.fws
+      citys: this.$store.state.default.citys,
+      fws: this.$store.state.default.fws
     }
     
   },
   mounted(){
-   
 	//console.log(this.$store.state.module_dd.default.filter.threeType)
 	//init
        // this.$store.dispatch('updateByRegionOfDd')

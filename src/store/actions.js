@@ -41,7 +41,7 @@ function initRegionLimit(commit,state,rootState,arg,resolve){
 	var first=true
 
 	request
-	.get(rootState.default.reqUrl+"/api/common/getUserCitys")
+	.get("/api/common/getUserCitys")
 .query(query) // query string
 //.use(prefix) // Prefixes *only* this request
 //.use(nocache) // Prevents caching of *only* this request
@@ -259,7 +259,7 @@ function getDataList(query,state,rootState,commit,arg,dispatch,looppage,getThing
 	var out=[];
 
 	request
-	.get(rootState.default.reqUrl+url)
+	.get(url)
 .query(query) // query string
 //.use(prefix) // Prefixes *only* this request
 //.use(nocache) // Prevents caching of *only* this request
@@ -366,9 +366,11 @@ function getMap(type,rootState){
 	return ts[type];
 }
 
-
 /* 
 17-06-05 k.liu
 rebuild
 */
 
+export const doChangePWD = ({rootState}, parmas) => {
+	return request.post('/api/User/modifyPwd', parmas)
+}

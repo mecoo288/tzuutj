@@ -13,8 +13,9 @@
      <div class="ui dropdown item"> <img :src="touxiang"> <img :src="jiaotou">
      	<div class="menu">
 
-             <a href="/!#/charts/dd/country/zdd" class="item">主菜单</a>
-	     <a href="/!#/limit" class="item">账号管理</a>
+       <a href="/!#/charts/dd/country/zdd" class="item">主菜单</a>
+       <a href="/!#/limit" class="item">账号管理</a>
+	     <a href="/!#/changePWD" class="item">修改密码</a>
 	     <a  href="javascript:;" @click="logout" class="item">退出</a>
     	</div>
     </div>

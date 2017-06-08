@@ -80,7 +80,7 @@ import chartConfig from "./data/chartConfig.js";
   </script>
 
   <style rel="stylesheet/less" lang="less">
-  @import "../../common/style/mixin.less";
+  @import "../../static/style/mixin.less";
   @dir: "static/imgs/login/";  
 
   .homemain{
