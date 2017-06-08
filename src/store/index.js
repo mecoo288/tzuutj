@@ -14,6 +14,7 @@ import home from './modules/home/'
 import limits from './modules/limits/'
 import account from './modules/account/'
 
+console.log(account);
 Vue.use(Vuex);
 export default new Vuex.Store({
     state,
@@ -29,6 +30,6 @@ export default new Vuex.Store({
 		'module_sp':sp,
 		'module_home': home,
 		'limits':limits,
-		'account': account
+		// 'account': account
     }
 });

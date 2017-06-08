@@ -1,2 +1,7 @@
-export * from './home'
-export * from './account'
+export {
+	getCity,
+	getTjBoth,
+	getOrder,
+	getProvider
+} from './home'
+export {doLogin} from './account'
