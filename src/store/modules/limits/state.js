@@ -5,43 +5,42 @@ var commonConfig=require('../../../common_config.json');
 var citys_merge=[];
 var reqUrl=commonConfig.baseapi.reqUrl;
 
-
 var query={}
 
-request
-.get('/api/common/citys_common')
-.query(query) // query string
-.end(function(err, res){
-      if(res.ok&&res.body.code==="00000"){
+// request
+// .get('/api/common/citys_common')
+// .query(query) // query string
+// .end(function(err, res){
+//       if(res.ok&&res.body.code==="00000"){
 
-	res.body.data.forEach(function(val,key,res){
-             if(!in_citys_merge(val)){
-                 citys_merge.push(val)
-             }
+// 	res.body.data.forEach(function(val,key,res){
+//              if(!in_citys_merge(val)){
+//                  citys_merge.push(val)
+//              }
 
-	});
+// 	});
 
-      }
-});
-
-
-
-request
-.get('/api/common/citys_sp')
-.query(query) // query string
-.end(function(err, res){
-      if(res.ok&&res.body.code==="00000"){
-
-	res.body.data.forEach(function(val,key,res){
-             if(!in_citys_merge(val)){
-                 citys_merge.push(val)
-             }
-
-        });
+//       }
+// });
 
 
-      }
-});
+
+// request
+// .get('/api/common/citys_sp')
+// .query(query) // query string
+// .end(function(err, res){
+//       if(res.ok&&res.body.code==="00000"){
+
+// 	res.body.data.forEach(function(val,key,res){
+//              if(!in_citys_merge(val)){
+//                  citys_merge.push(val)
+//              }
+
+//         });
+
+
+//       }
+// });
 
 
 

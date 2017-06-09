@@ -21,21 +21,12 @@
       <td >{{item.orders_num}}</td>
     </tr>
   </tbody>
-<!--   <tfoot>
-    <tr><th colspan="10">
-      <mypage v-if="threeType=='country'" firstType="Dd"></mypage>
-    </th>
-  </tr>
-</tfoot> -->
 </table>
 </div>
 </template>
 
 
 <script>
-
-  import mypage from "./common/page"
-  import {mapActions} from 'vuex'
 
   import {provider} from "./data/tabTag.js";
 
@@ -76,21 +67,18 @@
     },
     mounted(){
       Object.assign(this.parma, this.baseParma.data);
-      this.$emit('updateType', this.treeType);
       this.$emit('updateChart', this.chartConf);
+      this.$store.commit('home/Do_activeTag', 'provider');
       this.update();
     },
     methods:{
-      ...mapActions([
-        'GET_provider'
-      ]),
       cityChange(parma){
         Object.assign(this.parma, parma);
         this.update();
       },
       update(){
         let _this= this;
-        this.GET_provider(this.parma).then(function({status, errmsg, data, code}){
+        this.$store.dispatch('home/GET_provider', this.parma).then(function({status, errmsg, data, code}){
           if(status != 1){
             alert(errmsg);
             return;
@@ -105,9 +93,6 @@
           _this.chartConf.series[0].data = hasorder_percent;
         })
       },
-    },
-    components:{
-      mypage
     },
   }
 </script>

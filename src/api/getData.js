@@ -18,19 +18,21 @@ const formatRes = ({status, statusText, data, ...res}, {resolve, reject}, {commi
 		reject(resData);
 		return;
 	}
-	if(data.code === "50555"){
-		Object.assign(resData, {
-			status: 0,
-			errmsg: data.msg,
-			code: data.code
-		});
-		reject(resData);
-		commit("logOut", data)
-		return;
-	}
+	// if(data.code === "50555"){
+	// 	Object.assign(resData, {
+	// 		status: 0,
+	// 		errmsg: data.msg,
+	// 		code: data.code
+	// 	});
+	// 	reject(resData);
+	// 	commit("logOut", data)
+	// 	return;
+	// }
 	Object.assign(resData, {
 		status: 1,
-		data: data.data
+		data: data.data,
+		errmsg: data.msg,
+		code: data.code
 	})
 	resolve(resData);
 	return res

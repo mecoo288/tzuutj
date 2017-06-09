@@ -8,78 +8,76 @@
     </div>
     <highcharts  :options="options" ref="highcharts">
     </highcharts>
-    <router-view :baseParma="parma" @updateType= "updateByType" @updateChart="updateChart" ref="child"></router-view>
+    <router-view :baseParma="parma" @updateChart="updateChart" ref="child"></router-view>
   </div>
 
 </template>
 
 <script>
-import myselect from './select';
-import chartConfig from "./data/chartConfig.js";
+  import myselect from './components/select.vue';
+  import chartConfig from "./data/chartConfig.js";
   export default {
 
     components: {
       myselect,
-      // mytable
     },
     data(){
       return {
         chartTab:[
-          {
-            alias:'total',
-            name:'总图表'
-          },{
-            alias:'order',
-            name:'订单图表'
-          },{
-            alias:'provider',
-            name:'服务者图表'
-          },
+        {
+          alias:'total',
+          name:'总图表'
+        },{
+          alias:'order',
+          name:'订单图表'
+        },{
+          alias:'provider',
+          name:'服务者图表'
+        },
         ],
-        activeTag: 'total',
         options: {},
         parma:{
-          type: 'total',
+          type: this.activeTag,
           data: {
             cityCode: 0,
             type: 1,
           }
         }
-     }
-   },
-   created(){
-    Object.assign(this.options, chartConfig);
-   },
-   methods: {
-    checkLogin(){
-      if(this.$cookie.get('txy_name')==null||this.$cookie.get('txy_token')==null){
-        this.$router.push('/login')
       }
     },
-    updateByType(type){
-      this.checkLogin();
-      this.activeTag = type;
-      this.parma.type = type;
+    computed:{
+      activeTag(){
+        return this.$store.state.home.activedTag
+      }
     },
-    updateChart(chartData){
-      this.options = {};
-      Object.assign(this.options, chartConfig, chartData);
-    },
-    cityUpdate(city){
-      this.checkLogin();
-      this.parma.data.cityCode = city.code;
-      this.parma.data.type = city.code === 0 ? 1: 2; 
-      this.$refs.child.cityChange( this.parma.data );
-    }
-   },
     created(){
+      Object.assign(this.options, chartConfig);
+    },
+    methods: {
+      checkLogin(){
+        if(this.$cookie.get('txy_name')==null||this.$cookie.get('txy_token')==null){
+          this.$router.push('/login')
+        }
+      },
+      updateChart(chartData){
+        this.options = {};
+        Object.assign(this.options, chartConfig, chartData);
+      },
+      cityUpdate(city){
+        this.checkLogin();
+        this.parma.data.cityCode = city.code;
+        this.parma.data.type = city.code === 0 ? 1: 2; 
+        this.$refs.child.cityChange( this.parma.data );
+      }
+    },
+    created(){
+      let _this = this;
       this.$store.commit('activMenu', 'home');
-      this.updateByType(this.$route.path.split("/").pop());
     }
   }
-  </script>
+</script>
 
-  <style rel="stylesheet/less" lang="less">
+<style lang="less">
   @import "../../static/style/mixin.less";
   @dir: "static/imgs/login/";  
 

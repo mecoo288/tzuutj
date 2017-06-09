@@ -32,7 +32,6 @@
 </div>
 </template>
 <script>
-
   const RS_OK='00000'
   export default{
     data(){
@@ -40,8 +39,6 @@
         parmas:{
           name: "",
           passWd: "",
-          is_vue: 1,
-          isLogin: true
         },
         name: "",
         passWd:"",
@@ -73,27 +70,21 @@
         this.tips=''	
       },
       submit(){
-        let _this = this;
-        this.$store.dispatch('Do_login' , this.parmas).then((rs) => {
-          let obj = rs.data
-
-          if (obj.code == RS_OK) {
-            this.tips = '登录成功!';
-
+        this.$store.dispatch('account/Do_login', this.parmas).then((res) => {
+          console.log(this);
+          if (res.code == '00000') {
+            this.$locals("account").add({account: this.parmas.name});
             this.$router.push('/home');
-            window.location.reload();
-
-
-        }else{
-          this.tips = obj.msg?obj.msg:"登录失败，用户名或密码错误";
-        }
-      })
-
+          }else{
+            this.tips = res.errmsg ? res.errmsg : "登录失败，用户名或密码错误";
+          }
+        })
       }
     },
     created(){
       let _this= this;
       this.$store.commit('needLogged', true);
+      
     }
 
   }

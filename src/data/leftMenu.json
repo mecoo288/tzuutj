@@ -31,7 +31,7 @@
     },
     {
         "name": "商品统计",
-        "url": "/!#/charts/sp",
+        "url": "/!#/product",
         "alias": "product"
     }
 ]

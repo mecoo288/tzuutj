@@ -13,8 +13,7 @@ import sp from    './modules/sp'
 import home from './modules/home/'
 import limits from './modules/limits/'
 import account from './modules/account/'
-
-console.log(account);
+import product from './modules/account/'
 Vue.use(Vuex);
 export default new Vuex.Store({
     state,
@@ -28,8 +27,8 @@ export default new Vuex.Store({
 		'module_ds':ds,
 		'module_fc':fc,
 		'module_sp':sp,
-		'module_home': home,
-		'limits':limits,
-		// 'account': account
+		home,
+		limits,
+		account
     }
 });

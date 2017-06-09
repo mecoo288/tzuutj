@@ -20,21 +20,12 @@
       <td >{{item.pay_money}}</td>
     </tr>
   </tbody>
-<!--   <tfoot>
-    <tr><th colspan="10">
-      <mypage v-if="threeType=='country'" firstType="Dd"></mypage>
-    </th>
-  </tr>
-</tfoot> -->
 </table>
 </div>
 </template>
 
 
 <script>
-
-  import mypage from "./common/page"
-  import {mapActions} from 'vuex'
 
   import {order} from "./data/tabTag.js";
 
@@ -89,32 +80,18 @@
     },
     mounted(){
       Object.assign(this.parma, this.baseParma.data);
-      this.$emit('updateType', this.treeType);
       this.$emit('updateChart', this.chartConf); // 更新图标
+      this.$store.commit('home/Do_activeTag', 'order');
       this.update();
-      // var that=this;
-      // var first=this.initFirstAll({region:true,type:'module_home'})
-
-      // first.then((m)=>{
-
-      //   this.initTableOfDd({threeType:this.threeType}).then((msg)=>{
-      //     that.updateTableOfDd()
-      //   })
-
-      // })
-
     },
     methods:{
-      ...mapActions([
-        'GET_order'
-        ]),
       cityChange(parma){
         Object.assign(this.parma, parma);
         this.update();
       },
       update(){
         let _this= this;
-        this.GET_order(this.parma).then(function({status, errmsg, data, code}){
+        this.$store.dispatch('home/GET_order', this.parma).then(function({status, errmsg, data, code}){
           if(status != 1){
             alert(errmsg);
             return;
@@ -131,10 +108,6 @@
         })
       },
     },
-    components:{
-      mypage
-    },
-
   }
 </script>
 <style rel="stylesheet/less" lang="less">

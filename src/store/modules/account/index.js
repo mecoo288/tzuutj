@@ -3,6 +3,7 @@ import state from './state'
 import mutations from './mutations'
 
 export default{
+	namespaced: true,
     actions,
     mutations,
     state

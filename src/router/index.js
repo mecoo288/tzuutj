@@ -47,6 +47,13 @@ import total from '../pages/home/total';
 import order from '../pages/home/order';
 import provider from '../pages/home/provider';
 
+/* 
+k.liu rebuild
+2017-6-9
+*/
+
+import product from '../pages/product/'
+import product_main from '../pages/product/sp'
 
 const routes = [
 {
@@ -70,7 +77,6 @@ const routes = [
     component: home,
     redirect:'/home/total',
     children:[
-
     {
       path:'total',
       component: total
@@ -81,6 +87,16 @@ const routes = [
       path:'provider',
       component: provider
     }
+    ]
+  },{
+    path:'/product',
+    component: product,
+    redirect: '/product/main',
+    children: [
+      {
+        path: "main",
+        component: product_main
+      }
     ]
   },{
     path: '/charts',

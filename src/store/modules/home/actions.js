@@ -43,7 +43,7 @@ const GET_provider = (stroe, parma) => {
   return  getProvider(stroe, parma)
 }
 
-export {
+export default {
 	GET_order,
 	GET_city,
 	GET_tjBoth,

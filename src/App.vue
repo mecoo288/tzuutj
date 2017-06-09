@@ -6,7 +6,10 @@
 </template>
 
 <script>
+	import Vue from 'vue';
 	import loading from './components/loading.vue';
+	import {locals} from './plugin/locals.js';
+	Vue.use(locals);
 	export default{
 		data(){
 			return {
@@ -17,7 +20,6 @@
 			loading,
 		},
 		created(){
-			let _this = this;
 		}
 	}  
 </script>

@@ -13,17 +13,12 @@
           </div>
         </div>
       </div>
-      <!-- <div class="myexport" >
-        <div class="myexbutton" @click="exportdata">导出</div>
-      </div> -->
     </div>
   </div>
 </template>
 
 <script>
   import { mapActions } from 'vuex';
-  import mydate from "./common/date";
-
   export default{
     data(){
       return {
@@ -40,7 +35,7 @@
       $('.ui.dropdown').dropdown({
           on: 'hover'
       });
-      this.GET_city().then(function({status, errmsg, data, code}){
+      this.$store.dispatch('home/GET_city').then(function({status, errmsg, data, code}){
         if(status != 1){
           alert(errmsg);
           return;
@@ -49,9 +44,6 @@
       })
     },
     methods:{
-      ...mapActions([
-        'GET_city'
-      ]),
       exportdata(){
         this.$store.dispatch('download',{type:'dd',name:'订单'})
       },
@@ -64,9 +56,6 @@
         this.$emit('cityUpdate', this.selCity)
       }
     },
-    components:{
-      mydate,
-    }
   }
 </script>
 <style rel="stylesheet/less" lang="less">
