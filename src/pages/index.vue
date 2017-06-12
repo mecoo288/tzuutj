@@ -18,7 +18,7 @@
 			<el-row class="nav">	  
 			  <el-col>
 			    <el-menu mode="vertical" default-active="1" class="nav-items">
-			      <el-menu-item  :index='ind' class="nav-items-item" :class=" {is_active : menu.alias === alias }" v-for="menu, ind in menus"><a :href="menu.url">{{menu.name}}</a></el-menu-item>
+			      <el-menu-item  :index='ind' @click="openPage(menu.url)" class="nav-items-item" :class=" {is_active : menu.alias === alias }" v-for="menu, ind in menus"><a :href="menu.url">{{menu.name}}</a></el-menu-item>
 			    </el-menu>
 			  </el-col>
 			</el-row>
@@ -68,6 +68,16 @@ export default{
 			menus
 		}
 	},
+	methods:{
+		openPage(page){
+			this.$router.push(page)
+		}
+	},
+	computed: {
+		alias(){
+			return this.$store.state.menuActived;
+		}
+	},
 }  
 </script>
 
@@ -100,6 +110,9 @@ export default{
 					a{
 						color: #bfc6ce;
 						text-decoration: none;
+					}
+					&.is-active a{
+						color: #fff;
 					}
 				}
 			}
