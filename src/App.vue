@@ -27,7 +27,8 @@
 <style rel="stylesheet/less" lang="less">
 	@import "./static/style/index";
 	#app{
-   //     margin-top:60px;
-}
+	   //     margin-top:60px;
+	   height: 100%;
+	}
 
 </style>

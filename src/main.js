@@ -6,6 +6,10 @@ import VueHighcharts from 'vue-highcharts'
 import DrillDown from 'highcharts/modules/drilldown'
 import Highcharts3d from 'highcharts/highcharts-3d';
 import Exporting from 'highcharts/modules/exporting';
+
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-default/index.css'
+
 //import jQuery from 'jquery';
 
 import 'semantic-ui/dist/semantic.css';
@@ -53,6 +57,7 @@ import routes from './router/';
 
 
 
+Vue.use(ElementUI);
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
