@@ -1,19 +1,11 @@
 <template>
-  <div class="myselect">
-    <div class ="mysecond ui  column grid">
-      <div class="xzcstext">    
-        选择城市:
-      </div>
-      <div class="myregion">
-        <div class="ui dropdown item">
-          {{city_name}} 
-          <i class="dropdown icon"></i>
-          <div class="ui menu" id="myregionone">
-            <a  v-for="city in citys" class="item" @click="selectme(city)" :data-city-name="city">{{city.name}}</a>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="filter-bar">
+    <el-select v-model="selCity.name" filterable placeholder="请选择城市（默认全部）" @change="DoSelCity">
+      <el-option-group  label="选择城市">
+        <el-option v-for="item in citys" :key="item.code" :label="item.name" :value="item.code">
+        </el-option>
+      </el-option-group>
+    </el-select>
   </div>
 </template>
 
@@ -22,18 +14,19 @@
   export default{
     data(){
       return {
-        city_name:"请选择",
         region_name:"全国",
         citys:[],
         selCity:{
-          type: 1
+          name:'',
+          type:1,
+          code:""
         }
       }
     },
     mounted(){
       let _this = this;
       $('.ui.dropdown').dropdown({
-          on: 'hover'
+        on: 'hover'
       });
       this.$store.dispatch('home/GET_city').then(function({status, errmsg, data, code}){
         if(status != 1){
@@ -44,30 +37,18 @@
       })
     },
     methods:{
-      exportdata(){
-        this.$store.dispatch('download',{type:'dd',name:'订单'})
-      },
-      selectme(city){
-        if(this.selCity.code === city.code ){
+      DoSelCity(code){
+        if(this.selCity.code === code ){
           return;
         }
-        this.city_name = city.name;
-        Object.assign(this.selCity, city, {type: city.code === 0 ? 1 : 2});
+        Object.assign(this.selCity, {code: code}, {type: code === 0 ? 1 : 2});
         this.$emit('cityUpdate', this.selCity)
-      }
+      },
     },
   }
 </script>
 <style rel="stylesheet/less" lang="less">
-  .xzcstext{
-    min-width: 100px;
-  }
-  .myregion{
-    min-width: 120px;
-    margin-right: 20px;
-  }
-  .myselect{
-    min-height: 60px;
-    height: auto;
+  .filter-bar{
+
   }
 </style>

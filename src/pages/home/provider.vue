@@ -1,40 +1,36 @@
 <template>
   <div>
-
-    <!-- <button  @click="returnme"  v-if="threeType!='country'" class="ui primary basic button">返回</button> -->
-    <table class="ui large table" id="tabledata">
-     <caption id="tablecaption"></caption>
-     <thead>
-      <tr>
-       <th v-for="tab in tabs">{{tab.name}} <span v-if="tab.legend">({{tab.legend}})</span></th>
-     </tr>
-   </thead>
-   <tbody>
-    <tr v-for="item in tableList">
-      <td >{{item.date}}</td>
-      <td >{{item.hasorderPercent}}%</td>
-      <td >{{item.orderPercent}}%</td>
-      <td >{{item.orderaddPercent}}%</td>
-      <td >{{item.fwzaddPercent}}%</td>
-      <td >{{item.newbie}}</td>
-      <td >{{item.hasorder}}</td>
-      <td >{{item.orders_num}}</td>
-    </tr>
-  </tbody>
-</table>
-</div>
+    <el-table :data="tableList" border stripe style="width: 100%" :default-sort = "{prop: 'date', order: 'descending'}">
+      <el-table-column prop="date" label="日期" sortable>
+      </el-table-column>
+      <el-table-column prop="hasorderPercent" label="成单服务者占比率" sortable>
+        <template scope="scope" sortable>
+          {{ scope.row.hasorderPercent }}%
+        </template>
+      </el-table-column>
+      <el-table-column prop="orderPercent" label="成单服务者平均成单数" sortable>
+      </el-table-column>
+      <el-table-column prop="orderaddPercent" label="订单增长率" sortable>
+        <template scope="scope">
+          {{ scope.row.orderaddPercent }}%
+        </template>
+      </el-table-column>
+      <el-table-column prop="newbie" label="新增后服务者数" sortable>
+      </el-table-column>
+      <el-table-column prop="hasorder" label="成单服务者数" sortable>
+      </el-table-column>
+      <el-table-column prop="orders_num" label="订单数" sortable>
+      </el-table-column>
+    </el-table>
+  </div>
 </template>
 
 
 <script>
-
-  import {provider} from "./data/tabTag.js";
-
   export default{
     props:['threeType', 'baseParma'],
     data(){
       return{
-        tabs: provider,
         pages:[1,2,3,4,5],
         currentPage:1,
         tableList: [],
@@ -52,14 +48,14 @@
               text:""
             },
             labels: {
-                  format: '{value}%'
-              }
+              format: '{value}%'
+            }
           }],
           series:[{
             name:" ",
             data:[],
             tooltip: {
-                valueSuffix: '%'
+              valueSuffix: '%'
             }
           }]
         }
@@ -67,7 +63,7 @@
     },
     mounted(){
       Object.assign(this.parma, this.baseParma.data);
-      this.$emit('updateChart', this.chartConf);
+      this.$emit('updateChart', {options: this.chartConf, tab:"provider"});
       this.$store.commit('home/Do_activeTag', 'provider');
       this.update();
     },

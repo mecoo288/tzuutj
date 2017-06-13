@@ -1,39 +1,30 @@
 <template>
   <div>
-
-    <!-- <button  @click="returnme"  v-if="threeType!='country'" class="ui primary basic button">返回</button> -->
-    <table class="ui large table" id="tabledata">
-     <caption id="tablecaption"></caption>
-     <thead>
-      <tr>
-       <th v-for="tab in tabs">{{tab.name}} <span v-if="tab.legend">({{tab.legend}})</span></th>
-     </tr>
-   </thead>
-   <tbody>
-    <tr v-for="item in tableList">
-      <td >{{item.date}}</td>
-      <td >{{item.guests_order}}</td>
-      <td >{{item.guests_price}}</td>
-      <td >{{item.order_average}}</td>
-      <td >{{item.orders_num}}</td>
-      <td >{{item.guests_num}}</td>
-      <td >{{item.pay_money}}</td>
-    </tr>
-  </tbody>
-</table>
+    <el-table :data="tableList" border stripe style="width: 100%" :default-sort = "{prop: 'date', order: 'descending'}">
+      <el-table-column prop="date" label="日期" sortable>
+      </el-table-column>
+      <el-table-column prop="guests_order" label="客单人数" sortable>
+      </el-table-column>
+      <el-table-column prop="guests_price" label="客单价" sortable>
+      </el-table-column>
+      <el-table-column prop="order_average" label="订单均价" sortable>
+      </el-table-column>
+      <el-table-column prop="orders_num" label="订单数" sortable>
+      </el-table-column>
+      <el-table-column prop="guests_num" label="客人数" sortable>
+      </el-table-column>
+      <el-table-column prop="pay_money" label="销售额" sortable>
+      </el-table-column>
+    </el-table>
 </div>
 </template>
 
 
 <script>
-
-  import {order} from "./data/tabTag.js";
-
   export default{
     props:['threeType', 'baseParma'],
     data(){
       return{
-        tabs: order,
         pages:[1,2,3,4,5],
         currentPage:1,
         tableList: [],
@@ -50,21 +41,21 @@
             shared: true
           },
           legend: {
-              layout: 'horizontal',
+            layout: 'horizontal',
           },
           yAxis:[{
             title:{
               text:""
             },
             labels: {
-                  format: '{value}'
-              }
+              format: '{value}'
+            }
           }],
           series:[{
             data:[],
             name: "客单价",
             tooltip: {
-                valueSuffix: '元'
+              valueSuffix: '元'
             }
           },
           {
@@ -72,7 +63,7 @@
             data:[],
             name: "订单均价",
             tooltip: {
-                valueSuffix: '元'
+              valueSuffix: '元'
             }
           }]
         }
@@ -80,7 +71,7 @@
     },
     mounted(){
       Object.assign(this.parma, this.baseParma.data);
-      this.$emit('updateChart', this.chartConf); // 更新图标
+      this.$emit('updateChart', {options: this.chartConf, tab:"order"}); // 更新图标
       this.$store.commit('home/Do_activeTag', 'order');
       this.update();
     },

@@ -49,8 +49,8 @@ export default {
     data:[]
   }],
   credits:{
-            enabled:false // 禁用版权信息
-          },
+    enabled:false 
+  },
 
 
-        };
+};

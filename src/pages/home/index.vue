@@ -1,14 +1,13 @@
 <template>
   <div>
     <myselect @cityUpdate="cityUpdate"></myselect>
-    <div class="ui  seven item menu">
-      <a class="item" :class="{active: activeTag == tab.alias}"  v-for="tab in chartTab" :href="'#/home/'+tab.alias">
-        {{tab.name}}
-      </a>
-    </div>
-    <highcharts  :options="options" ref="highcharts">
-    </highcharts>
-    <router-view :baseParma="parma" @updateChart="updateChart" ref="child"></router-view>
+    <el-tabs type="border-card" @tab-click="goPage" class="tabs-chart" v-model="activeTag" v-loading.fullscreen.lock="fullscreenLoading">
+      <el-tab-pane :label="tab.name" :name="tab.alias" v-for="tab in chartTab">
+        <highcharts  :options="tab.options" ref="highcharts"> 
+        </highcharts>
+      </el-tab-pane>
+    </el-tabs>
+    <router-view :baseParma="parma" @updateChart="updateChart" ref="child" class="tabs-table"></router-view>
   </div>
 
 </template>
@@ -17,25 +16,32 @@
   import myselect from './components/select.vue';
   import chartConfig from "./data/chartConfig.js";
   export default {
-
     components: {
       myselect,
     },
     data(){
       return {
-        chartTab:[
-        {
-          alias:'total',
-          name:'总图表'
-        },{
-          alias:'order',
-          name:'订单图表'
-        },{
-          alias:'provider',
-          name:'服务者图表'
+        fullscreenLoading: true,
+        chartTab:{
+          total: {
+            alias:'total',
+            name:'总图表',
+            link: '/home/total',
+            options: {}
+          },
+          order: {
+            alias:'order',
+            name:'订单图表',
+            link: '/home/order',
+            options: {}
+          },
+          provider: {
+            alias:'provider',
+            name:'服务者图表',
+            link: '/home/provider',
+            options: {}
+          },
         },
-        ],
-        options: {},
         parma:{
           type: this.activeTag,
           data: {
@@ -53,15 +59,26 @@
     created(){
       Object.assign(this.options, chartConfig);
     },
+    mounted(){
+    },
     methods: {
+      goPage(tab){
+        this.fullscreenLoading = true;
+        this.$router.push(this.chartTab[tab.name].link);
+      },
       checkLogin(){
         if(this.$cookie.get('txy_name')==null||this.$cookie.get('txy_token')==null){
           this.$router.push('/login')
         }
       },
       updateChart(chartData){
+        let _this = this;
+        setTimeout(()=>{
+          _this.fullscreenLoading = false;
+        },0);
         this.options = {};
-        Object.assign(this.options, chartConfig, chartData);
+        Object.assign(this.options, chartConfig, chartData.options);
+        this.chartTab[chartData.tab].options = Object.assign({}, chartConfig, chartData.options)
       },
       cityUpdate(city){
         this.checkLogin();
@@ -78,20 +95,15 @@
 </script>
 
 <style lang="less">
-  @import "../../static/style/mixin.less";
-  @dir: "static/imgs/login/";  
-
-  .homemain{
-    margin-top:86px;
-  }
-  .apploginme {
-
-    position: fixed;
-    width: 500px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -70%);
-
+  .tabs-chart,
+  .tabs-table{
+    margin-top: 10px;
   }
 
+  .el-select-dropdown__list{
+    width: 470px;
+    .el-select-dropdown__item{
+      display: inline-block;
+    }
+  }
 </style>

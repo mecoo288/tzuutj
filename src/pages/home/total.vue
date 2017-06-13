@@ -1,39 +1,34 @@
 <template>
   <div>
-    <table class="ui large table" id="tabledata">
-     <caption id="tablecaption"></caption>
-     <thead>
-      <tr>
-       <th v-for="tab in tabs">{{tab.name}} <span v-if="tab.legend">({{tab.legend}})</span></th>
-     </tr>
-   </thead>
-   <tbody>
-    <tr v-for="item in tableList">
-        <td >{{item.date}}</td>
-        <td >{{item.week_day}}</td>
-        <td >{{item.newbie}}</td>
-        <td >{{item.total}}</td>
-        <td >{{item.hasorder}}</td>
-        <td >{{item.orders_num}}</td>
-        <td >{{item.orders_detail_num}}</td>
-        <td >{{item.guests_num}}</td>
-        <td >{{item.pay_money}}</td>
-    </tr>
-  </tbody>
-</table>
+    <el-table :data="tableList" border stripe style="width: 100%" :default-sort = "{prop: 'date', order: 'descending'}">
+      <el-table-column prop="date" label="日期" sortable>
+      </el-table-column>
+      <el-table-column prop="week_day" label="星期" sortable>
+      </el-table-column>
+      <el-table-column prop="newbie" label="服务者新增 (单位/人)" sortable>
+      </el-table-column>
+      <el-table-column prop="total" label="服务者总数 (单位/人)" sortable>
+      </el-table-column>
+      <el-table-column prop="hasorder" label="服务者成单数量 (单位/人)" sortable>
+      </el-table-column>
+      <el-table-column prop="orders_num" label="主订单数 (单位/单)" sortable>
+      </el-table-column>
+      <el-table-column prop="orders_detail_num" label="详单数量 (单位/单)" sortable>
+      </el-table-column>
+      <el-table-column prop="guests_num" label="客人数量 (单位/人)" sortable>
+      </el-table-column>
+      <el-table-column prop="pay_money" label="成单金额 (单位/元)" sortable>
+      </el-table-column>
+    </el-table>
 </div>
 </template>
 
 
 <script>
-
-  import {total} from "./data/tabTag.js";
-
   export default{
     props:['baseParma'],
     data(){
       return{
-        tabs: total,
         pages:[1,2,3,4,5],
         currentPage:1,
         tableList: [],
@@ -108,7 +103,7 @@
     },
     mounted(){
       Object.assign(this.parma, this.baseParma.data);
-      this.$emit('updateChart', this.chartConf);
+      this.$emit('updateChart', {options: this.chartConf, tab:"total"});
       this.update();
     },
     methods:{
