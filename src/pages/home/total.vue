@@ -114,9 +114,11 @@
       update(){
         let _this= this;
         this.$store.commit('home/Do_activeTag', 'total');
-        this.$store.dispatch('home/GET_tjBoth', this.parma ).then(function({status, errmsg, data, code}){
-          if(status != 1){
-            alert(errmsg);
+        this.$store.dispatch('home/GET_tjBoth', {
+          data: this.parma,
+          callback({status, errmsg, data, code}){
+            if(status == "0"){
+            _this.$message.error(errmsg);
             return;
           }
           _this.tableList = data;
@@ -128,6 +130,7 @@
           });
           _this.chartConf.series[0].data = payMoney;
           _this.chartConf.series[1].data = totalProvider;
+          }
         })
       },
     }

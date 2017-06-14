@@ -32,7 +32,6 @@
 </div>
 </template>
 <script>
-  const RS_OK='00000'
   export default{
     data(){
       return {
@@ -70,13 +69,16 @@
         this.tips=''	
       },
       submit(){
-        this.$store.dispatch('account/Do_login', this.parmas).then((res) => {
-          console.log(this);
-          if (res.code == '00000') {
-            this.$locals("account").add({account: this.parmas.name});
-            this.$router.push('/home');
-          }else{
-            this.tips = res.errmsg ? res.errmsg : "登录失败，用户名或密码错误";
+        let _this = this;
+        this.$store.dispatch('account/Do_login', {
+          data: _this.parmas,
+          callback({status, data, errmsg}){
+            if (status == "0") {
+            _this.tips = errmsg ? errmsg : "登录失败，用户名或密码错误";
+            return;
+          }
+          _this.$locals("account").add({account: _this.parmas.name});
+          _this.$router.push('/home');
           }
         })
       }

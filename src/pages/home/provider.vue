@@ -74,19 +74,22 @@
       },
       update(){
         let _this= this;
-        this.$store.dispatch('home/GET_provider', this.parma).then(function({status, errmsg, data, code}){
-          if(status != 1){
-            alert(errmsg);
-            return;
-          }
-          _this.tableList = data;
+        this.$store.dispatch('home/GET_provider', {
+          data: this.parma,
+          callback({status, errmsg, data, code}){
+            if(status == "0"){
+              _this.$message.error(errmsg);
+              return;
+            }
+            _this.tableList = data;
 
-          let hasorder_percent=[];
-          data.forEach(function({date, hasorderPercent}){
-            date = Date.parse(date);
-            hasorder_percent.unshift([date, hasorderPercent]);
-          });
-          _this.chartConf.series[0].data = hasorder_percent;
+            let hasorder_percent=[];
+            data.forEach(function({date, hasorderPercent}){
+              date = Date.parse(date);
+              hasorder_percent.unshift([date, hasorderPercent]);
+            });
+            _this.chartConf.series[0].data = hasorder_percent;
+          }
         })
       },
     },

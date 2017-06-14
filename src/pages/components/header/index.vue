@@ -9,13 +9,13 @@
         <el-menu-item index="/home/">首页</el-menu-item>
         <el-menu-item index="/limit">账号管理</el-menu-item>
         <el-menu-item index="/changePWD">修改密码</el-menu-item>
-        <el-menu-item index="2-3" @click="logout">退出</el-menu-item>
+        <el-menu-item index="" @click="logout">退出</el-menu-item>
       </el-submenu>
     </el-menu>
   </header>
 </template>
 <script>
-  import logo from '../../static/imgs/home/logo.png';
+  import logo from '../../../static/imgs/home/logo.png';
   export default{
     data(){
       return {
@@ -24,13 +24,26 @@
     },
     methods: {
       logout(){
-        this.$cookie.delete('txy_name')
-      	this.$cookie.delete('txy_token')
-      	this.$cookie.delete('cookieLogin')
+        let _this = this;
+        this.$store.dispatch('account/Do_logout', {
+          callback({status, errmsg}){
+            if(status == "0"){
+              this.$message({
+                message: errmsg,
+                type: 'warning'
+              });
+              return;
+            }
+             _this.$store.commit('account/logout', null, {root: true});           
+          }
+        })
+       //  this.$cookie.delete('txy_name')
+      	// this.$cookie.delete('txy_token')
+      	// this.$cookie.delete('cookieLogin')
 
-      	this.$router.push('/login')
-      	//window.location.reload();
-      	this.$store.dispatch('logout')	
+      	// this.$router.push('/login')
+      	// //window.location.reload();
+      	// this.$store.dispatch('logout')	
       }
     },
     computed: {

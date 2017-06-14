@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import menus from '../data/leftMenu.json';
-import mheader from '../components/header/';
+import menus from './data/leftMenu.json';
+import mheader from './components/header/';
 export default{
 	data(){
 		return {

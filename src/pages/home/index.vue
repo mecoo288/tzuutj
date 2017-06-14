@@ -66,11 +66,6 @@
         this.fullscreenLoading = true;
         this.$router.push(this.chartTab[tab.name].link);
       },
-      checkLogin(){
-        if(this.$cookie.get('txy_name')==null||this.$cookie.get('txy_token')==null){
-          this.$router.push('/login')
-        }
-      },
       updateChart(chartData){
         let _this = this;
         setTimeout(()=>{
@@ -81,7 +76,6 @@
         this.chartTab[chartData.tab].options = Object.assign({}, chartConfig, chartData.options)
       },
       cityUpdate(city){
-        this.checkLogin();
         this.parma.data.cityCode = city.code;
         this.parma.data.type = city.code === 0 ? 1: 2; 
         this.$refs.child.cityChange( this.parma.data );

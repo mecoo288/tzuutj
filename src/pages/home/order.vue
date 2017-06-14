@@ -82,20 +82,23 @@
       },
       update(){
         let _this= this;
-        this.$store.dispatch('home/GET_order', this.parma).then(function({status, errmsg, data, code}){
-          if(status != 1){
-            alert(errmsg);
-            return;
+        this.$store.dispatch('home/GET_order', {
+          data: this.parma,
+          callback({status, errmsg, data, code}){
+            if(status == "0"){
+              _this.$message.error(errmsg);
+              return;
+            }
+            _this.tableList = data;
+            let guestsPrice=[], orderAverage=[];
+            data.forEach(function({date, guests_price, order_average}){
+              date = Date.parse(date);
+              guestsPrice.unshift([date, guests_price||0]);
+              orderAverage.unshift([date, order_average||0]);
+            });
+            _this.chartConf.series[0].data = guestsPrice;
+            _this.chartConf.series[1].data = orderAverage;
           }
-          _this.tableList = data;
-          let guestsPrice=[], orderAverage=[];
-          data.forEach(function({date, guests_price, order_average}){
-            date = Date.parse(date);
-            guestsPrice.unshift([date, guests_price||0]);
-            orderAverage.unshift([date, order_average||0]);
-          });
-          _this.chartConf.series[0].data = guestsPrice;
-          _this.chartConf.series[1].data = orderAverage;
         })
       },
     },

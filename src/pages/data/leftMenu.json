@@ -15,6 +15,11 @@
         "alias": "provider"
     },
     {
+        "name": "BD销售统计",
+        "url": "/!#/sales/",
+        "alias": "sales"
+    },
+    {
         "name": "会话统计",
         "url": "/!#/charts/hh",
         "alias": "talk"

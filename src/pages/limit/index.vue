@@ -108,7 +108,7 @@
 </template>
 
 <script>
-  import myheader from '../../components/header/'
+  import myheader from '../components/header/'
   export default {
     components: {
       myheader

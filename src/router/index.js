@@ -47,6 +47,10 @@ import total from '../pages/home/total';
 import order from '../pages/home/order';
 import provider from '../pages/home/provider';
 
+import sales from '../pages/sales/';
+
+
+
 /* 
 k.liu rebuild
 2017-6-9
@@ -98,6 +102,15 @@ const routes = [
         component: product_main
       }
     ]
+  },{
+    path:'/sales',
+    component: sales,
+    // children: [
+    //   {
+    //     // path: "main",
+    //     // component: product_main
+    //   }
+    // ]
   },{
     path: '/charts',
     component: chart_base,
