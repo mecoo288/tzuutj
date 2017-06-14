@@ -2,7 +2,7 @@
   <div class="form-bar">
     <el-form :inline="true" :model="form" class="demo-form-inline">
       <el-form-item label="选择城市">
-        <el-select v-model="form.selCity.name" filterable placeholder="请选择城市（默认全部）" @change="DoSelCity">
+        <el-select v-model="form.selCity.code" filterable placeholder="请选择城市（默认全部）">
           <el-option-group  label="选择城市">
             <el-option v-for="item in citys" :key="item.code" :label="item.name" :value="item.code">
             </el-option>
@@ -13,8 +13,6 @@
         </el-form-item>
       </el-form-item>
     </el-form>
-
-    
   </div>
 </template>
 
@@ -27,23 +25,14 @@
         citys:[],
         form:{
           selCity:{
-            name:'',
             type:1,
-            code:""
+            code:0
           }
-        },
-        selCity:{
-          name:'',
-          type:1,
-          code:""
         }
       }
     },
     mounted(){
       let _this = this;
-      $('.ui.dropdown').dropdown({
-        on: 'hover'
-      });
       this.$store.dispatch('home/GET_city', {
         callback({status, errmsg, data, code}){
           if(status != 1){
@@ -56,15 +45,17 @@
     },
     methods:{
       query(){
-        console.log(this.form.selCity)
-      },
-      DoSelCity(code){
-        if(this.form.selCity.code === code ){
-          return;
-        }
-        Object.assign(this.form.selCity, {code: code}, {type: code === 0 ? 1 : 2});
+        console.log(this.form.selCity);
+        
         this.$emit('cityUpdate', this.form.selCity)
       },
+      // DoSelCity(code){
+      //   if(this.form.selCity.code === code ){
+      //     return;
+      //   }
+      //   Object.assign(this.form.selCity, {code: code}, {type: code === 0 ? 1 : 2});
+      //   this.$emit('cityUpdate', this.form.selCity)
+      // },
     },
   }
 </script>

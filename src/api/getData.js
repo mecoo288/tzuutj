@@ -17,7 +17,6 @@ const formatRes = ({status, statusText, data, ...res}, callback, {commit, dispat
 		})
 		return;
 	}
-	console.log(ot);
 	if(data.status == "0" && data.errno == "login_error"){
 		Object.assign(resData, {
 			status: 0,
