@@ -43,9 +43,11 @@ import login from '../pages/account/login/';
 import changepwd from '../pages/account/changePWD/';
 import home from '../pages/home/index';
 import limit from '../pages/limit/index';
-import total from '../pages/home/total';
-import order from '../pages/home/order';
-import provider from '../pages/home/provider';
+import home_total from '../pages/home/total';
+import home_order from '../pages/home/order';
+import home_provider from '../pages/home/provider';
+
+import order from '../pages/order/'
 
 import sales from '../pages/sales/';
 
@@ -83,13 +85,13 @@ const routes = [
     children:[
     {
       path:'total',
-      component: total
+      component: home_total
     },{
       path:'order',
-      component: order
+      component: home_order
     },{
       path:'provider',
-      component: provider
+      component: home_provider
     }
     ]
   },{
@@ -111,6 +113,9 @@ const routes = [
     //     // component: product_main
     //   }
     // ]
+  },{
+    path:'/order',
+    component: order
   },{
     path: '/charts',
     component: chart_base,
