@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import {getCity, getTjBoth, getOrder, getProvider} from '../../../api/index.js';
 
 const GET_city = (stroe, parma) =>{

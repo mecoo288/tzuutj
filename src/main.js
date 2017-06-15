@@ -56,7 +56,6 @@ import routes from './router/';
 
 
 
-
 Vue.use(ElementUI);
 
 Vue.use(VueRouter);
@@ -89,10 +88,14 @@ const router = new VueRouter({
   routes// （缩写）相当于 routes: routes
 })
 
+// Vue.filter('divide',(x, y)=>{
+//   return x+"aaaaa";
+// })
 
 const app = new Vue({
+
   router,
   store,
   template: '<App/>',
-  components: {App}
+  components: {App},
 }).$mount('#app');

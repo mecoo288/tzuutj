@@ -1,12 +1,29 @@
 import Vue from 'vue';
-import {getSales} from '../../../api/index.js';
+import {
+	getReport,
+	getRank,
+	getQuery,
+	getWeekly
+} from '../../../api/index.js';
 
 
-
-const GET_sales = (stroe, parma) => {
-  return  getSales(stroe, parma)
+const GET_report = (stroe, parma) =>{
+	return getReport(stroe, parma)
 }
 
+const GET_rank = (stroe, parma) =>{
+	return getRank(stroe, parma)
+}
+
+const GET_query = (stroe, parma) =>{
+	return getQuery(stroe, parma)
+}
+
+const GET_weekly = (stroe, parma) =>{
+	return getWeekly(stroe, parma)
+}
+
+
 export default {
-	GET_sales
+	GET_report,
 }

@@ -9,5 +9,5 @@ export {
 	doLogout,
 } from './account'
 export {
-	getSales,
+	getReport,
 } from './sales'
