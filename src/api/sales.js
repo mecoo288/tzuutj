@@ -11,11 +11,15 @@ const getQuery = (scope, parma) => {
 } 
 const getWeekly = (scope, parma) => {
 	return GET('/api/Bd/dataList', parma, scope)
+}  
+const getBdName = (scope, parma) => {
+	return GET('/api/Bd/bdName', parma, scope)
 } 
 
 export {
 	getReport,
 	getRank,
 	getQuery,
-	getWeekly
+	getWeekly,
+	getBdName,
 }

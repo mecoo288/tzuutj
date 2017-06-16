@@ -1,5 +1,10 @@
 <template>
-  <div>
+  <div v-loading.lock="isLoading">
+  <el-form :inline="true" :model="rank.parma" class="demo-form-inline">
+      <el-form-item>
+        <sel-city @change="cityChange"></sel-city>
+      </el-form-item>
+    </el-form>
     <el-tabs v-model="activedTab" type="border-card" @tab-click="Do_activeTab">
       <el-tab-pane label="服务者管理统计表" name="report">
         <el-table :data="report.data" style="width: 100%" stripe>
@@ -13,16 +18,27 @@
             </template>
           </el-table-column>
           <el-table-column prop="fwz_online_num" label="上线服务者总数"></el-table-column>
-          <!-- <el-table-column prop="fwz_online_num/fwz_recruit_num" label="上线服务者比例"></el-table-column> -->
+          <el-table-column label="上线服务者比例">
+            <template scope="scope">
+              {{ scope.row.fwz_online_num | divide(scope.row.fwz_recruit_num) }}
+            </template>
+          </el-table-column>
           <el-table-column prop="fwz_hasorder_num" label="成单服务者总数"></el-table-column>
-          <!-- <el-table-column prop="fwz_hasorder_num/fwz_recruit_num" label="成单服务者比例"></el-table-column> -->
+          <el-table-column label="成单服务者比例">
+            <template scope="scope">
+              {{ scope.row.fwz_hasorder_num | divide(scope.row.fwz_recruit_num) }}
+            </template>
+          </el-table-column>
           <el-table-column label="" width="100">
             <template scope="scope">
-              <el-button @click="goPage" type="text" size="small">查看</el-button>
+              <el-button @click="viewItem(scope.row)" type="text" size="small">查看</el-button>
             </template>
           </el-table-column>
         </el-table>
+        <el-pagination :current-page.sync="report.parma.pageNum" :page-size="report.pageSize" layout="total, prev, pager, next" :total="report.total" class="pagination">
+        </el-pagination>
       </el-tab-pane>
+
       <el-tab-pane label="BD每日统计表" name="rank">
         <el-form :inline="true" :model="rank.parma" class="demo-form-inline">
           <el-form-item label="筛选日期">
@@ -45,7 +61,10 @@
           <el-table-column prop="fwz_online_num" label="上线服务者数"></el-table-column>
           <el-table-column prop="fwz_recruit_num" label="开拓服务者数"></el-table-column>
         </el-table>
+        <el-pagination :current-page.sync="rank.parma.pageNum" :page-size="rank.pageSize" layout="total, prev, pager, next" :total="rank.total" class="pagination">
+        </el-pagination>
       </el-tab-pane>
+
       <el-tab-pane label="BD业绩查询" name="query">
         <el-form :inline="true" :model="query.parma" class="demo-form-inline">
           <el-form-item label="筛选日期">
@@ -55,15 +74,18 @@
           <el-form-item>
             <el-button type="primary" @click="queryData">查询</el-button>
           </el-form-item>
-          <el-table :data="query.data" style="width: 100%" stripe>
-            <el-table-column prop="fwz_name" label="姓名"></el-table-column>
-            <el-table-column prop="money_sum" label="成单金额"></el-table-column>
-            <el-table-column prop="order_num" label="成单数"></el-table-column>
-            <el-table-column prop="refund_money" label="退单金额"></el-table-column>
-            <el-table-column prop="refund_num" label="退单数"></el-table-column>
-          </el-table>
         </el-form>
+        <el-table :data="query.data" style="width: 100%" stripe>
+          <el-table-column prop="fwz_name" label="姓名"></el-table-column>
+          <el-table-column prop="money_sum" label="成单金额"></el-table-column>
+          <el-table-column prop="order_num" label="成单数"></el-table-column>
+          <el-table-column prop="refund_money" label="退单金额"></el-table-column>
+          <el-table-column prop="refund_num" label="退单数"></el-table-column>
+        </el-table>
+        <el-pagination :current-page.sync="query.parma.pageNum" :page-size="query.pageSize" layout="total, prev, pager, next" :total="query.total" class="pagination">
+        </el-pagination>
       </el-tab-pane>
+
       <el-tab-pane label="周报明细" name="weekly">
         <el-form :inline="true" :model="weekly.parma" class="demo-form-inline">
           <el-form-item label="筛选日期">
@@ -73,43 +95,48 @@
           <el-form-item label="请选择BD姓名">
             <el-select v-model="weekly.parma.bdName" placeholder="请选择">
               <el-option
-                v-for="bd in bdNames"
-                :key="bd.value"
-                :label="bd.label"
-                :value="bd.value">
-              </el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="queryData">查询</el-button>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="exportData">导出</el-button>
-          </el-form-item>
-        </el-form>
-        <el-table :data="weekly.data" style="width: 100%" stripe>
-          <el-table-column prop="fwz_name" label="姓名"></el-table-column>
-          <el-table-column prop="money_sum" label="成单金额"></el-table-column>
-          <el-table-column prop="order_num" label="成单数"></el-table-column>
-          <el-table-column prop="refund_money" label="退单金额"></el-table-column>
-          <el-table-column prop="refund_num" label="退单数"></el-table-column>
-        </el-table>
-      </el-tab-pane>
-    </el-tabs>
-    <router-view></router-view>
-  </div>
-
+              v-for="bd in bdNames"
+              :key="bd.id"
+              :label="bd.name"
+              :value="bd.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="queryData">查询</el-button>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="exportData">导出</el-button>
+        </el-form-item>
+      </el-form>
+      <el-table :data="weekly.data" style="width: 100%" stripe>
+        <el-table-column prop="fwz_name" label="姓名"></el-table-column>
+        <el-table-column prop="money_sum" label="成单金额"></el-table-column>
+        <el-table-column prop="order_num" label="成单数"></el-table-column>
+        <el-table-column prop="refund_money" label="退单金额"></el-table-column>
+        <el-table-column prop="refund_num" label="退单数"></el-table-column>
+      </el-table>
+      <el-pagination :current-page.sync="weekly.parma.pageNum" :page-size="weekly.pageSize" layout="total, prev, pager, next" :total="weekly.total" class="pagination">
+      </el-pagination>
+    </el-tab-pane>
+  </el-tabs>
+  <router-view></router-view>
+</div>
 </template>
 
 <script>
   import {Divide} from "../../filters/";
+  import selCity from "../components/citys/"
   export default {
+    components:{
+      selCity
+    },
     data(){
       return {
+        isLoading: true,
         Query:{}, /*url query*/
-        report:{
-          parma:{},
-          data:[]
+        baseParma:{
+          cityCode: 0
         },
         dateOptions:{
           shortcuts: [{
@@ -138,30 +165,48 @@
             }
           }]
         },
+        report:{
+          parma:{
+            pageNum: 1,
+            type: 1
+          },
+          data:[],
+          total: 2000,
+          pageSize: 20,
+        },
         bdNames:[],
         rank:{
           parma:{
             __dateRange:[],
+            pageNum: 5,
             dateStart:"",
             dateEnd:"",
           },
           data:[],
+          total: 2000,
+          pageSize: 20,
         },
         query:{
           parma:{
             __dateRange:[],
+            pageNum: 1,
             dateStart:"",
             dateEnd:"",
           },
           data:[],
+          total: 2000,
+          pageSize: 20,
         },
         weekly:{
           parma:{
             __dateRange:[],
+            pageNum: 1,
             dateStart:"",
             dateEnd:"",
           },
           data:[],
+          total: 2000,
+          pageSize: 20,
         }
       }
     },
@@ -180,27 +225,43 @@
       Go_tag(query){
         this.Query = query;
         this.goPage(query);
-        this.render();
+      },
+      viewItem({recruit_id}){
+        let query = {
+          to: this.activedTab,
+          recruitId: recruit_id,
+          type: this[this.activedTab].parma.type + 1
+        }
+        this.goPage(query);
       },
       goPage(query){
         this.$router.push({path:'/sales', query:query})
+        this.render(query)
       },
-      render(){
+      render(query){
         let _this = this;
         this.fixParma();
+        console.log(query);
+        this.isLoading = true;
         this.$store.dispatch('sales/GET_'+this.activedTab, {
-          data: _this[this.activedTab].parma,
+          data: Object.assign({}, _this[this.activedTab].parma, _this.baseParma),
           callback({status, errmsg, data}){
+            _this.isLoading = false;
             if(status != "1"){
               _this.$message.error(errmsg);
               return
             }
             _this[_this.activedTab].data = data.list;
+            _this[_this.activedTab].total = data.total;
+            _this[_this.activedTab].pageSize = data.length;
           }
         })
       },
       fixParma(){
         this.Query.to = this.activedTab;
+        if(this.activedTab === "weekly"){
+          this.getBd()
+        };
       },
       setDate(date){
         let [start="", end=""] = date.split(" - ");
@@ -211,7 +272,26 @@
         this.render();
       },
       exportData(){
-        
+
+      },
+      cityChange(city){
+        this.baseParma.cityCode = city.code;
+        this.render();
+      },
+      getBd(){
+        let _this = this;
+        this.isLoading = true;
+        this.$store.dispatch('sales/GET_bdName', {
+          data: _this.baseParma,
+          callback({status, errmsg, data}){
+            _this.isLoading = false;
+            if(status != "1"){
+              _this.$message.error(errmsg);
+              return
+            }
+            _this.bdNames = data;
+          }
+        })
       }
     },
     created(){
@@ -223,4 +303,9 @@
 </script>
 
 <style lang="less">
+  .pagination{
+    margin-top: 20px;
+    display: block;
+    text-align: center;
+  }
 </style>

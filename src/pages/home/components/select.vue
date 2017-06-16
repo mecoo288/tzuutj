@@ -46,7 +46,6 @@
     methods:{
       query(){
         console.log(this.form.selCity);
-        
         this.$emit('cityUpdate', this.form.selCity)
       },
     },

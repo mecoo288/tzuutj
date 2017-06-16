@@ -12,5 +12,6 @@ export {
 	getReport,
 	getRank,
 	getQuery,
-	getWeekly
+	getWeekly,
+	getBdName,
 } from './sales'
