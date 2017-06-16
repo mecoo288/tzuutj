@@ -1,7 +1,7 @@
 <template>
   <div>
     <myselect @cityUpdate="cityUpdate"></myselect>
-    <el-tabs type="border-card" @tab-click="goPage" class="tabs-chart" v-model="activeTag" v-loading.fullscreen.lock="fullscreenLoading">
+    <el-tabs type="border-card" @tab-click="goPage" v-model="activeTag" v-loading.fullscreen.lock="fullscreenLoading">
       <el-tab-pane :label="tab.name" :name="tab.alias" v-for="tab in chartTab">
         <highcharts  :options="tab.options" ref="highcharts"> 
         </highcharts>

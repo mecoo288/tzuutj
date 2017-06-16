@@ -26,4 +26,7 @@ const GET_weekly = (stroe, parma) =>{
 
 export default {
 	GET_report,
+	GET_rank,
+	GET_query,
+	GET_weekly,
 }

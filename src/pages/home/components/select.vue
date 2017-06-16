@@ -1,5 +1,5 @@
 <template>
-  <div class="form-bar">
+  <div>
     <el-form :inline="true" :model="form" class="demo-form-inline">
       <el-form-item label="选择城市">
         <el-select v-model="form.selCity.code" filterable placeholder="请选择城市（默认全部）">
@@ -49,18 +49,8 @@
         
         this.$emit('cityUpdate', this.form.selCity)
       },
-      // DoSelCity(code){
-      //   if(this.form.selCity.code === code ){
-      //     return;
-      //   }
-      //   Object.assign(this.form.selCity, {code: code}, {type: code === 0 ? 1 : 2});
-      //   this.$emit('cityUpdate', this.form.selCity)
-      // },
     },
   }
 </script>
 <style rel="stylesheet/less" lang="less">
-  .form-bar{
-
-  }
 </style>
