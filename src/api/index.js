@@ -1,5 +1,4 @@
 export {
-	getCity,
 	getTjBoth,
 	getOrder,
 	getProvider
@@ -7,7 +6,12 @@ export {
 export {
 	doLogin,
 	doLogout,
+	getCity,
 } from './account'
 export {
-	getSales,
+	getReport,
+	getRank,
+	getQuery,
+	getWeekly,
+	getBdName,
 } from './sales'

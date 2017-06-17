@@ -1,8 +1,5 @@
 import {POST, GET} from "./getData.js"
-
-const getCity = (scope, parma) => {
-	return GET('/api/common/getUserCitys', parma, scope)
-} 
+ 
 const getTjBoth = (scope, parma) => {
 	return POST('/api/Tongji/TjBoth', parma, scope)
 } 
@@ -14,7 +11,6 @@ const getProvider = (scope, parma) => {
 }
 
 export {
-	getCity,
 	getTjBoth,
 	getOrder,
 	getProvider

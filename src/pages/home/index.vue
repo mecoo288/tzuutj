@@ -1,7 +1,14 @@
 <template>
   <div>
-    <myselect @cityUpdate="cityUpdate"></myselect>
-    <el-tabs type="border-card" @tab-click="goPage" class="tabs-chart" v-model="activeTag" v-loading.fullscreen.lock="fullscreenLoading">
+    <el-form :inline="true" :model="parma" class="demo-form-inline">
+      <el-form-item>
+        <sel-city @change="cityChange"></sel-city>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="queryData">查询</el-button>
+      </el-form-item>
+    </el-form>
+    <el-tabs type="border-card" @tab-click="goPage" v-model="activeTag" v-loading.fullscreen.lock="fullscreenLoading">
       <el-tab-pane :label="tab.name" :name="tab.alias" v-for="tab in chartTab">
         <highcharts  :options="tab.options" ref="highcharts"> 
         </highcharts>
@@ -13,11 +20,11 @@
 </template>
 
 <script>
-  import myselect from './components/select.vue';
+  import selCity from '../components/citys/';
   import chartConfig from "./data/chartConfig.js";
   export default {
     components: {
-      myselect,
+      selCity,
     },
     data(){
       return {
@@ -75,9 +82,11 @@
         Object.assign(this.options, chartConfig, chartData.options);
         this.chartTab[chartData.tab].options = Object.assign({}, chartConfig, chartData.options)
       },
-      cityUpdate(city){
+      cityChange(city){
         this.parma.data.cityCode = city.code;
         this.parma.data.type = city.code === 0 ? 1: 2; 
+      },
+      queryData(){
         this.$refs.child.cityChange( this.parma.data );
       }
     },
@@ -89,15 +98,7 @@
 </script>
 
 <style lang="less">
-  .tabs-chart,
   .tabs-table{
     margin-top: 10px;
-  }
-
-  .el-select-dropdown__list{
-    width: 470px;
-    .el-select-dropdown__item{
-      display: inline-block;
-    }
   }
 </style>
