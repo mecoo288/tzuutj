@@ -16,7 +16,7 @@
     },
     {
         "name": "BD销售统计",
-        "url": "/!#/sales/",
+        "url": "/!#/sales",
         "alias": "sales"
     },
     {

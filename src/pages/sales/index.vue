@@ -7,36 +7,38 @@
     </el-form>
     <el-tabs v-model="activedTab" type="border-card" @tab-click="Do_activeTab">
       <el-tab-pane label="服务者管理统计表" name="report">
-        <el-table :data="report.data" style="width: 100%" stripe>
-          <el-table-column prop="fwz_name" label="姓名"></el-table-column>
-          <el-table-column prop="fwz_id" label="ID"></el-table-column>
-          <el-table-column prop="fwz_recruit_num" label="服务者总数"></el-table-column>
-          <el-table-column prop="fwz_focus_num" label="关注服务者总数"></el-table-column>
-          <el-table-column label="关注服务者比例">
-            <template scope="scope">
-              {{ scope.row.fwz_focus_num | divide(scope.row.fwz_recruit_num) }}
-            </template>
-          </el-table-column>
-          <el-table-column prop="fwz_online_num" label="上线服务者总数"></el-table-column>
-          <el-table-column label="上线服务者比例">
-            <template scope="scope">
-              {{ scope.row.fwz_online_num | divide(scope.row.fwz_recruit_num) }}
-            </template>
-          </el-table-column>
-          <el-table-column prop="fwz_hasorder_num" label="成单服务者总数"></el-table-column>
-          <el-table-column label="成单服务者比例">
-            <template scope="scope">
-              {{ scope.row.fwz_hasorder_num | divide(scope.row.fwz_recruit_num) }}
-            </template>
-          </el-table-column>
-          <el-table-column label="" width="100">
-            <template scope="scope">
-              <el-button @click="viewItem(scope.row)" type="text" size="small">查看</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-        <el-pagination :current-page.sync="report.parma.pageNum" :page-size="report.pageSize" layout="total, prev, pager, next" :total="report.total" class="pagination">
-        </el-pagination>
+        <template v-if="report.parma.type == 1">
+          <el-table :data="report.data" style="width: 100%" stripe>
+            <el-table-column prop="fwz_name" label="姓名"></el-table-column>
+            <el-table-column prop="fwz_id" label="ID"></el-table-column>
+            <el-table-column prop="fwz_recruit_num" label="服务者总数"></el-table-column>
+            <el-table-column prop="fwz_focus_num" label="关注服务者总数"></el-table-column>
+            <el-table-column label="关注服务者比例">
+              <template scope="scope">
+                {{ scope.row.fwz_focus_num | divide(scope.row.fwz_recruit_num) }}
+              </template>
+            </el-table-column>
+            <el-table-column prop="fwz_online_num" label="上线服务者总数"></el-table-column>
+            <el-table-column label="上线服务者比例">
+              <template scope="scope">
+                {{ scope.row.fwz_online_num | divide(scope.row.fwz_recruit_num) }}
+              </template>
+            </el-table-column>
+            <el-table-column prop="fwz_hasorder_num" label="成单服务者总数"></el-table-column>
+            <el-table-column label="成单服务者比例">
+              <template scope="scope">
+                {{ scope.row.fwz_hasorder_num | divide(scope.row.fwz_recruit_num) }}
+              </template>
+            </el-table-column>
+            <el-table-column label="" width="100">
+              <template scope="scope">
+                <el-button @click="viewItem(scope.row)" type="text" size="small">查看</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+          <el-pagination :current-page.sync="report.parma.pageNum" :page-size="report.pageSize" layout="total, prev, pager, next" :total="report.total" class="pagination">
+          </el-pagination>
+        </template>
       </el-tab-pane>
 
       <el-tab-pane label="BD每日统计表" name="rank">
@@ -236,12 +238,12 @@
       },
       goPage(query){
         this.$router.push({path:'/sales', query:query})
+        this.Query = query;
         this.render(query)
       },
-      render(query){
+      render(){
         let _this = this;
         this.fixParma();
-        console.log(query);
         this.isLoading = true;
         this.$store.dispatch('sales/GET_'+this.activedTab, {
           data: Object.assign({}, _this[this.activedTab].parma, _this.baseParma),

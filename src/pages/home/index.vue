@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-loading.lock="isLoading">
     <el-form :inline="true" :model="parma" class="demo-form-inline">
       <el-form-item>
         <sel-city @change="cityChange"></sel-city>
@@ -8,7 +8,7 @@
         <el-button type="primary" @click="queryData">查询</el-button>
       </el-form-item>
     </el-form>
-    <el-tabs type="border-card" @tab-click="goPage" v-model="activeTag" v-loading.fullscreen.lock="fullscreenLoading">
+    <el-tabs type="border-card" @tab-click="goPage" v-model="activeTag">
       <el-tab-pane :label="tab.name" :name="tab.alias" v-for="tab in chartTab">
         <highcharts  :options="tab.options" ref="highcharts"> 
         </highcharts>
@@ -28,7 +28,7 @@
     },
     data(){
       return {
-        fullscreenLoading: true,
+        isLoading: true,
         chartTab:{
           total: {
             alias:'total',
@@ -70,13 +70,13 @@
     },
     methods: {
       goPage(tab){
-        this.fullscreenLoading = true;
+        this.isLoading = true;
         this.$router.push(this.chartTab[tab.name].link);
       },
       updateChart(chartData){
         let _this = this;
         setTimeout(()=>{
-          _this.fullscreenLoading = false;
+          _this.isLoading = false;
         },0);
         this.options = {};
         Object.assign(this.options, chartConfig, chartData.options);
