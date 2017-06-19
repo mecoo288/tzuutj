@@ -15,3 +15,7 @@ export {
 	getWeekly,
 	getBdName,
 } from './sales'
+
+export {
+	getOrders
+} from './order'

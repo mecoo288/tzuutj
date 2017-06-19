@@ -3,37 +3,20 @@ import qs from "qs";
 import Vue from "vue";
 require('es6-promise').polyfill();
 const formatRes = ({status, statusText, data, ...res}, callback, {commit, dispatch, state,rootState,...ot}) =>{
-	let resData = {
-		status: 1,
-		errmsg: "",
-		code : 1,
-		data: {}
-	}
+	let resData =Object.assign({}, data);
 	if(status !== 200){
 		Object.assign(resData, {
 			status: 0,
 			errmsg: statusText,
-			code: status
-		})
-		return;
-	}
-	if(data.status == "0" && data.errno == "login_error"){
-		Object.assign(resData, {
-			status: 0,
-			errmsg: data.msg,
-			code: data.code
+			errno: status
 		});
-		commit('account/logout', null, {root: true});
-		// Vue.$locals("account").remove();
-		// window.location.href = window.location.hash.split("#/")[0] + "#/login";
+		callback(resData)
 		return;
 	}
-	Object.assign(resData, {
-		status: 1,
-		data: data.data,
-		errmsg: data.msg,
-		code: data.code
-	})
+	if(data.status == "0" && data.errno == "no_login"){
+		commit('account/logout', null, {root: true});
+		return;
+	}
 	callback(resData);
 }
 
