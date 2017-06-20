@@ -1,9 +1,9 @@
 <template>
-  <el-form :inline="true" :model="form">
+  <el-form :inline="true" :model="selCity">
     <el-form-item label="选择城市">
-      <el-select v-model="form.selCity.code" @change="change" filterable placeholder="请选择城市（默认全部）" popper-class="block_select">
+      <el-select v-model="selCity.__city" @change="change" filterable placeholder="请选择城市（默认全部）" popper-class="block_select">
         <el-option-group  label="选择城市">
-          <el-option v-for="item in citys" :key="item.code" :label="item.name" :value="item.code">
+          <el-option v-for="item in citys" :key="item.code" :label="item.name" :value="item">
           </el-option>
         </el-option-group>
       </el-select>
@@ -16,13 +16,11 @@
   export default{
     data(){
       return {
-        region_name:"全国",
         citys:[],
-        form:{
-          selCity:{
-            type:1,
-            code:0
-          }
+        selCity:{
+          name: "全部",
+          __city: {},
+          code:0
         }
       }
     },
@@ -31,7 +29,7 @@
       this.$store.dispatch('home/GET_city', {
         callback({status, errmsg, data, code}){
           if(status != 1){
-          alert(errmsg);
+          this.$message({type:"warnign", message: errmsg});
           return;
         }
         _this.citys = data;
@@ -39,8 +37,8 @@
       })
     },
     methods:{
-      change(){
-        this.$emit('change', this.form.selCity)
+      change(city){
+        this.$emit('change', {name: this.selCity.__city.name, code: this.selCity.__city.code});
       },
     },
   }

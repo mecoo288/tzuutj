@@ -5,7 +5,7 @@ import {
 
 
 const GET_Orders = (stroe, parma) =>{
-	return Orders(stroe, parma)
+	return getOrders(stroe, parma)
 }
 
 export default {

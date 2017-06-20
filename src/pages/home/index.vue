@@ -21,7 +21,7 @@
 
 <script>
   import selCity from '../components/citys/';
-  import chartConfig from "./data/chartConfig.js";
+  import {chartConfig} from "../data/config.js";
   export default {
     components: {
       selCity,
@@ -65,8 +65,6 @@
     },
     created(){
       Object.assign(this.options, chartConfig);
-    },
-    mounted(){
     },
     methods: {
       goPage(tab){

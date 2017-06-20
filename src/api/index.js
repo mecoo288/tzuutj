@@ -19,3 +19,27 @@ export {
 export {
 	getOrders
 } from './order'
+
+export {
+	getProducts
+} from './product'
+
+export {
+	getDivide
+} from './divide'
+
+export {
+	getDownload
+} from './download'
+
+export {
+	getRewards
+} from './reward'
+
+export {
+	getTalks
+} from './talk'
+
+export {
+	getProviders
+} from './provider'

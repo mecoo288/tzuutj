@@ -51,6 +51,16 @@ import order from '../pages/order/'
 
 import sales from '../pages/sales/';
 
+import divide from '../pages/divide/';
+
+import download from '../pages/download/';
+
+import reward from '../pages/reward/';
+
+import talk from '../pages/talk/';
+
+import provider from '../pages/provider/';
+
 
 
 /* 
@@ -59,7 +69,6 @@ k.liu rebuild
 */
 
 import product from '../pages/product/'
-import product_main from '../pages/product/sp'
 
 const routes = [
 {
@@ -97,25 +106,28 @@ const routes = [
   },{
     path:'/product',
     component: product,
-    redirect: '/product/main',
-    children: [
-      {
-        path: "main",
-        component: product_main
-      }
-    ]
+    children: []
   },{
     path:'/sales',
     component: sales,
-    // children: [
-    //   {
-    //     // path: "main",
-    //     // component: product_main
-    //   }
-    // ]
   },{
     path:'/order',
     component: order
+  },{
+    path:'/divide',
+    component: divide
+  },{
+    path:'/talk',
+    component: talk
+  },{
+    path:'/reward',
+    component: reward
+  },{
+    path:'/provider',
+    component: provider
+  },{
+    path:'/download',
+    component: download
   },{
     path: '/charts',
     component: chart_base,

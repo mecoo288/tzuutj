@@ -5,7 +5,7 @@
 			<el-row class="nav">	  
 			  <el-col>
 			    <el-menu mode="vertical" default-active="1" class="nav-items"  theme="dark">
-			      <el-menu-item :index='menu.url' @click="openPage(menu.url)" class="nav-items-item" :class=" {'is-active' : menu.alias === alias }" v-for="menu in menus">{{menu.name}}</el-menu-item>
+			      <el-menu-item :index='menu.url' @click="openPage(menu.url)" class="nav-items-item" :class=" {'is-active' : menu.alias === alias }" v-for="menu in leftMenu">{{menu.name}}</el-menu-item>
 			    </el-menu>
 			  </el-col>
 			</el-row>
@@ -17,13 +17,12 @@
 </template>
 
 <script>
-import menus from './data/leftMenu.json';
+import {leftMenu} from './data/config';
 import mheader from './components/header/';
 export default{
 	data(){
 		return {
-			leftMenu: {},
-			menus
+			leftMenu
 		}
 	},
 	methods:{

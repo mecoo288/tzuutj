@@ -36,7 +36,7 @@
               </template>
             </el-table-column>
           </el-table>
-          <el-pagination :current-page.sync="report.parma.page" :page-size="report.pageSize" @current-change="pageChange" layout="total, prev, pager, next" :total="report.total" class="pagination">
+          <el-pagination v-if="report.hasMore" :current-page.sync="report.parma.page" :page-size="report.pageSize" @current-change="pageChange" layout="total, prev, pager, next" :total="report.total" class="pagination">
           </el-pagination>
         </template>
       </el-tab-pane>
@@ -63,7 +63,7 @@
           <el-table-column prop="fwz_online_num" label="上线服务者数"></el-table-column>
           <el-table-column prop="fwz_recruit_num" label="开拓服务者数"></el-table-column>
         </el-table>
-        <el-pagination :current-page.sync="rank.parma.page" :page-size="rank.pageSize" @current-change="pageChange" layout="total, prev, pager, next" :total="rank.total" class="pagination">
+        <el-pagination v-if="rank.hasMore" :current-page.sync="rank.parma.page" :page-size="rank.pageSize" @current-change="pageChange" layout="total, prev, pager, next" :total="rank.total" class="pagination">
         </el-pagination>
       </el-tab-pane>
 
@@ -84,7 +84,7 @@
           <el-table-column prop="refund_money" label="退单金额"></el-table-column>
           <el-table-column prop="refund_num" label="退单数"></el-table-column>
         </el-table>
-        <el-pagination :current-page.sync="query.parma.page" :page-size="query.pageSize" @current-change="pageChange" layout="total, prev, pager, next" :total="query.total" class="pagination">
+        <el-pagination v-if="query.hasMore" :current-page.sync="query.parma.page" :page-size="query.pageSize" @current-change="pageChange" layout="total, prev, pager, next" :total="query.total" class="pagination">
         </el-pagination>
       </el-tab-pane>
 
@@ -118,7 +118,7 @@
         <el-table-column prop="refund_money" label="退单金额"></el-table-column>
         <el-table-column prop="refund_num" label="退单数"></el-table-column>
       </el-table>
-      <el-pagination :current-page.sync="weekly.parma.page" :page-size="weekly.pageSize" @current-change="pageChange" layout="total, prev, pager, next" :total="weekly.total" class="pagination">
+      <el-pagination v-if="weekly.hasMore" :current-page.sync="weekly.parma.page" :page-size="weekly.pageSize" @current-change="pageChange" layout="total, prev, pager, next" :total="weekly.total" class="pagination">
       </el-pagination>
     </el-tab-pane>
   </el-tabs>
@@ -150,6 +150,7 @@
           data:[],
           total: 2000,
           pageSize: 20,
+          hasMore: false,
         },
         bdNames:[],
         rank:{
@@ -162,6 +163,7 @@
           data:[],
           total: 2000,
           pageSize: 20,
+          hasMore: false,
         },
         query:{
           parma:{
@@ -173,6 +175,7 @@
           data:[],
           total: 2000,
           pageSize: 20,
+          hasMore: false,
         },
         weekly:{
           parma:{
@@ -184,6 +187,7 @@
           data:[],
           total: 2000,
           pageSize: 20,
+          hasMore: false,
         }
       }
     },
@@ -231,6 +235,7 @@
             _this[_this.activedTab].data = data.list;
             _this[_this.activedTab].total = data.total;
             _this[_this.activedTab].pageSize = data.length;
+            _this[_this.activedTab].hasMore = data.hasMore;
           }
         })
       },

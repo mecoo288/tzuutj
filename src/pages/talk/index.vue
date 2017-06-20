@@ -5,33 +5,28 @@
 				<sel-city @change="cityChange"></sel-city>
 			</el-form-item>
 			<el-form-item>
-				<el-select v-model="parma.typeAlias" placeholder="请选择">
-					<el-option v-for="item in select" :key="item.val" :label="item.name" :value="item.val">
-				</el-option>
-			</el-select>
-		</el-form-item>
-		<el-form-item>
-			<el-input v-model="parma.searchVal" :placeholder="svalHolder"></el-input>
-		</el-form-item>
-		<el-form-item label="筛选日期">
-			<el-date-picker :editable="false" v-model="parma.__dateRange" @change="setDate" type="daterange" align="left" placeholder="选择日期范围" :picker-options="calConfig">
-			</el-date-picker>
-		</el-form-item>
-		<el-form-item>
-			<el-button type="primary" @click="search">查询</el-button>
-			<el-button type="primary" @click="dataExport" :disabled="true">导出</el-button>
-		</el-form-item>
-	</el-form>
-	<el-table :data="data" stripe style="width: 100%">
-		<el-table-column prop="date" sortable label="日期"></el-table-column>
-		<el-table-column prop="stock_name" label="TR商品"></el-table-column>
-		<el-table-column prop="sp_name" label="供应商名称"></el-table-column>
-		<el-table-column prop="total_num" sortable label="数量"></el-table-column>
-		<el-table-column prop="total_money" sortable label="销售金额"></el-table-column>
-	</el-table>
-	<el-pagination :current-page.sync="parma.page" :page-size="pageSize" @current-change="render" layout="total, prev, pager, next" :total="total" class="pagination">
-      </el-pagination>
-</div>
+			<el-input v-model="parma.fwzName" placeholder="请输入查询的姓名"></el-input>
+			</el-form-item>
+			<el-form-item label="日期">
+				<el-date-picker :editable="false" v-model="parma.__dateRange" @change="setDate" type="daterange" align="left" placeholder="选择日期范围" :picker-options="calConfig">
+				</el-date-picker>
+			</el-form-item>
+			<el-form-item>
+				<el-button type="primary" @click="search">查询</el-button>
+				<el-button type="primary" @click="dataExport" :disabled="true">导出</el-button>
+			</el-form-item>
+		</el-form>
+		<el-table :data="data" stripe style="width: 100%">
+			<el-table-column prop="date" sortable label="日期"></el-table-column>
+			<el-table-column prop="pid" label="会话商品ID"></el-table-column>
+			<el-table-column prop="pname" label="会话商品名称"></el-table-column>
+			<el-table-column prop="fwz_name" label="土著人姓名"></el-table-column>
+			<el-table-column prop="order_num" sortable label="服务人数"></el-table-column>
+			<el-table-column prop="chat_total_num" sortable label="会话总数"></el-table-column>
+		</el-table>
+		<el-pagination v-if="hasMore" :current-page.sync="parma.page" :page-size="pageSize" @current-change="render" layout="total, prev, pager, next" :total="total" class="pagination">
+		</el-pagination>
+	</div>
 </template>
 
 <script>
@@ -54,7 +49,7 @@
 				parma:{
 					__dateRange: [],
 					typeAlias:"gys",
-					searchVal: "",
+					fwzName: "",
 					dateStart:"",
 					dateEnd:"",
 					page: 1,
@@ -78,7 +73,7 @@
 			render(){
 				let _this = this;
 				this.isLoading = true;
-				this.$store.dispatch('product/GET_products', {
+				this.$store.dispatch('talk/GET_talk', {
 					data: _this.parma,
 					callback({status, errmsg, data}){
 						_this.isLoading = false;
@@ -113,7 +108,7 @@
 			}
 		},
 		created(){
-			this.$store.commit('activMenu', 'product');
+			this.$store.commit('activMenu', 'talk');
 			this.render();
 		}
 	}
