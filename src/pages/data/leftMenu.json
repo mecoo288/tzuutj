@@ -6,7 +6,7 @@
     },
     {
         "name": "订单统计",
-        "url": "/!#/charts/dd/country/zdd",
+        "url": "/!#/order",
         "alias": "order"
     },
     {
@@ -16,7 +16,7 @@
     },
     {
         "name": "BD销售统计",
-        "url": "/!#/sales/",
+        "url": "/!#/sales",
         "alias": "sales"
     },
     {

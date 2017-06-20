@@ -15,6 +15,7 @@ import limits from './modules/limits/'
 import account from './modules/account/'
 import product from './modules/account/'
 import sales from './modules/sales/'
+import orders from './modules/orders/'
 Vue.use(Vuex);
 export default new Vuex.Store({
     state,
@@ -31,6 +32,7 @@ export default new Vuex.Store({
 		home,
 		limits,
 		account,
-		sales
+		sales,
+		orders
     }
 });

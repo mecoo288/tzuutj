@@ -135,6 +135,7 @@ if(state.default.date.start!='开始日期'||state.default.date.end!='结束日�
 	query.pageNum=600
 }
 
+console.log(query);
 
 var chartList=[];
 request
@@ -378,6 +379,7 @@ state.default.tabList.forEach(function(val,key,array){
 
 function initDataOfTable(query,state,rootState,commit,arg,resolve){
 
+console.log(33333);
   var firstList=[];
   var firstType=state.default.filter.threeType
   var chartList=[];

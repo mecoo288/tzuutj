@@ -7,42 +7,44 @@
     </el-form>
     <el-tabs v-model="activedTab" type="border-card" @tab-click="Do_activeTab">
       <el-tab-pane label="服务者管理统计表" name="report">
-        <el-table :data="report.data" style="width: 100%" stripe>
-          <el-table-column prop="fwz_name" label="姓名"></el-table-column>
-          <el-table-column prop="fwz_id" label="ID"></el-table-column>
-          <el-table-column prop="fwz_recruit_num" label="服务者总数"></el-table-column>
-          <el-table-column prop="fwz_focus_num" label="关注服务者总数"></el-table-column>
-          <el-table-column label="关注服务者比例">
-            <template scope="scope">
-              {{ scope.row.fwz_focus_num | divide(scope.row.fwz_recruit_num) }}
-            </template>
-          </el-table-column>
-          <el-table-column prop="fwz_online_num" label="上线服务者总数"></el-table-column>
-          <el-table-column label="上线服务者比例">
-            <template scope="scope">
-              {{ scope.row.fwz_online_num | divide(scope.row.fwz_recruit_num) }}
-            </template>
-          </el-table-column>
-          <el-table-column prop="fwz_hasorder_num" label="成单服务者总数"></el-table-column>
-          <el-table-column label="成单服务者比例">
-            <template scope="scope">
-              {{ scope.row.fwz_hasorder_num | divide(scope.row.fwz_recruit_num) }}
-            </template>
-          </el-table-column>
-          <el-table-column label="" width="100">
-            <template scope="scope">
-              <el-button @click="viewItem(scope.row)" type="text" size="small">查看</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-        <el-pagination :current-page.sync="report.parma.pageNum" :page-size="report.pageSize" layout="total, prev, pager, next" :total="report.total" class="pagination">
-        </el-pagination>
+        <template v-if="report.parma.type == 1">
+          <el-table :data="report.data" style="width: 100%" stripe>
+            <el-table-column prop="fwz_name" label="姓名"></el-table-column>
+            <el-table-column prop="fwz_id" label="ID"></el-table-column>
+            <el-table-column prop="fwz_recruit_num" label="服务者总数"></el-table-column>
+            <el-table-column prop="fwz_focus_num" label="关注服务者总数"></el-table-column>
+            <el-table-column label="关注服务者比例">
+              <template scope="scope">
+                {{ scope.row.fwz_focus_num | divide(scope.row.fwz_recruit_num) }}
+              </template>
+            </el-table-column>
+            <el-table-column prop="fwz_online_num" label="上线服务者总数"></el-table-column>
+            <el-table-column label="上线服务者比例">
+              <template scope="scope">
+                {{ scope.row.fwz_online_num | divide(scope.row.fwz_recruit_num) }}
+              </template>
+            </el-table-column>
+            <el-table-column prop="fwz_hasorder_num" label="成单服务者总数"></el-table-column>
+            <el-table-column label="成单服务者比例">
+              <template scope="scope">
+                {{ scope.row.fwz_hasorder_num | divide(scope.row.fwz_recruit_num) }}
+              </template>
+            </el-table-column>
+            <el-table-column label="" width="100">
+              <template scope="scope">
+                <el-button @click="viewItem(scope.row)" type="text" size="small">查看</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+          <el-pagination :current-page.sync="report.parma.page" :page-size="report.pageSize" @current-change="pageChange" layout="total, prev, pager, next" :total="report.total" class="pagination">
+          </el-pagination>
+        </template>
       </el-tab-pane>
 
       <el-tab-pane label="BD每日统计表" name="rank">
         <el-form :inline="true" :model="rank.parma" class="demo-form-inline">
           <el-form-item label="筛选日期">
-            <el-date-picker :editable="false" v-model="rank.parma.__dateRange" @change="setDate" type="daterange" align="left" placeholder="选择日期范围" :picker-options="dateOptions">
+            <el-date-picker :editable="false" v-model="rank.parma.__dateRange" @change="setDate" type="daterange" align="left" placeholder="选择日期范围" :picker-options="calConfig">
             </el-date-picker>
           </el-form-item>
           <el-form-item>
@@ -61,14 +63,14 @@
           <el-table-column prop="fwz_online_num" label="上线服务者数"></el-table-column>
           <el-table-column prop="fwz_recruit_num" label="开拓服务者数"></el-table-column>
         </el-table>
-        <el-pagination :current-page.sync="rank.parma.pageNum" :page-size="rank.pageSize" layout="total, prev, pager, next" :total="rank.total" class="pagination">
+        <el-pagination :current-page.sync="rank.parma.page" :page-size="rank.pageSize" @current-change="pageChange" layout="total, prev, pager, next" :total="rank.total" class="pagination">
         </el-pagination>
       </el-tab-pane>
 
       <el-tab-pane label="BD业绩查询" name="query">
         <el-form :inline="true" :model="query.parma" class="demo-form-inline">
           <el-form-item label="筛选日期">
-            <el-date-picker :editable="false" v-model="query.parma.__dateRange" @change="setDate" type="daterange" align="left" placeholder="选择日期范围" :picker-options="dateOptions">
+            <el-date-picker :editable="false" v-model="query.parma.__dateRange" @change="setDate" type="daterange" align="left" placeholder="选择日期范围" :picker-options="calConfig">
             </el-date-picker>
           </el-form-item>
           <el-form-item>
@@ -82,14 +84,14 @@
           <el-table-column prop="refund_money" label="退单金额"></el-table-column>
           <el-table-column prop="refund_num" label="退单数"></el-table-column>
         </el-table>
-        <el-pagination :current-page.sync="query.parma.pageNum" :page-size="query.pageSize" layout="total, prev, pager, next" :total="query.total" class="pagination">
+        <el-pagination :current-page.sync="query.parma.page" :page-size="query.pageSize" @current-change="pageChange" layout="total, prev, pager, next" :total="query.total" class="pagination">
         </el-pagination>
       </el-tab-pane>
 
       <el-tab-pane label="周报明细" name="weekly">
         <el-form :inline="true" :model="weekly.parma" class="demo-form-inline">
           <el-form-item label="筛选日期">
-            <el-date-picker :editable="false" v-model="weekly.parma.__dateRange" @change="setDate" type="daterange" align="left" placeholder="选择日期范围" :picker-options="dateOptions">
+            <el-date-picker :editable="false" v-model="weekly.parma.__dateRange" @change="setDate" type="daterange" align="left" placeholder="选择日期范围" :picker-options="calConfig">
             </el-date-picker>
           </el-form-item>
           <el-form-item label="请选择BD姓名">
@@ -116,7 +118,7 @@
         <el-table-column prop="refund_money" label="退单金额"></el-table-column>
         <el-table-column prop="refund_num" label="退单数"></el-table-column>
       </el-table>
-      <el-pagination :current-page.sync="weekly.parma.pageNum" :page-size="weekly.pageSize" layout="total, prev, pager, next" :total="weekly.total" class="pagination">
+      <el-pagination :current-page.sync="weekly.parma.page" :page-size="weekly.pageSize" @current-change="pageChange" layout="total, prev, pager, next" :total="weekly.total" class="pagination">
       </el-pagination>
     </el-tab-pane>
   </el-tabs>
@@ -126,7 +128,8 @@
 
 <script>
   import {Divide} from "../../filters/";
-  import selCity from "../components/citys/"
+  import {calConfig} from "../data/config.js";
+  import selCity from "../components/citys/";
   export default {
     components:{
       selCity
@@ -138,36 +141,10 @@
         baseParma:{
           cityCode: 0
         },
-        dateOptions:{
-          shortcuts: [{
-            text: '最近一周',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: '最近一个月',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: '最近三个月',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-              picker.$emit('pick', [start, end]);
-            }
-          }]
-        },
+        calConfig:calConfig,
         report:{
           parma:{
-            pageNum: 1,
+            page: 1,
             type: 1
           },
           data:[],
@@ -178,7 +155,7 @@
         rank:{
           parma:{
             __dateRange:[],
-            pageNum: 5,
+            page: 5,
             dateStart:"",
             dateEnd:"",
           },
@@ -189,7 +166,7 @@
         query:{
           parma:{
             __dateRange:[],
-            pageNum: 1,
+            page: 1,
             dateStart:"",
             dateEnd:"",
           },
@@ -200,7 +177,7 @@
         weekly:{
           parma:{
             __dateRange:[],
-            pageNum: 1,
+            page: 1,
             dateStart:"",
             dateEnd:"",
           },
@@ -236,12 +213,12 @@
       },
       goPage(query){
         this.$router.push({path:'/sales', query:query})
+        this.Query = query;
         this.render(query)
       },
-      render(query){
+      render(){
         let _this = this;
         this.fixParma();
-        console.log(query);
         this.isLoading = true;
         this.$store.dispatch('sales/GET_'+this.activedTab, {
           data: Object.assign({}, _this[this.activedTab].parma, _this.baseParma),
@@ -273,6 +250,10 @@
       },
       exportData(){
 
+      },
+      pageChange(page){
+        this[this.activedTab].parma.page = page;
+        this.render();
       },
       cityChange(city){
         this.baseParma.cityCode = city.code;

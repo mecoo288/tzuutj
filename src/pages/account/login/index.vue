@@ -73,18 +73,24 @@
         this.$store.dispatch('account/Do_login', {
           data: _this.parmas,
           callback({status, data, errmsg}){
-            if (status == "0") {
+            if(status == "0") {
             _this.tips = errmsg ? errmsg : "登录失败，用户名或密码错误";
             return;
           }
           _this.$locals("account").add({account: _this.parmas.name});
-          _this.$router.push('/home');
+          _this.goHome();
           }
         })
+      },
+      goHome(){
+        this.$router.push('/home')
       }
     },
     created(){
       let _this= this;
+      if(this.$locals("account").get("account")){
+        this.goHome();
+      }
       this.$store.commit('needLogged', true);
       
     }
