@@ -60,6 +60,7 @@
   import {Divide} from "../../filters/";
   import {calConfig, chartConfig} from "../data/config.js";
   import selCity from "../components/citys/";
+  let config = JSON.stringify(chartConfig);
   export default {
     components:{
       selCity
@@ -82,22 +83,22 @@
         pageSize: 20,
         hasMore: false,
         provider:{
-          options: JSON.parse(JSON.stringify(chartConfig))
+          options: JSON.parse(config)
         },
         newProvider:{
-          options: JSON.parse(JSON.stringify(chartConfig))
+          options: JSON.parse(config)
         },
         follow:{
-          options: JSON.parse(JSON.stringify(chartConfig))
+          options: JSON.parse(config)
         },
         noFollow:{
-          options: JSON.parse(JSON.stringify(chartConfig))
+          options: JSON.parse(config)
         },
         online:{
-          options: JSON.parse(JSON.stringify(chartConfig))
+          options: JSON.parse(config)
         },
         offline:{
-          options: JSON.parse(JSON.stringify(chartConfig))
+          options: JSON.parse(config)
         },
       }
     },
@@ -160,10 +161,10 @@
         });
         this.provider.options.series[0].data = provider;
         this.newProvider.options.series[0].data = newProvider;
-        this.follow.options.series[0].data = newProvider;
-        this.noFollow.options.series[0].data = newProvider;
-        this.online.options.series[0].data = newProvider;
-        this.offline.options.series[0].data = newProvider;
+        this.follow.options.series[0].data = follow;
+        this.noFollow.options.series[0].data = noFollow;
+        this.online.options.series[0].data = online;
+        this.offline.options.series[0].data = offline;
       },
       setDate(date){
         let [start="", end=""] = date.split(" - ");
