@@ -82,22 +82,22 @@
         pageSize: 20,
         hasMore: false,
         provider:{
-          options: Object.assign({},chartConfig)
+          options: JSON.parse(JSON.stringify(chartConfig))
         },
         newProvider:{
-          options: Object.assign({},chartConfig)
+          options: JSON.parse(JSON.stringify(chartConfig))
         },
         follow:{
-          options: Object.assign({},chartConfig)
+          options: JSON.parse(JSON.stringify(chartConfig))
         },
         noFollow:{
-          options: Object.assign({},chartConfig)
+          options: JSON.parse(JSON.stringify(chartConfig))
         },
         online:{
-          options: Object.assign({},chartConfig)
+          options: JSON.parse(JSON.stringify(chartConfig))
         },
         offline:{
-          options: Object.assign({},chartConfig)
+          options: JSON.parse(JSON.stringify(chartConfig))
         },
       }
     },
@@ -158,7 +158,6 @@
           online.push([item.date, item.online])
           offline.push([item.date, item.offline])
         });
-        console.log(online, offline)
         this.provider.options.series[0].data = provider;
         this.newProvider.options.series[0].data = newProvider;
         this.follow.options.series[0].data = newProvider;
@@ -190,6 +189,7 @@
       this.Query = this.$route.query;
       this.$store.commit('activMenu', 'provider');
       this.render();
+      console.log(this.offline.options, this.online.options)
     }
   }
 </script>
