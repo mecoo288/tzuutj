@@ -27,6 +27,7 @@
 
 
 <script>
+import {Percentage} from '../../filters/'
   export default{
     props:['threeType', 'baseParma'],
     data(){
@@ -38,6 +39,9 @@
         parma: {
           cityCode:0,
           type: 1
+        },
+        filters:{
+          Percentage
         },
         chartConf: {
           title: {

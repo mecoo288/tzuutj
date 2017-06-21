@@ -52,7 +52,7 @@
       <el-table-column prop="unconcern" label="未关注服务者人数"></el-table-column>
     </el-table>
     <el-pagination v-if="hasMore && parma.dateStart" :current-page.sync="parma.page" :page-size="pageSize" @current-change="pageChange" layout="total, prev, pager, next" :total="total" class="pagination">
-      </el-pagination>
+    </el-pagination>
   </div>
 </template>
 
@@ -67,7 +67,7 @@
     },
     data(){
       return {
-        isLoading: false,
+        isLoading: true,
         Query:{}, /*url query*/
         calConfig:calConfig,
         parma:{
@@ -83,22 +83,94 @@
         pageSize: 20,
         hasMore: false,
         provider:{
-          options: JSON.parse(config)
+          options: Object.assign(JSON.parse(config), {
+            title: {
+              text: '服务者数量'
+            },
+            yAxis:[{
+              title:{
+                text:"(单位/人)"
+              },
+              labels: {
+                format: '{value}'
+              }
+            }],
+          })
         },
         newProvider:{
-          options: JSON.parse(config)
+          options: Object.assign(JSON.parse(config), {
+            title: {
+              text: '当日新增服务者数量'
+            },
+            yAxis:[{
+              title:{
+                text:"(单位/人)"
+              },
+              labels: {
+                format: '{value}'
+              }
+            }],
+          })
         },
         follow:{
-          options: JSON.parse(config)
+          options: Object.assign(JSON.parse(config), {
+            title: {
+              text: '已关注服务者人数'
+            },
+            yAxis:[{
+              title:{
+                text:"(单位/人)"
+              },
+              labels: {
+                format: '{value}'
+              }
+            }],
+          })
         },
         noFollow:{
-          options: JSON.parse(config)
+          options: Object.assign(JSON.parse(config), {
+            title: {
+              text: '未关注服务者人数'
+            },
+            yAxis:[{
+              title:{
+                text:"(单位/人)"
+              },
+              labels: {
+                format: '{value}'
+              }
+            }],
+          })
         },
         online:{
-          options: JSON.parse(config)
+          options: Object.assign(JSON.parse(config), {
+            title: {
+              text: '上线状态人数'
+            },
+            yAxis:[{
+              title:{
+                text:"(单位/人)"
+              },
+              labels: {
+                format: '{value}'
+              }
+            }],
+          })
         },
         offline:{
-          options: JSON.parse(config)
+          options: Object.assign(JSON.parse(config), {
+            title: {
+              text: '下线状态人数'
+            },
+            yAxis:[{
+              title:{
+                text:"(单位/人)"
+              },
+              labels: {
+                format: '{value}'
+              }
+            }],
+          })
         },
       }
     },
@@ -124,7 +196,7 @@
       },
       render(){
         let _this = this;
-        // this.isLoading = true;
+        this.isLoading = true;
         this.$store.dispatch('provider/GET_provider', {
           data: this.parma,
           callback({status, errmsg, data}){
@@ -145,26 +217,27 @@
         if(this.parma.page !== 1){
           return;
         }
-        let provider = [],
-            newProvider = [],
-            follow = [],
-            noFollow = [],
-            online = [],
-            offline  = [];
-        this.data.forEach((item)=>{
-          provider.push([item.date, item.total]);
-          newProvider.push([item.date, item.newbie])
-          follow.push([item.date, item.follow])
-          noFollow.push([item.date, item.unconcern])
-          online.push([item.date, item.online])
-          offline.push([item.date, item.offline])
+        let providerArr = [],
+        newProviderArr = [],
+        followArr = [],
+        noFollowArr = [],
+        onlineArr = [],
+        offlineArr  = [];
+        this.data.forEach(({date, total, newbie, follow, unconcern, online, offline})=>{
+          date = Date.parse(date);
+          providerArr.unshift([date, total]);
+          newProviderArr.unshift([date, newbie])
+          followArr.unshift([date, follow])
+          noFollowArr.unshift([date, unconcern])
+          onlineArr.unshift([date, online])
+          offlineArr.unshift([date, offline])
         });
-        this.provider.options.series[0].data = provider;
-        this.newProvider.options.series[0].data = newProvider;
-        this.follow.options.series[0].data = follow;
-        this.noFollow.options.series[0].data = noFollow;
-        this.online.options.series[0].data = online;
-        this.offline.options.series[0].data = offline;
+        this.provider.options.series[0].data = providerArr;
+        this.newProvider.options.series[0].data = newProviderArr;
+        this.follow.options.series[0].data = followArr;
+        this.noFollow.options.series[0].data = noFollowArr;
+        this.online.options.series[0].data = onlineArr;
+        this.offline.options.series[0].data = offlineArr;
       },
       setDate(date){
         let [start="", end=""] = date.split(" - ");
@@ -190,7 +263,6 @@
       this.Query = this.$route.query;
       this.$store.commit('activMenu', 'provider');
       this.render();
-      console.log(this.offline.options, this.online.options)
     }
   }
 </script>

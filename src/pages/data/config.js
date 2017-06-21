@@ -117,8 +117,10 @@ const chartConfig = {
     }]
   },
   tooltip: {
-    xDateFormat:'%m-%d',
-    pointFormat:' {point.y}'
+    xDateFormat:'%Y-%m-%d',
+    pointFormat:' {point.y}',
+    shared: true,
+    crosshairs: true,
   },
   legend: {
     layout: 'vertical',

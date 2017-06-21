@@ -4,6 +4,11 @@ const Divide = (x, y) =>{
 	}
 	return Math.round((x / y) * 100)/100;
 }
+
+const Percentage = (x, y) => {
+	return (Divide(x, y) * 100) +"%"
+}
 export{
-	Divide
+	Divide,
+	Percentage
 }
