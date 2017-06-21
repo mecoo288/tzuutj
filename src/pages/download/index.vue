@@ -15,7 +15,7 @@
 			</el-form-item>
 		</el-form>
 		<el-table :data="data" stripe style="width: 100%">
-			<el-table-column prop="pay_date" label="创建时间"></el-table-column>
+			<el-table-column prop="create_dt" label="创建时间"></el-table-column>
 			<el-table-column prop="stock_name" label="操作类型"></el-table-column>
 			<el-table-column prop="sp_user_name" label="所选日期"></el-table-column>
 			<el-table-column prop="pnum" label="生成状态"></el-table-column>
@@ -56,14 +56,8 @@
 					},
 				],
 				parma:{
-					typeAlias:"fws",
-					searchVal: "",
-					exportStatus:0,
-					oprateType:0,
-					dateStart:"",
-					dateEnd:"",
+					status: 0,
 					page: 1,
-					cityCode:0
 				},
 				data:[],
 				total:0,

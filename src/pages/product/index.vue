@@ -27,7 +27,7 @@
 		<el-table-column prop="stock_name" label="TR商品"></el-table-column>
 		<el-table-column prop="sp_name" label="供应商名称"></el-table-column>
 		<el-table-column prop="total_num" sortable label="数量"></el-table-column>
-		<el-table-column prop="total_money" sortable label="销售金额"></el-table-column>
+		<el-table-column prop="total_money" sortable label="销售金额(单位: 元)"></el-table-column>
 	</el-table>
 	<el-pagination :current-page.sync="parma.page" :page-size="pageSize" @current-change="render" layout="total, prev, pager, next" :total="total" class="pagination">
       </el-pagination>

@@ -1,5 +1,5 @@
 <template>
-  <div v-loading.lock="isLoading">
+  <div>
     <el-form :inline="true" :model="parma" class="demo-form-inline">
       <el-form-item>
         <sel-city @change="cityChange"></sel-city>
@@ -28,7 +28,6 @@
     },
     data(){
       return {
-        isLoading: true,
         chartTab:{
           total: {
             alias:'total',
@@ -68,14 +67,10 @@
     },
     methods: {
       goPage(tab){
-        this.isLoading = true;
         this.$router.push(this.chartTab[tab.name].link);
       },
       updateChart(chartData){
         let _this = this;
-        setTimeout(()=>{
-          _this.isLoading = false;
-        },0);
         this.options = {};
         Object.assign(this.options, chartConfig, chartData.options);
         this.chartTab[chartData.tab].options = Object.assign({}, chartConfig, chartData.options)

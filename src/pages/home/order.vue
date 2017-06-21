@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-loading.lock="isLoading">
     <el-table :data="tableList" border stripe style="width: 100%" :default-sort = "{prop: 'date', order: 'descending'}">
       <el-table-column prop="date" label="日期" sortable>
       </el-table-column>
@@ -25,6 +25,7 @@
     props:['threeType', 'baseParma'],
     data(){
       return{
+        isLoading: true,
         pages:[1,2,3,4,5],
         currentPage:1,
         tableList: [],
@@ -82,9 +83,11 @@
       },
       update(){
         let _this= this;
+        _this.isLoading = true;
         this.$store.dispatch('home/GET_order', {
           data: this.parma,
           callback({status, errmsg, data, code}){
+            _this.isLoading = false;
             if(status == "0"){
               _this.$message.error(errmsg);
               return;

@@ -8,7 +8,12 @@ const Divide = (x, y) =>{
 const Percentage = (x, y) => {
 	return (Divide(x, y) * 100) +"%"
 }
+
+const coin2yuan = (x) => {
+	return Math.round(x) / 100
+}
 export{
 	Divide,
-	Percentage
+	Percentage,
+	coin2yuan,
 }

@@ -48,6 +48,8 @@ import home_order from '../pages/home/order';
 import home_provider from '../pages/home/provider';
 
 import order from '../pages/order/'
+import orderDateList from '../pages/order/date'
+import orderCityList from '../pages/order/city'
 
 import sales from '../pages/sales/';
 
@@ -112,7 +114,13 @@ const routes = [
     component: sales,
   },{
     path:'/order',
-    component: order
+    component: order,
+  },{
+    path:"/order/:date",
+    component: orderDateList
+  },{
+    path:"/order/:date/:cityCode",
+    component: orderCityList
   },{
     path:'/divide',
     component: divide
