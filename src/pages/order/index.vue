@@ -1,21 +1,21 @@
 <template>
 	<div v-loading.lock="isLoading">
-		<el-form :inline="true" v-model="parma" class="demo-form-inline">
+		<el-form :inline="true" v-model="params" class="demo-form-inline">
 			<el-form-item>
 				<sel-city @change="cityChange"></sel-city>
 			</el-form-item>
 			<el-form-item>
-				<el-input placeholder="服务商姓名" v-model="parma.fwsName"></el-input>
+				<el-input placeholder="服务商姓名" @change="searched = false" v-model="params.fwsName"></el-input>
 			</el-form-item>
 			<el-form-item label="筛选日期">
-				<el-date-picker :editable="false" v-model="parma.__dateRange" @change="setDate" type="daterange" align="left" placeholder="选择日期范围" :picker-options="calConfig">
+				<el-date-picker :editable="false" v-model="params.__dateRange" @change="setDate" type="daterange" align="left" placeholder="选择日期范围" :picker-options="calConfig">
 				</el-date-picker>
 			</el-form-item>
 			<el-form-item>
 				<el-button type="primary" @click="search">查询</el-button>
 			</el-form-item>
 			<el-form-item>
-				<el-button type="primary" @click="exportData">导出</el-button>
+				<el-button type="primary" @click="exportData" :disabled="canExport">导出</el-button>
 			</el-form-item>
 		</el-form>
 		<el-tabs type="border-card" @tab-click="Do_activeTab" v-model="activedTab">
@@ -45,7 +45,11 @@
 			</el-tab-pane>
 		</el-tabs>
 		<el-table :data="data" style="width: 100%; margin-top: 10px" stripe>
-			<el-table-column prop="date" label="日期"></el-table-column>
+			<el-table-column prop="date" label="日期">
+				<template scope="scope">
+					<el-button @click="handleView(scope.row)" type="text">{{scope.row.date}}</el-button>
+				</template>
+			</el-table-column>
 			<el-table-column prop="orders_num" label="主订单数量"></el-table-column>
 			<el-table-column prop="orders_detail_num" label="商品订单数量"></el-table-column>
 			<el-table-column label="当日支付金额(元)">
@@ -70,13 +74,13 @@
 					{{scope.row.pay_money | Divide(scope.row.orders_num) | coin2yuan('')}}
 				</template>
 			</el-table-column>
-			<el-table-column label="详情">
+			<!-- <el-table-column label="详情">
 				<template scope="scope">
 					<el-button @click="handleView(scope.row)" type="text" size="small">查看</el-button>
 				</template>
-			</el-table-column>
+			</el-table-column> -->
 		</el-table>
-		<el-pagination v-if="hasMore && parma.dateStart" :current-page.sync="parma.page" :page-size="pageSize" @current-change="pageChange" layout="total, prev, pager, next" :total="total" class="pagination">
+		<el-pagination v-if="hasMore && params.dateStart" :current-page.sync="params.page" :page-size="pageNum" @current-change="pageChange" layout="total, prev, pager, next" :total="total" class="pagination">
 		</el-pagination>
 	</div>
 </template>
@@ -89,9 +93,10 @@
 	export default {
 		data(){
 			return {
-				isLoading: true,
+				isLoading: false,
 				calConfig:calConfig,
-				parma:{
+				searched: false,
+				params:{
 					__dateRange:[],
 					cityCode: 0,
 					cityName:'全部',
@@ -99,7 +104,6 @@
 					dateStart:'',
 					dateEnd:'',
 					type:1,
-					threeType:'',
 					page:1,
 					pageNum:20,
 				},
@@ -240,6 +244,9 @@
 			},
 			Query(){
 				return this.$route.query
+			},
+			canExport(){
+				return !(this.params.dateStart && this.searched && this.total>0)
 			}
 		},
 		components:{
@@ -247,37 +254,49 @@
 		},
 		methods:{
 			search(){
-				let query = Object.assign({}, this.Query, {cityCode: this.parma.cityCode, cityName: this.parma.cityName});
+				let query = Object.assign({}, this.Query, {cityCode: this.params.cityCode, cityName: this.params.cityName});
 				if(query.cityCode == 0){
 					delete query.cityCode;
 					delete query.cityName;
 				}
-				this.parma.page = 1;
-				this.goPage(query)
+				this.params.page = 1;
 				this.render();
 			},
-			handleView(item){
-				let link = '/order/'+item.date;
+			handleView({date}){
+				let link = '/order/'+date;
 				if(this.Query.cityCode && this.Query.cityCode != 0){
 					link += "/"+ this.Query.cityCode
 				}
 				this.$router.push({path:link});
-				// query.type = type||1;
-				// if(item.city_code){
-				// 	query.cityCode = item.city_code
-				// }
 			},
 			cityChange(city){
-				this.parma.cityCode = city.code;
-				this.parma.cityName = city.name;
+				this.searched = false;
+				this.params.cityCode = city.code;
+				this.params.cityName = city.name;
 			},
 			setDate(date){
+				this.searched = false;
 				let [start="", end=""] = date.split(" - ");
-				this.parma.dateStart = start;
-				this.parma.dateEnd = end;
+				this.params.dateStart = start;
+				this.params.dateEnd = end;
 			},
 			exportData(){
-				console.log("导出")
+				let _this = this;
+				this.$store.dispatch('download/Do_download_order',{
+					data: this.params,
+					callback({status, errmsg, data}){
+						if(status != "1"){
+							_this.$message.error(errmsg);
+							return
+						}
+						_this.$store.commit('download/DONE_downLoad', {
+							that: _this,
+							type: 51000,
+							title: "订单统计导出提示",
+							message: _this.params.dateStart + " 至 " + _this.params.dateEnd + '的报表文件正在生成请至下载中心下载'
+						})
+					}
+				})
 			},
 			Do_activeTab({name, ...ot}){
 				this.Go_tag({to:name});
@@ -292,8 +311,9 @@
 				let _this = this;
 				this.isLoading = true;
 				this.$store.dispatch('orders/GET_Orders', {
-					data: Object.assign({}, this.parma, this.Query),
+					data: Object.assign({}, this.params, this.Query),
 					callback({status, errmsg, data}){
+						_this.searched = true;
 						_this.isLoading = false;
 						if(status != "1"){
 							_this.$message.error(errmsg);
@@ -308,7 +328,7 @@
 				})
 			},
 			updateChart(){
-				if(this.parma.page !== 1){
+				if(this.params.page !== 1){
 					return;
 				}
 				let mainOrderArr = [],
@@ -341,7 +361,7 @@
 				this.avaragePrice.options.series[0].data = avaragePriceArr;
 			},
 			pageChange(page){
-				this.parma.page = page;
+				this.params.page = page;
 				this.render();
 			},
 		},

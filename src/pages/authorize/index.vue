@@ -1,110 +1,7 @@
 <template>
-  <div id="limit">
-    <myheader :menus="menus" ></myheader>
-
-    <div class="ui message" >
-      账号管理
-    </div>
-
-    <table class="ui celled table" id="tabledata">
-     <caption id="tablecaption"></caption>
-     <thead>
-      <tr>
-
-       <th v-for="tab in $store.state.limits.default.tabList">{{tab.name}}</th>
-
-     </tr>
-   </thead>
-   <tbody>
-
-
-    <tr v-for=" (arr,k) in $store.state.limits.default.tableList.zhList">
-
-      <td >{{$store.state.limits.default.tableList.zhList[k].name}} </td>
-      
-      <td > <button class="ui secondary basic button" @click="guanli" :data-val="$store.state.limits.default.tableList.zhList[k].name"    :data-useridval="arr.id">管理</button> </td>
-
-      <td >
-
-        <div class="ui grid">
-
-         <div class="four wide column " v-for="one in $store.state.limits.default.qxListObj[arr.id]">
-           <button   class="ui button" >
-            {{one.city_name}}
-            <!--<i class="remove icon right"  @click="removeCity" :data-userid=arr.id :data-arrid=one.id></i>-->
-          </button>
-        </div>
-
-      </div>
-
-    </td>
-
-  </tr>
-
-
-</tbody>
-<tfoot>
-  <tr>
-    <th colspan="3">
-
-
-    </th>
-  </tr></tfoot>
-</table>
-
-
-
-
-
-<!--弹出层-->
-<div class="ui modal">
-
-
-
-  <div class="header">
-   {{nowUser}}的城市管理
-
-   <div class="rightme">
-    <div class="ui checkbox  rightmex" >     
-     <input type="checkbox"   @click="checkall" :checked=selectAll>
-     <label>全部城市</label>
-   </div>
-
-   <div class="ui button" @click="closeme">
-     关闭
-   </div>
-
- </div>
-</div>
-
-<div class="content">
-
-
-  <div class="ui grid">
-
-
-
-    <div class="four wide column" v-for="city in $store.state.limits.default.citys_merge">
-
-     <div class="ui checkbox" >
-      <input type="checkbox" :data-citycode="city.code" :data-cityname="city.name"  @click="checkme" 
-      :checked="$store.state.limits.default.qxListObj[nowUserId]&&$store.state.limits.default.qxListObj[nowUserId][city.code]">
-      <label>{{city.name}}</label>
-    </div>
-
-
+  <div style="height:100%">
+    <myheader></myheader>
   </div>
-</div>
-
-
-</div>
-
-</div>
-
-
-
-
-</div>
 </template>
 
 <script>
@@ -122,7 +19,7 @@
       }
     },
     computed(){
-      
+
     },
     methods: {
       removeCity(env){
@@ -197,7 +94,7 @@
       });
 
       $('.ui.dropdown').dropdown({
-          on: 'hover'
+        on: 'hover'
       });
 
 
@@ -208,7 +105,7 @@
 </script>
 
 <style rel="stylesheet/less" lang="less">
-  @import "../../components/static/style/index";
+  @import "../../static/style/index";
   
   #limit {
     margin:10px;

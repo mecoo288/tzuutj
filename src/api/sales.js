@@ -14,7 +14,8 @@ const getWeekly = (scope, parma) => {
 }  
 const getBdName = (scope, parma) => {
 	return GET('/api/Bd/bdName', parma, scope)
-} 
+}  
+
 
 export {
 	getReport,

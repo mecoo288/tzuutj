@@ -25,7 +25,7 @@
     props:['threeType', 'baseParma'],
     data(){
       return{
-        isLoading: true,
+        isLoading: false,
         pages:[1,2,3,4,5],
         currentPage:1,
         tableList: [],

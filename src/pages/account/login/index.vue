@@ -23,7 +23,7 @@
       </form>
     </div>
     <div id="footer" >
-     <img src="../../../components/static/imgs/login/logo.png">
+     <img src="../../../static/imgs/login/logo.png">
      上海糖玩国际旅行社有限公司
    </div>
  </div>
@@ -99,7 +99,7 @@
 </script>
 <style lang="less">
   @import "../../../static/style/mixin";
-  @dir: "static/imgs/login/";
+  @dir: "../../static/imgs/login/";
 
   ::-webkit-input-placeholder {
     color:#aaaaaa !important;

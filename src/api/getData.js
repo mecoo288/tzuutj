@@ -20,17 +20,31 @@ const formatRes = ({status, statusText, data, ...res}, callback, {commit, dispat
 	callback(resData);
 }
 
+const filterData = (data) => {
+	let res = {}
+	for(let key in (data)){
+		if(!/^__.*$/.test(key)){
+			res[key] = data[key]
+		}
+	}
+	return res;
+}
+
 const POST = (url, {data = {}, callback = ()=>{}}, scope) => {
-	return	axios.post(url, qs.stringify(data), {
-			responseType: 'json'
-		}).then(function(res){
-			formatRes(res, callback, scope)
-		});
+	return	axios.post(url, qs.stringify( filterData(data) ), {
+		responseType: 'json'
+	}).then(function(res){
+		formatRes(res, callback, scope)
+	}).catch(function ({message, response, ...ot}) {
+		formatRes({status: response ? response.status : 0, statusText: message, data:{}}, callback,  scope)
+	});
 }
 const GET = (url, {data = {}, callback = ()=>{}}, scope) => {
-	return axios.get(url, {params: data}).then(function(res){
+	return axios.get(url, {params: filterData(data) }).then(function(res){
 		formatRes(res, callback,  scope)
-	});;
+	}).catch(function ({message, response, ...ot}) {
+		formatRes({status: response ? response.status : 0, statusText: message, data:{}}, callback,  scope)
+	});
 }
 
 export {POST, GET}

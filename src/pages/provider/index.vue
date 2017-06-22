@@ -1,18 +1,18 @@
 <template>
   <div v-loading.lock="isLoading">
-    <el-form :inline="true" :model="parma" class="demo-form-inline">
+    <el-form :inline="true" :model="params" class="demo-form-inline">
       <el-form-item>
         <sel-city @change="cityChange"></sel-city>
       </el-form-item>
       <el-form-item label="筛选日期">
-        <el-date-picker :editable="false" v-model="parma.__dateRange" @change="setDate" type="daterange" align="left" placeholder="选择日期范围" :picker-options="calConfig">
+        <el-date-picker :editable="false" v-model="params.__dateRange" @change="setDate" type="daterange" align="left" placeholder="选择日期范围" :picker-options="calConfig">
         </el-date-picker>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="search">查询</el-button>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="exportData">导出</el-button>
+        <el-button type="primary" @click="exportData" :disabled="canExport">导出</el-button>
       </el-form-item>
     </el-form>
     <el-tabs type="border-card" v-model="activedTab" @tab-click="Do_activeTab">
@@ -51,7 +51,7 @@
       <el-table-column prop="follow" label="已关注服务者人数"></el-table-column>
       <el-table-column prop="unconcern" label="未关注服务者人数"></el-table-column>
     </el-table>
-    <el-pagination v-if="hasMore && parma.dateStart" :current-page.sync="parma.page" :page-size="pageSize" @current-change="pageChange" layout="total, prev, pager, next" :total="total" class="pagination">
+    <el-pagination v-if="hasMore && params.dateStart" :current-page.sync="params.page" :page-size="pageSize" @current-change="pageChange" layout="total, prev, pager, next" :total="total" class="pagination">
     </el-pagination>
   </div>
 </template>
@@ -70,7 +70,8 @@
         isLoading: true,
         Query:{}, /*url query*/
         calConfig:calConfig,
-        parma:{
+        searched: false,
+        params:{
           __dateRange:[],
           cityCode:0,
           dateStart:"",
@@ -178,6 +179,9 @@
       activedTab(){
         return this.Query.to || "provider";
       },
+      canExport(){
+        return !(this.params.dateStart && this.searched && this.total>0)
+      }
     },
     filters:{
       Divide
@@ -197,10 +201,12 @@
       render(){
         let _this = this;
         this.isLoading = true;
+        this.searched = false;
         this.$store.dispatch('provider/GET_provider', {
-          data: this.parma,
+          data: this.params,
           callback({status, errmsg, data}){
             _this.isLoading = false;
+            _this.searched = true;
             if(status != "1"){
               _this.$message.error(errmsg);
               return
@@ -214,7 +220,7 @@
         })
       },
       updateChart(){
-        if(this.parma.page !== 1){
+        if(this.params.page !== 1){
           return;
         }
         let providerArr = [],
@@ -240,23 +246,40 @@
         this.offline.options.series[0].data = offlineArr;
       },
       setDate(date){
+        this.searched = false;
         let [start="", end=""] = date.split(" - ");
-        this.parma.dateStart = start;
-        this.parma.dateEnd = end;
+        this.params.dateStart = start;
+        this.params.dateEnd = end;
       },
       search(){
-        this.parma.page = 1;
+        this.params.page = 1;
         this.render();
       },
       exportData(){
-
+        let _this = this;
+        this.$store.dispatch('download/Do_download_provider',{
+          data: this.params,
+          callback({status, errmsg, data}){
+            if(status != "1"){
+              _this.$message.error(errmsg);
+              return
+            }
+            _this.$store.commit('download/DONE_downLoad', {
+              that: _this,
+              type: 51000,
+              title: "服务者统计导出提示",
+              message: _this.params.dateStart + " 至 " + _this.params.dateEnd + '的报表文件正在生成请至下载中心下载'
+            })
+          }
+        })
       },
       pageChange(page){
-        this.parma.page = page;
+        this.params.page = page;
         this.render();
       },
       cityChange(city){
-        this.parma.cityCode = city.code;
+        this.searched = false;
+        this.params.cityCode = city.code;
       }
     },
     created(){

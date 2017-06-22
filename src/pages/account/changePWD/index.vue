@@ -34,7 +34,7 @@
       </form>
 
    <div id="footer" >
-     <img src="../../../components/static/imgs/login/logo.png">
+     <img src="../../../static/imgs/home/logo.png" height="48" width="40">
      上海糖玩国际旅行社有限公司
    </div>
 
@@ -141,7 +141,7 @@
 </script>
 <style rel="stylesheet/less" lang="less">
   @import "../../../static/style/mixin";
-  @dir: "static/imgs/login/";
+  @dir: "../../static/imgs/login/";
   ::-webkit-input-placeholder {
     color:#aaaaaa !important;
     font-size:14px;

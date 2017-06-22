@@ -51,6 +51,12 @@ export default{
 </script>
 
 <style rel="stylesheet/less" lang="less">
+	html, body{
+		padding: 0;
+		margin: 0;
+		overflow: hidden;
+		height: 100%; 
+	}
 	.content{
 		display: flex;
 		display: -webkit-flex;

@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import VueResource from 'vue-resource'
 import Highcharts from 'highcharts'
 import VueHighcharts from 'vue-highcharts'
 import DrillDown from 'highcharts/modules/drilldown'
@@ -8,17 +7,13 @@ import Highcharts3d from 'highcharts/highcharts-3d';
 import Exporting from 'highcharts/modules/exporting';
 
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-default/index.css'
-
 //import jQuery from 'jquery';
 
-import 'semantic-ui/dist/semantic.css';
 //import 'highcharts/css/highcharts.css';
 
 
 //import DatetimePicker from 'bootstrap-datetime-picker';
 
-import 'bootstrap/dist/css/bootstrap.css'
 import store from './store';
 var VueCookie = require('vue-cookie');
 //var await = require('await');
@@ -32,16 +27,11 @@ var VueCookie = require('vue-cookie');
 //import 'script-loader!../static/dist/js/tableexport.js';
 
 ///js/bootstrap-datetimepicker.js
-require('bootstrap-datetime-picker')
-require('bootstrap-datetime-picker/js/locales/bootstrap-datetimepicker.zh-CN.js');
 
 
 
 // require('../static/dist/css/datetimepicker.css');
 // require('../static/dist/js/semantic.js');
-require('semantic-ui/dist/semantic.js');
-
-
 //require('../static/dist/js/FileSaver.js');
 //require.ensure(['../static/dist/js/xlsx.core.js'], function(require) {
 //            require('../static/dist/js/xlsx.core.js');
@@ -59,9 +49,7 @@ import routes from './router/';
 Vue.use(ElementUI);
 
 Vue.use(VueRouter);
-Vue.use(VueResource);
 Vue.use(VueHighcharts);
-Vue.use(VueCookie);
 //require('vue-semantic')vue@1.*
 //Vue.use(VueSemantic);
 

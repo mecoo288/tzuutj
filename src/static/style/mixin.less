@@ -18,16 +18,16 @@
 }
 
 .bg-img_mob(@dir,@pic,@w,@h) {
-  background-image: url("../../components/@{dir}@{pic}@2x.png");
+  background-image: url("@{dir}@{pic}@2x.png");
   background-size: @w @h;
   background-repeat: no-repeat;
   @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3) {
-    background-image: url("../../components/@{dir}@{pic}@3x.png") ;
+    background-image: url("@{dir}@{pic}@3x.png") ;
   }
 }
 
 .bg-img(@dir,@pic,@w,@h) {
-  background-image: url("../../components/@{dir}@{pic}");
+  background-image: url("@{dir}@{pic}");
   background-size: @w @h;
   background-repeat: no-repeat;
 }

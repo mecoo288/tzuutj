@@ -3,7 +3,7 @@
 		<el-breadcrumb separator="/" class="guid">
 		  <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
 		  <el-breadcrumb-item :to="{ path: '/order' }">订单统计</el-breadcrumb-item>
-		  <el-breadcrumb-item>日期: {{params.date}}</el-breadcrumb-item>
+		  <el-breadcrumb-item :to="{ path: '/order/'+params.date}">日期: {{params.date}}</el-breadcrumb-item>
 		  <el-breadcrumb-item>{{params.cityName}}</el-breadcrumb-item>
 		</el-breadcrumb>
 		<el-table :data="data" style="width: 100%; margin-top: 10px" stripe>
@@ -77,11 +77,12 @@
 		},
 		created(){
 			this.$store.commit('activMenu', 'order');
-			let {date, cityCode} = this.$route.params;
+			let {date, city} = this.$route.params;
+			let [cityName, cityCode] = city.split("__");
 			Object.assign(this.params, {
 				date: date,
-				cityCode: cityCode.split("_")[0],
-				cityName: cityCode.split("_")[1],
+				cityName: cityName,
+				cityCode: cityCode,
 			})
 			this.render();
 		}

@@ -29,7 +29,15 @@ export {
 } from './divide'
 
 export {
-	getDownload
+	getDownload,
+	doReDownload,
+	doOrderDownload,
+	doWeeklyDownload,
+	doTalkDownload,
+	doRewardDownload,
+	doDivideDownload,
+	doProductDownload,
+	doProvidertDownload,
 } from './download'
 
 export {

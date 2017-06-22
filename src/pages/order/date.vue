@@ -6,7 +6,11 @@
 		  <el-breadcrumb-item>日期: {{params.date}}</el-breadcrumb-item>
 		</el-breadcrumb>
 		<el-table :data="data" style="width: 100%; margin-top: 10px" stripe>
-			<el-table-column prop="city_name" label="城市"></el-table-column>
+			<el-table-column label="城市">
+				<template scope="scope">
+					<el-button @click="handleView(scope.row)" type="text">{{scope.row.city_name}}</el-button>
+				</template>
+			</el-table-column>
 			<el-table-column prop="orders_num" label="主订单数量"></el-table-column>
 			<el-table-column prop="orders_detail_num" label="商品订单数量"></el-table-column>
 			<el-table-column label="当日支付金额">
@@ -27,11 +31,11 @@
 					{{scope.row.pay_money | Divide(scope.row.orders_num)}}
 				</template>
 			</el-table-column>
-			<el-table-column label="详情">
+			<!-- <el-table-column label="详情">
 				<template scope="scope">
 					<el-button @click="handleView(scope.row)" type="text" size="small">查看</el-button>
 				</template>
-			</el-table-column>
+			</el-table-column> -->
 		</el-table>
 		<el-pagination v-if="hasMore && parma.dateStart" :current-page.sync="parma.page" :page-size="pageSize" @current-change="pageChange" layout="total, prev, pager, next" :total="total" class="pagination">
 		</el-pagination>
@@ -60,8 +64,8 @@
 			coin2yuan
 		},
 		methods:{
-			handleView(item){
-				this.$router.push({path:'/order/'+ this.params.date +'/'+ item.city_code+"_"+item.city_name});
+			handleView({date, city_name, city_code}){
+				this.$router.push({path:'/order/'+ this.params.date +'/'+ city_name + "__" + city_code});
 			},
 			render(){
 				let _this = this;

@@ -7,7 +7,7 @@
       <el-submenu index="2">
         <template slot="title"><i class="el-icon-menu"></i></template>
         <el-menu-item index="/home/">首页</el-menu-item>
-        <el-menu-item index="/limit">账号管理</el-menu-item>
+        <el-menu-item index="/authorize">账号管理</el-menu-item>
         <el-menu-item index="/changePWD">修改密码</el-menu-item>
         <el-menu-item index="" @click="logout">退出</el-menu-item>
       </el-submenu>

@@ -4,7 +4,8 @@ import {
 	getRank,
 	getQuery,
 	getWeekly,
-	getBdName
+	getBdName,
+	doDlWeekly
 } from '../../../api/index.js';
 
 
