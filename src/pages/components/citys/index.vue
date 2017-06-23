@@ -1,7 +1,7 @@
 <template>
   <el-form :inline="true" :model="selCity">
     <el-form-item label="选择城市">
-      <el-select v-model="selCity.__city" @change="change" filterable placeholder="请选择城市（默认全部）" popper-class="block_select">
+      <el-select v-model="selCity.__city" @change="change" filterable clearable placeholder="请选择城市（默认全部）" popper-class="block_select">
         <el-option-group  label="选择城市">
           <el-option v-for="item in citys" :key="item.code" :label="item.name" :value="item">
           </el-option>
