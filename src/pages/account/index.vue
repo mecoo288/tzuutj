@@ -24,6 +24,7 @@
 </script>
 <style lang="less">
   .account-wrapper,
+  .main-header,
   .header{
     background-size: cover;
     background-repeat: no-repeat;
