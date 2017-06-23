@@ -41,7 +41,6 @@
     },
     methods:{
       change(city){
-        console.log(city);
         this.$emit('change', {name: city.name, code: city.code});
       },
     },
