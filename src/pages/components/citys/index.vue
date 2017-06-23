@@ -19,7 +19,10 @@
         citys:[],
         selCity:{
           name: "全部",
-          __city: {},
+          __city: {
+            code:0,
+            name:'全部'
+          },
           code:0
         }
       }
@@ -38,7 +41,8 @@
     },
     methods:{
       change(city){
-        this.$emit('change', {name: this.selCity.__city.name, code: this.selCity.__city.code});
+        console.log(city);
+        this.$emit('change', {name: city.name, code: city.code});
       },
     },
   }
