@@ -11,9 +11,9 @@
       <el-form-item>
         <el-button type="primary" @click="search">查询</el-button>
       </el-form-item>
-      <el-form-item>
+      <!-- <el-form-item>
         <el-button type="primary" @click="exportData" :disabled="canExport">导出</el-button>
-      </el-form-item>
+      </el-form-item> -->
     </el-form>
     <el-tabs type="border-card" v-model="activedTab" @tab-click="Do_activeTab">
       <el-tab-pane name="provider" label="服务者数量">
@@ -266,7 +266,7 @@
             }
             _this.$store.commit('download/DONE_downLoad', {
               that: _this,
-              type: 51000,
+              type: 56000,
               title: "服务者统计导出提示",
               message: _this.params.dateStart + " 至 " + _this.params.dateEnd + '的报表文件正在生成请至下载中心下载'
             })

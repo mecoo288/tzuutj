@@ -1,9 +1,6 @@
 <template>
-	<div id="app">
-		<router-view></router-view>
-	</div>
+	<router-view style="height:100%"></router-view>
 </template>
-
 <script>
 	import Vue from 'vue';
 	import {locals} from './plugin/locals.js';
@@ -11,7 +8,6 @@
 	export default{
 		data(){
 			return {
-				loadingShow: false
 			}
 		},
 		created(){
@@ -20,11 +16,5 @@
 </script>
 
 <style lang="less">
-	@import "./static/style/index";
-	#app{
-	   //     margin-top:60px;
-	   height: 100%;
-	   overflow: hidden;
-	}
-
+	@import "./static/style/base";
 </style>

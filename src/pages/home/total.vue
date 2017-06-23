@@ -5,19 +5,19 @@
       </el-table-column>
       <el-table-column prop="week_day" label="星期" sortable>
       </el-table-column>
-      <el-table-column prop="newbie" label="服务者新增 (单位/人)" sortable>
+      <el-table-column prop="newbie" label="服务者新增" sortable>
       </el-table-column>
-      <el-table-column prop="total" label="服务者总数 (单位/人)" sortable>
+      <el-table-column prop="total" label="服务者总数" sortable>
       </el-table-column>
-      <el-table-column prop="hasorder" label="服务者成单数量 (单位/人)" sortable>
+      <el-table-column prop="hasorder" label="服务者成单数量" sortable>
       </el-table-column>
-      <el-table-column prop="orders_num" label="主订单数 (单位/单)" sortable>
+      <el-table-column prop="orders_num" label="主订单数 (单)" sortable>
       </el-table-column>
-      <el-table-column prop="orders_detail_num" label="详单数量 (单位/单)" sortable>
+      <el-table-column prop="orders_detail_num" label="详单数量" sortable>
       </el-table-column>
-      <el-table-column prop="guests_num" label="客人数量 (单位/人)" sortable>
+      <el-table-column prop="guests_num" label="客人数量 (人)" sortable>
       </el-table-column>
-      <el-table-column prop="pay_money" label="成单金额 (单位/元)" sortable>
+      <el-table-column prop="pay_money" label="成单金额 (元)" sortable>
       </el-table-column>
     </el-table>
 </div>

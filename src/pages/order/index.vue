@@ -14,9 +14,9 @@
 			<el-form-item>
 				<el-button type="primary" @click="search">查询</el-button>
 			</el-form-item>
-			<el-form-item>
+			<!-- <el-form-item>
 				<el-button type="primary" @click="exportData" :disabled="canExport">导出</el-button>
-			</el-form-item>
+			</el-form-item> -->
 		</el-form>
 		<el-tabs type="border-card" @tab-click="Do_activeTab" v-model="activedTab">
 			<el-tab-pane name="mainOrder" label="主订单数量">

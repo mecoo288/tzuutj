@@ -9,6 +9,14 @@ const doLogout = (scope, parma) => {
 	return POST('/api/User/loginOut', parma, scope)
 }
 
+const doChangePWD = (scope, parma) => {
+	return POST('/api/User/modifyPwd', parma, scope)
+}
+
+const getMenus = (scope, parma) => {
+	return POST('/api/Common/menus', parma, scope)
+}
+
 const getCity = (scope, parma) => {
 	let {state, rootState} = scope,
 		callback = parma.callback;
@@ -29,4 +37,6 @@ export {
 	doLogin,
 	doLogout,
 	getCity,
+	doChangePWD,
+	getMenus,
 }

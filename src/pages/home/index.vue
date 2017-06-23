@@ -1,8 +1,12 @@
 <template>
   <div>
-    <el-form :inline="true" :model="parma" class="demo-form-inline">
+    <el-form :inline="true" :model="params" class="demo-form-inline">
       <el-form-item>
         <sel-city @change="cityChange"></sel-city>
+      </el-form-item>
+      <el-form-item label="筛选日期">
+        <el-date-picker :editable="false" v-model="params.__dateRange" @change="setDate" type="daterange" align="left" placeholder="选择日期范围" :picker-options="calConfig">
+        </el-date-picker>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="queryData">查询</el-button>
@@ -14,20 +18,21 @@
         </highcharts>
       </el-tab-pane>
     </el-tabs>
-    <router-view :baseParma="parma" @updateChart="updateChart" ref="child" class="tabs-table"></router-view>
+    <router-view :baseParma="params" @updateChart="updateChart" ref="child" class="tabs-table"></router-view>
   </div>
 
 </template>
 
 <script>
   import selCity from '../components/citys/';
-  import {chartConfig} from "../data/config.js";
+  import {chartConfig, calConfig} from "../data/config.js";
   export default {
     components: {
       selCity,
     },
     data(){
       return {
+        calConfig: calConfig,
         chartTab:{
           total: {
             alias:'total',
@@ -48,11 +53,14 @@
             options: {}
           },
         },
-        parma:{
+        params:{
           type: this.activeTag,
+          __dateRange:[],
           data: {
             cityCode: 0,
             type: 1,
+            dateStart: "",
+            dateEnd: "",
           }
         }
       }
@@ -69,6 +77,11 @@
       goPage(tab){
         this.$router.push(this.chartTab[tab.name].link);
       },
+      setDate(date){
+        let [start="", end=""] = date.split(" - ");
+        this.params.data.dateStart = start;
+        this.params.data.dateEnd = end;
+      },
       updateChart(chartData){
         let _this = this;
         this.options = {};
@@ -76,11 +89,11 @@
         this.chartTab[chartData.tab].options = Object.assign({}, chartConfig, chartData.options)
       },
       cityChange(city){
-        this.parma.data.cityCode = city.code;
-        this.parma.data.type = city.code === 0 ? 1: 2; 
+        this.params.data.cityCode = city.code;
+        this.params.data.type = city.code === 0 ? 1: 2; 
       },
       queryData(){
-        this.$refs.child.cityChange( this.parma.data );
+        this.$refs.child.cityChange( this.params.data );
       }
     },
     created(){

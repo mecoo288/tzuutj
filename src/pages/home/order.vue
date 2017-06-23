@@ -7,7 +7,7 @@
       </el-table-column>
       <el-table-column prop="guests_price" label="客单价" sortable>
       </el-table-column>
-      <el-table-column prop="order_average" label="订单均价" sortable>
+      <el-table-column prop="order_average" label="订单均价(元)" sortable>
       </el-table-column>
       <el-table-column prop="orders_num" label="订单数" sortable>
       </el-table-column>

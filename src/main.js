@@ -15,7 +15,6 @@ import ElementUI from 'element-ui'
 //import DatetimePicker from 'bootstrap-datetime-picker';
 
 import store from './store';
-var VueCookie = require('vue-cookie');
 //var await = require('await');
 //import xlsx from 'xlsx'
 //import tableExport from 'tableexport'

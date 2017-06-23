@@ -1,9 +1,10 @@
 import index from '../pages/';
 
-import login from '../pages/account/login/';
-import changepwd from '../pages/account/changePWD/';
+
+import account from '../pages/account/';
+import account_login from '../pages/account/login/';
+import account_changepwd from '../pages/account/changePWD/';
 import home from '../pages/home/index';
-import authorize from '../pages/authorize/index';
 import home_total from '../pages/home/total';
 import home_order from '../pages/home/order';
 import home_provider from '../pages/home/provider';
@@ -39,15 +40,18 @@ const routes = [
 {
   path: '',
   redirect: '/home'
-}, {
-  path: '/login',
-  component: login
 },{
-  path:'/changePWD',
-  component: changepwd
-},{
-  path: '/authorize',
-  component: authorize
+  path:'/account',
+  component: account,
+  children:[
+  {
+    path: '/login',
+    component: account_login
+  },{
+    path:'/changePWD',
+    component: account_changepwd
+  },
+  ]
 },{
   path:"/index",
   component: index,

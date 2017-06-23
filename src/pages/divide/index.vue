@@ -22,8 +22,10 @@
 			</el-form-item>
 			<el-form-item>
 				<el-button type="primary" @click="search">查询</el-button>
-				<el-button type="primary" @click="dataExport" :disabled="canExport">导出</el-button>
 			</el-form-item>
+			<!-- <el-form-item>
+				<el-button type="primary" @click="dataExport" :disabled="canExport">导出</el-button>
+			</el-form-item> -->
 		</el-form>
 		<el-table :data="data" stripe style="width: 100%">
 			<el-table-column prop="pay_date" sortable label="日期">

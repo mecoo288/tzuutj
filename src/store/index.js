@@ -1,11 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import * as actions from './actions'
-import * as getters from './getters'
-import * as mutations from './mutations'
+import actions from './actions'
+import getters from './getters'
+import mutations from './mutations'
 import state from './state'
 import home from './modules/home/'
-import limits from './modules/limits/'
 import account from './modules/account/'
 import product from './modules/product/'
 import sales from './modules/sales/'
@@ -24,7 +23,6 @@ export default new Vuex.Store({
     mutations,
     modules:{
 		home,
-		limits,
 		account,
 		sales,
 		orders,

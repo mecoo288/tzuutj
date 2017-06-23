@@ -7,6 +7,8 @@ export {
 	doLogin,
 	doLogout,
 	getCity,
+	doChangePWD,
+	getMenus,
 } from './account'
 export {
 	getReport,

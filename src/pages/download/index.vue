@@ -3,7 +3,7 @@
 		<el-form :inline="true" :model="params">
 			<el-form-item label="操作类型">
 				<el-select v-model="params.operateType" @change="doFilter" placeholder="请选择">
-					<el-option v-for="item in operateType" :key="item.val" :label="item.name" :value="item.val">
+					<el-option v-for="item in operateType" :key="item.val" :label="item.name" :value="item.val" :disabled="item.disabled">
 					</el-option>
 				</el-select>
 			</el-form-item>
@@ -50,22 +50,32 @@
 				operateType:[
 				{
 					name: "订单统计",
-					val:51000
+					val:51000,
+					disabled: true,
+				},{
+					name: "服务者统计",
+					val:56000,
+					disabled: true,
 				},{
 					name: "BD销售统计",
-					val:50000
+					val:50000,
+					disabled: false,
 				},{
 					name: "分成统计",
-					val:52000
+					val:52000,
+					disabled: true,
 				},{
 					name: "商品统计",
-					val:53000
+					val:53000,
+					disabled: true,
 				},{
 					name: "会话统计",
-					val:54000
+					val:54000,
+					disabled: true,
 				},{
 					name: "打赏统计",
-					val:55000
+					val:55000,
+					disabled: true,
 				},
 				],
 				exportStatus:[
@@ -86,7 +96,7 @@
 				params:{
 					status: 0,
 					page: 1,
-					operateType: 51000,
+					operateType: 50000,
 				},
 				data:[],
 				total:0,
@@ -164,7 +174,7 @@
 			}
 		},
 		created(){
-			this.params.operateType = this.$route.params.type * 1 || 51000;
+			this.params.operateType = this.$route.params.type * 1 || 50000;
 			this.$store.commit('activMenu', 'download');
 			this.render();
 		}

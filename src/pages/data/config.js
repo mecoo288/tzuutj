@@ -80,6 +80,55 @@ const leftMenu = [
 }
 ];
 
+const MenuStore = {
+  "65":{
+    "name": "首页",
+    "url": "/!#/home",
+    "alias": "home"
+  },
+  "66":{
+    "name": "订单统计",
+    "url": "/!#/order",
+    "alias": "order"
+  },
+  "69":{
+    "name": "服务者统计",
+    "url": "/!#/provider",
+    "alias": "provider"
+  },
+  "91":{
+    "name": "BD销售统计",
+    "url": "/!#/sales",
+    "alias": "sales"
+  },
+  "74":{
+    "name": "会话统计",
+    "url": "/!#/talk",
+    "alias": "talk"
+  },
+  "75":{
+    "name": "打赏统计",
+    "url": "/!#/reward",
+    "alias": "reward"
+  },
+  "76":{
+    "name": "分成统计",
+    "url": "/!#/divide",
+    "alias": "divide"
+  },
+  "77":{
+    "name": "商品统计",
+    "url": "/!#/product",
+    "alias": "product"
+  },
+  "92":{
+    "name": "下载中心",
+    "url": "/!#/download",
+    "alias": "download"
+  }
+};
+
+
 const chartConfig = {
   chart: {
     type: 'line',
@@ -142,4 +191,5 @@ export {
   calConfig,
   leftMenu,
   chartConfig,
+  MenuStore,
 }

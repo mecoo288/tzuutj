@@ -33,7 +33,7 @@ const doProductDownload = (scope, parma) => {
 } 
 
 const doProvidertDownload = (scope, parma) => {
-	return POST('/api/Export/addProviderTask', parma, scope)
+	return POST('/api/Export/addFwzTask', parma, scope)
 } 
 
 
