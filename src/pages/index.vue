@@ -6,13 +6,12 @@
 				<el-menu mode="vertical" default-active="1" class="nav-items"  theme="dark">
 					<el-menu-item :index='menu.url' @click="openPage(menu.url)" class="nav-items-item" :class=" {'is-active' : menu.alias === alias }" v-for="menu in leftMenu">{{menu.name}}</el-menu-item>
 				</el-menu>
-			</el-col>
-		</aside>
-		<section class="main-content">
-			<router-view class="content-wrap"></router-view>
+			</aside>
+			<section class="main-content">
+				<router-view class="content-wrap"></router-view>
+			</section>
 		</section>
-	</section>
-</div>
+	</div>
 </template>
 
 <script>
@@ -61,35 +60,6 @@
 		}
 	}  
 </script>
-<style rel="stylesheet/less" lang="less">
-	html, body{
-		padding: 0;
-		margin: 0;
-		overflow: hidden;
-		height: 100%; 
-	}
-	.content{
-		display: flex;
-		display: -webkit-flex;
-		height: 100%;
-		display: border-box;
-		.nav{
-			width: 240px;
-			height: 100%;
-			&-items{
-				&-item{
-					font-size: 16px;
-				}
-			}
-		}
-		.body{
-			padding: 10px 0;
-			-webkit-flex:1;
-			margin-left: 10px;
-			flex:1;
-			height: 100%;
-			overflow-x: hidden;
-			overflow-y: scroll;
-		}
-	}
+<style lang="less">
+	@import "../static/style/base";
 </style>

@@ -1,3 +1,4 @@
+import p404 from '../pages/404'
 import index from '../pages/';
 
 
@@ -37,6 +38,10 @@ k.liu rebuild
 import product from '../pages/product/'
 
 const routes = [
+{
+  path: '*',
+  component: p404
+},
 {
   path: '',
   redirect: '/home'

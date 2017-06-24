@@ -4,6 +4,7 @@ import Vue from "vue";
 require('es6-promise').polyfill();
 const formatRes = ({status, statusText, data, ...res}, callback, {commit, dispatch, state,rootState,...ot}) =>{
 	let resData =Object.assign({}, data);
+	resData.data = resData.data || [];
 	if(status !== 200){
 		Object.assign(resData, {
 			status: 0,
