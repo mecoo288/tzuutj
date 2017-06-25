@@ -51,9 +51,11 @@ const routes = [
   children:[
   {
     path: '/login',
+    name: 'login',
     component: account_login
   },{
     path:'/changePWD',
+    name: 'changePWD',
     component: account_changepwd
   },
   ]
@@ -68,20 +70,25 @@ const routes = [
     children:[
     {
       path:'total',
+      name:'home_total',
       component: home_total
     },{
       path:'order',
+      name:'home_order',
       component: home_order
     },{
       path:'provider',
+      name:'home_provider',
       component: home_provider
     }
     ]
   },{
     path:'/product',
+    name:'product',
     component: product,
   },{
     path:'/sales',
+    name:'sales',
     component: sales,
   },{
     path:'/sales/:recruit',
@@ -91,6 +98,7 @@ const routes = [
     component: sales_recruit_date,
   },{
     path:'/order',
+    name:'order',
     component: order,
   },{
     path:"/order/:date",
@@ -100,18 +108,23 @@ const routes = [
     component: order_date_city
   },{
     path:'/divide',
+    name:'divide',
     component: divide
   },{
     path:'/talk',
+    name:'talk',
     component: talk
   },{
     path:'/reward',
+    name:'reward',
     component: reward
   },{
     path:'/provider',
+    name:'provider',
     component: provider
   },{
     path:'/download',
+    name:'download',
     component: download
   },{
     path:'/download/:type',

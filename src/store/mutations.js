@@ -8,10 +8,18 @@ const needLogged = (state, payload) => {
 }
 
 const setMenus = (state, {that, menus = []}) => {
-	let MENU = [];
+	let MENU = [],
+		LIMITPATH = {
+			'/p404': true
+		};
+	for(let key in MenuStore){
+		LIMITPATH[ MenuStore[key].url ] = false;
+	}
+	state.limitPath = LIMITPATH;
  	menus.forEach((menu) =>{
  		let smenu = MenuStore[menu.menuId];
  		if(smenu){
+ 			state.limitPath[ smenu.url ] = true;
  			MENU.push(Object.assign(smenu, {name:menu.name, id: menu.menuId}))
  		}
  	});
@@ -20,5 +28,5 @@ const setMenus = (state, {that, menus = []}) => {
 export default{
   activMenu,
   needLogged,
-  setMenus
+  setMenus,
 }

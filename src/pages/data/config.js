@@ -35,47 +35,47 @@ const calConfig = {
 const leftMenu = [
 {
   "name": "首页",
-  "url": "/!#/home",
+  "url": "/home",
   "alias": "home"
 },
 {
   "name": "订单统计",
-  "url": "/!#/order",
+  "url": "/order",
   "alias": "order"
 },
 {
   "name": "服务者统计",
-  "url": "/!#/provider",
+  "url": "/provider",
   "alias": "provider"
 },
 {
   "name": "BD销售统计",
-  "url": "/!#/sales",
+  "url": "/sales",
   "alias": "sales"
 },
 {
   "name": "会话统计",
-  "url": "/!#/talk",
+  "url": "/talk",
   "alias": "talk"
 },
 {
   "name": "打赏统计",
-  "url": "/!#/reward",
+  "url": "/reward",
   "alias": "reward"
 },
 {
   "name": "分成统计",
-  "url": "/!#/divide",
+  "url": "/divide",
   "alias": "divide"
 },
 {
   "name": "商品统计",
-  "url": "/!#/product",
+  "url": "/product",
   "alias": "product"
 },
 {
   "name": "下载中心",
-  "url": "/!#/download",
+  "url": "/download",
   "alias": "download"
 }
 ];
@@ -83,47 +83,47 @@ const leftMenu = [
 const MenuStore = {
   "65":{
     "name": "首页",
-    "url": "/!#/home",
+    "url": "/home",
     "alias": "home"
   },
   "66":{
     "name": "订单统计",
-    "url": "/!#/order",
+    "url": "/order",
     "alias": "order"
   },
   "69":{
     "name": "服务者统计",
-    "url": "/!#/provider",
+    "url": "/provider",
     "alias": "provider"
   },
   "91":{
     "name": "BD销售统计",
-    "url": "/!#/sales",
+    "url": "/sales",
     "alias": "sales"
   },
   "74":{
     "name": "会话统计",
-    "url": "/!#/talk",
+    "url": "/talk",
     "alias": "talk"
   },
   "75":{
     "name": "打赏统计",
-    "url": "/!#/reward",
+    "url": "/reward",
     "alias": "reward"
   },
   "76":{
     "name": "分成统计",
-    "url": "/!#/divide",
+    "url": "/divide",
     "alias": "divide"
   },
   "77":{
     "name": "商品统计",
-    "url": "/!#/product",
+    "url": "/product",
     "alias": "product"
   },
   "92":{
     "name": "下载中心",
-    "url": "/!#/download",
+    "url": "/download",
     "alias": "download"
   }
 };

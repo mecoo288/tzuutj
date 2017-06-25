@@ -7,7 +7,6 @@ var webpack = require('webpack')
 var opn = require('opn')
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = require('./webpack.dev.conf')
-var cookieParser = require('cookie-parser')
 
 
 // default port where dev server listens for incoming traffic
@@ -64,7 +63,6 @@ app.use(devMiddleware)
 app.use(hotMiddleware)
 
 //cookie
-app.use(cookieParser());
 
 // serve pure static assets
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
