@@ -55,17 +55,19 @@
 		created(){
 			let _this = this;
 			this.getMenus();
-			// this.$router.beforeEach((to, from, next)=>{
-			// 	// if(!_this.$store.state.limitPath[to.path]){
-			// 	// 	console.log(111);
-			// 	// 	_this.$router.push({path:'/p404'});
-			// 	// 	return;
-			// 	// }
-			// 	if(_this.$route.path != "/p404"){
-			// 		next('/p404')
-			// 	}
-			// 	next();
-			// });
+			this.$router.beforeEach((to, from, next)=>{
+				// if(!_this.$store.state.limitPath[to.path]){
+				// 	console.log(111);
+				// 	_this.$router.push({path:'/p404'});
+				// 	return;
+				// }
+				if(!_this.$store.state.limitPath[to.path]){
+					// console.log(111);
+					console.log(to.path)
+					// next('/p404')
+				}
+				next();
+			});
 		},
 		components:{
 			mheader
